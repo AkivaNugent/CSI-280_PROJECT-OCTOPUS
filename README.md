@@ -20,4 +20,6 @@ https://github.com/BatteryAcid/first-game-in-godot
 
 ---
 
+## Animation
+video tutorial: https://www.youtube.com/watch?v=H2AKBEDzXuA
 
