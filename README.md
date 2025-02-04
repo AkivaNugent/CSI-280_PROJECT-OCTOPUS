@@ -21,4 +21,4 @@ https://github.com/BatteryAcid/first-game-in-godot
 ---
 
 
-Hello, it me, Owen this is my branch.
+Hello, it me, Owen.
