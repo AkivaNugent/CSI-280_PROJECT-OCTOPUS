@@ -21,4 +21,4 @@ https://github.com/BatteryAcid/first-game-in-godot
 ---
 
 
-Hello, it me, Owen.
+Hello, it me, Owen, Deris
