@@ -18,6 +18,7 @@ func _input(event):
 		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
 
 func _step_up(delta) -> bool:
+	# Code adapted from youtube.com/watch?v=Tb-R3l0SQdc
 	if not is_on_floor() and not _snapped_to_stairs_last_frame: return false
 	# Find the direction we're moving in (x and z only)
 	var expected_move_motion = self.velocity * Vector3(1,0,1) * delta
@@ -43,6 +44,7 @@ func _step_up(delta) -> bool:
 	return false
 
 func _run_body_test_motion(from: Transform3D, motion : Vector3, result = null) -> bool:
+	# Code adapted from youtube.com/watch?v=Tb-R3l0SQdc
 	# Wrapper for sending info to the PhysicsServer, asking it to test the result of a possible move
 	if not result: result = PhysicsTestMotionResult3D.new()
 	var params = PhysicsTestMotionParameters3D.new()
