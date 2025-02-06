@@ -5,17 +5,17 @@ const JUMP_VELOCITY = 4.5
 const MAX_STEP_HEIGHT = 0.75
 @onready var player: CharacterBody3D = $"."
 @onready var pivot: Node3D = $"Camera Origin"
-@export var sens = 0.5
+#@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
-
+@onready var animated_sprite_2d = $AnimatedSprite3D
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _input(event):
-	if event is InputEventMouseMotion:
-		rotate_y(deg_to_rad(-event.relative.x * sens))
-		pivot.rotate_x(deg_to_rad(-event.relative.y * sens))
-		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
+#func _input(event):
+	#if event is InputEventMouseMotion:
+		#rotate_y(deg_to_rad(-event.relative.x * sens))
+		#pivot.rotate_x(deg_to_rad(-event.relative.y * sens))
+		#pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
 
 func _step_up(delta) -> bool:
 	# Code adapted from youtube.com/watch?v=Tb-R3l0SQdc
@@ -70,9 +70,20 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		
+		if direction.z < 0:
+			animated_sprite_2d.play("move_forward")
+		if direction.z > 0:
+			animated_sprite_2d.play("move_backward")
+		if direction.x > 0:
+			animated_sprite_2d.play("move_right")
+		if direction.x < 0:
+			animated_sprite_2d.play("move_left")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+		animated_sprite_2d.play("idle")
 
 	if not	_step_up(delta):
 		move_and_slide()
