@@ -30,7 +30,7 @@ environment = SubResource("Environment_opreq")
 script = ExtResource("1_bydk5")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.8157, 0)
 script = ExtResource("1_d34xq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
@@ -50,6 +50,10 @@ margin = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="Player/Camera Origin/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="StairsAheadRayCast3D" type="RayCast3D" parent="Player"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
