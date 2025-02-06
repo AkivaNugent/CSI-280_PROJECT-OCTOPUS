@@ -8,6 +8,7 @@ func _ready() -> void:
 	var noisegen = FastNoiseLite.new()
 	noisegen.seed = randi()
 	var tileScene = load("res://tile.tscn")
+	# Build tiles in a grid
 	for x in range(GRID_SIZE):
 		for z in range(GRID_SIZE):
 			var newTile = tileScene.instantiate()
