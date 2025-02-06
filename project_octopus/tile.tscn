@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://vkgclr823rn7"]
+
+[ext_resource type="Texture2D" uid="uid://bqpvxmhjl5smv" path="res://snow.png" id="1_mlfl6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_w5w2k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2mfw"]
+albedo_texture = ExtResource("1_mlfl6")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_20p0w"]
+
+[node name="Tile" type="Node3D"]
+
+[node name="Tile" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tile"]
+transform = Transform3D(1.00328, 0, 0, 0, 1.00328, 0, 0, 0, 1.00328, 0, 0, 0)
+mesh = SubResource("BoxMesh_w5w2k")
+surface_material_override/0 = SubResource("StandardMaterial3D_t2mfw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tile"]
+transform = Transform3D(1.00195, 0, 0, 0, 1.00195, 0, 0, 0, 1.00195, 0, 0, 0)
+shape = SubResource("BoxShape3D_20p0w")
