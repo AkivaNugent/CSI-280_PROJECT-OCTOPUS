@@ -1,6 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://11nairsk57pk"]
 
+[ext_resource type="Script" path="res://worldrenderer.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
+[ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -14,6 +16,8 @@ background_mode = 2
 sky = SubResource("Sky_wrnn1")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_density = 0.05
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kkt4v"]
 
@@ -22,19 +26,17 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8075l"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_7sf0d"]
-size = Vector3(25, 1, 25)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vx8ve"]
-size = Vector3(25, 1, 25)
-
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_opreq")
+script = ExtResource("1_bydk5")
+
+[node name="Tile4" parent="WorldEnvironment" instance=ExtResource("3_p8hm3")]
+transform = Transform3D(100, 0, 0, 0, 0.562, 0, 0, 0, 100, 0.119, -14.222, 4.137)
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.1086, 0)
 script = ExtResource("1_d34xq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
@@ -55,14 +57,9 @@ margin = 0.5
 [node name="Camera3D" type="Camera3D" parent="Player/Camera Origin/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_7sf0d")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="MeshInstance3D"]
-gravity_scale = 0.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/RigidBody3D"]
-shape = SubResource("BoxShape3D_vx8ve")
+[node name="StairsAheadRayCast3D" type="RayCast3D" parent="Player"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
