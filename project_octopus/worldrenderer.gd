@@ -1,6 +1,7 @@
 extends Node
 
 const GRID_SIZE = 100
+const MAX_HEIGHT = 40
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,8 +14,10 @@ func _ready() -> void:
 		for z in range(GRID_SIZE):
 			var newTile = tileScene.instantiate()
 			add_child(newTile)
-			newTile.position = Vector3(x - (GRID_SIZE / 2), 0.0, z - (GRID_SIZE / 2))
-			newTile.scale = Vector3(1.0, (noisegen.get_noise_2d(x,z) * 80) + 1.0, 1.0)
+			
+			var tileHeight = (noisegen.get_noise_2d(x,z) * (MAX_HEIGHT / 2)) + (MAX_HEIGHT / 2)
+			newTile.position = Vector3(x - (GRID_SIZE / 2), 0.0 + (tileHeight / 2), z - (GRID_SIZE / 2))
+			newTile.scale = Vector3(1.0, tileHeight + 1.0, 1.0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

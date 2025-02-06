@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=10 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldrenderer.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
+[ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -31,8 +32,11 @@ albedo_color = Color(1, 0, 0, 1)
 environment = SubResource("Environment_opreq")
 script = ExtResource("1_bydk5")
 
+[node name="Tile4" parent="WorldEnvironment" instance=ExtResource("3_p8hm3")]
+transform = Transform3D(100, 0, 0, 0, 0.562, 0, 0, 0, 100, 0.119, -14.222, 4.137)
+
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.8157, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.1086, 0)
 script = ExtResource("1_d34xq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
