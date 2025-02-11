@@ -70,19 +70,33 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		
-		if direction.z < 0:
-			animated_sprite_2d.play("move_forward")
-		if direction.z > 0:
-			animated_sprite_2d.play("move_backward")
-		if direction.x > 0:
-			animated_sprite_2d.play("move_right")
-		if direction.x < 0:
-			animated_sprite_2d.play("move_left")
+	
+		# Check if moving diagonally first
+		if direction.x != 0 and direction.z != 0:
+			# Diagonal movement
+			if direction.z < 0: 
+				if direction.x < 0:
+					animated_sprite_2d.play("move_left")
+				else:
+					animated_sprite_2d.play("move_right")
+			else:
+				if direction.x < 0:
+					animated_sprite_2d.play("move_left")
+				else:
+					animated_sprite_2d.play("move_right")
+		else:
+			# Regular cardinal direction movement
+			if direction.z < 0:
+				animated_sprite_2d.play("move_forward")
+			elif direction.z > 0:
+				animated_sprite_2d.play("move_backward")
+			elif direction.x > 0:
+				animated_sprite_2d.play("move_right")
+			elif direction.x < 0:
+				animated_sprite_2d.play("move_left")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		
 		animated_sprite_2d.play("idle")
 
 	if not	_step_up(delta):

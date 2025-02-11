@@ -186,7 +186,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_58jt6")
 }],
 "loop": true,
-"name": &"move_backwards",
+"name": &"move_backward",
 "speed": 10.0
 }, {
 "frames": [{
@@ -277,7 +277,7 @@ script = ExtResource("1_d34xq")
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
 pixel_size = 0.03
 sprite_frames = SubResource("SpriteFrames_adtjf")
-animation = &"idle"
+animation = &"move_backward"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
