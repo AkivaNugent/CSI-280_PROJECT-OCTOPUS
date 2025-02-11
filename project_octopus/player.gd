@@ -10,6 +10,10 @@ var _snapped_to_stairs_last_frame := false;
 @onready var animated_sprite_2d = $AnimatedSprite3D
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
+	# Move the player down to the top of the procedural terrain
+	self.velocity = Vector3(0,-9999,0)
 
 #func _input(event):
 	#if event is InputEventMouseMotion:
