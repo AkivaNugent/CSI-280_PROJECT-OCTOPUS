@@ -275,7 +275,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.1086, 0)
 script = ExtResource("1_d34xq")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
-pixel_size = 0.03
+pixel_size = 0.045
 sprite_frames = SubResource("SpriteFrames_adtjf")
 animation = &"move_backward"
 
@@ -284,14 +284,19 @@ transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_8075l")
 
 [node name="Camera Origin" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609057, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Player/Camera Origin"]
 spring_length = 3.0
 margin = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="Player/Camera Origin/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 70, 50)
+current = true
+fov = 85.0
+size = 20.0
+near = 0.001
+far = 308.17
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="Player"]
 unique_name_in_owner = true
