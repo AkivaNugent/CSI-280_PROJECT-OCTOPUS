@@ -1,6 +1,17 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=10 format=3 uid="uid://11nairsk57pk"]
+=======
+[gd_scene load_steps=43 format=3 uid="uid://11nairsk57pk"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
+<<<<<<< Updated upstream
+=======
+[ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
+[ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
+[ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="5_t8g68"]
+[ext_resource type="Script" path="res://day_night.gd" id="7_sobx1"]
+>>>>>>> Stashed changes
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -14,6 +25,12 @@ background_mode = 2
 sky = SubResource("Sky_wrnn1")
 tonemap_mode = 2
 glow_enabled = true
+<<<<<<< Updated upstream
+=======
+fog_enabled = true
+fog_density = 0.05
+adjustment_enabled = true
+>>>>>>> Stashed changes
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kkt4v"]
 
@@ -22,11 +39,15 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8075l"]
 
+<<<<<<< Updated upstream
 [sub_resource type="BoxMesh" id="BoxMesh_7sf0d"]
 size = Vector3(25, 1, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vx8ve"]
 size = Vector3(25, 1, 25)
+=======
+[sub_resource type="GDScript" id="GDScript_4jpao"]
+>>>>>>> Stashed changes
 
 [node name="Node3D" type="Node3D"]
 
@@ -65,6 +86,13 @@ gravity_scale = 0.0
 shape = SubResource("BoxShape3D_vx8ve")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
-light_color = Color(0.915643, 0.90692, 0.701245, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 65)
+light_color = Color(0.854416, 0.705491, 0.532402, 1)
 sky_mode = 1
+script = SubResource("GDScript_4jpao")
+
+[node name="Day_Night" type="Node3D" parent="." node_paths=PackedStringArray("env")]
+script = ExtResource("7_sobx1")
+day_length = 60.0
+night_length = 90.0
+env = NodePath("../WorldEnvironment")
