@@ -1,10 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=43 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldrenderer.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
 [ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
 [ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
 [ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="5_t8g68"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="6_ypbrq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -261,6 +262,20 @@ animations = [{
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8075l"]
 
+[sub_resource type="GDScript" id="GDScript_oeomh"]
+script/source = "extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -284,19 +299,21 @@ transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_8075l")
 
 [node name="Camera Origin" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 2.5, 0)
+script = SubResource("GDScript_oeomh")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="Player/Camera Origin"]
 spring_length = 3.0
 margin = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="Player/Camera Origin/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 70, 50)
+transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939692, 0, -0.939692, 0.34202, 0, 200, 50)
 current = true
 fov = 85.0
 size = 20.0
 near = 0.001
 far = 308.17
+script = ExtResource("6_ypbrq")
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="Player"]
 unique_name_in_owner = true

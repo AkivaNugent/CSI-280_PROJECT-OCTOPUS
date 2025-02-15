@@ -8,6 +8,7 @@ const MAX_STEP_HEIGHT = 0.75
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
 @onready var animated_sprite_2d = $AnimatedSprite3D
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -53,51 +54,51 @@ func _run_body_test_motion(from: Transform3D, motion : Vector3, result = null) -
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# Add gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): #or snapped to stairs?
+	# Handle jump
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Get player input direction
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	# Get camera's rotation basis
+	var camera_transform := pivot.global_transform.basis  
+	var camera_forward := camera_transform.z.normalized() 
+	var camera_right := camera_transform.x.normalized()  
+	
+	# Calculate movement direction relative to the camera's rotation
+	var direction := (camera_right * input_dir.x + camera_forward * input_dir.y).normalized()
+	
+	print(direction)
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-	
-		# Check if moving diagonally first
-		if direction.x != 0 and direction.z != 0:
-			# Diagonal movement
-			if direction.z < 0: 
-				if direction.x < 0:
-					animated_sprite_2d.play("move_left")
+		
+		# Get input direction in camera space
+		var input_dire := Input.get_vector("left", "right", "up", "down")
+		
+		# Play animation based on raw input direction
+		if input_dire.length() > 0:
+			if abs(input_dire.y) > abs(input_dire.x):
+				if input_dire.y < 0:
+					animated_sprite_2d.play("move_forward")
 				else:
-					animated_sprite_2d.play("move_right")
+					animated_sprite_2d.play("move_backward")
 			else:
-				if direction.x < 0:
+				if input_dire.x < 0:
 					animated_sprite_2d.play("move_left")
 				else:
 					animated_sprite_2d.play("move_right")
-		else:
-			# Regular cardinal direction movement
-			if direction.z < 0:
-				animated_sprite_2d.play("move_forward")
-			elif direction.z > 0:
-				animated_sprite_2d.play("move_backward")
-			elif direction.x > 0:
-				animated_sprite_2d.play("move_right")
-			elif direction.x < 0:
-				animated_sprite_2d.play("move_left")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
 
-	if not	_step_up(delta):
+	if not _step_up(delta):
 		move_and_slide()
