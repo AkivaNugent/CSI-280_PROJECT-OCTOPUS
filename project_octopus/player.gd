@@ -81,17 +81,17 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED
 		
 		# Get input direction in camera space
-		var input_dire := Input.get_vector("left", "right", "up", "down")
+		var input_dir2 := Input.get_vector("left", "right", "up", "down")
 		
 		# Play animation based on raw input direction
-		if input_dire.length() > 0:
-			if abs(input_dire.y) > abs(input_dire.x):
-				if input_dire.y < 0:
+		if input_dir2.length() > 0:
+			if abs(input_dir2.y) > abs(input_dir2.x):
+				if input_dir2.y < 0:
 					animated_sprite_2d.play("move_forward")
 				else:
 					animated_sprite_2d.play("move_backward")
 			else:
-				if input_dire.x < 0:
+				if input_dir2.x < 0:
 					animated_sprite_2d.play("move_left")
 				else:
 					animated_sprite_2d.play("move_right")
