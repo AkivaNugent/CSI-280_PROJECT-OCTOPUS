@@ -1,10 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=42 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldrenderer.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
 [ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
 [ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
 [ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="5_t8g68"]
+[ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,6 +21,7 @@ tonemap_mode = 2
 glow_enabled = true
 fog_enabled = true
 fog_density = 0.05
+adjustment_enabled = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbj1d"]
 atlas = ExtResource("4_o6bu0")
@@ -301,3 +303,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
 light_color = Color(0.915643, 0.90692, 0.701245, 1)
 sky_mode = 1
+
+[node name="Day and night" type="Node3D" parent="." node_paths=PackedStringArray("world_environment")]
+script = ExtResource("6_3wk7r")
+world_environment = NodePath("../WorldEnvironment")
