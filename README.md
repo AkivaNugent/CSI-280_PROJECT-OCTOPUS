@@ -2,7 +2,10 @@
 ---
 Desc: TBD
 
+## Central Documentation
+https://docs.google.com/document/d/1zEwFv-X2agyDHZoreTnodJ9Z1QpjB-4eJeBts5b-jd8/edit?usp=sharing
 
+---
 
 ### Godot Familiarization
 video tutorial + first game:
