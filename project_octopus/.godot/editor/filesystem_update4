@@ -1,2 +1,3 @@
 res://node_3d.tscn
-res://day_and_night.gd
+res://camera_3d.gd
+res://player.gd

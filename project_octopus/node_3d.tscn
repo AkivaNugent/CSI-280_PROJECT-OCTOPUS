@@ -1,10 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=43 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldrenderer.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
 [ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
 [ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
 [ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="5_t8g68"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
 [ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
@@ -277,7 +278,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.1086, 0)
 script = ExtResource("1_d34xq")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
-pixel_size = 0.03
+pixel_size = 0.045
 sprite_frames = SubResource("SpriteFrames_adtjf")
 animation = &"move_backward"
 
@@ -293,7 +294,8 @@ spring_length = 3.0
 margin = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="Player/Camera Origin/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 3)
+script = ExtResource("6_0k1nh")
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="Player"]
 unique_name_in_owner = true
