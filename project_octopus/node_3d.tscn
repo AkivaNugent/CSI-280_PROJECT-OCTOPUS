@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://worldrenderer.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
-[ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
 [ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
 [ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="5_t8g68"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
@@ -270,11 +269,8 @@ animations = [{
 environment = SubResource("Environment_opreq")
 script = ExtResource("1_bydk5")
 
-[node name="Tile4" parent="WorldEnvironment" instance=ExtResource("3_p8hm3")]
-transform = Transform3D(100, 0, 0, 0, 0.562, 0, 0, 0, 100, 0.119, -14.222, 4.137)
-
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.1086, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 365.359, 0)
 script = ExtResource("1_d34xq")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
