@@ -8,6 +8,7 @@ const MAX_STEP_HEIGHT = 0.75
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
 @onready var animated_sprite_2d = $AnimatedSprite3D
+@export var posText: Label
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -97,6 +98,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
+		
+	if posText:
+		posText.text = "X: " + str(round(position.x)) + " Y: " + str(round(position.y)) + " Z: " + str(round(position.z))
 
 	if not _step_up(delta):
 		move_and_slide()

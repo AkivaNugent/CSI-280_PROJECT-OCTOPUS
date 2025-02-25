@@ -1,3 +1,4 @@
 res://node_3d.tscn
-res://camera_3d.gd
+res://tile.tscn
 res://player.gd
+res://day_and_night.gd

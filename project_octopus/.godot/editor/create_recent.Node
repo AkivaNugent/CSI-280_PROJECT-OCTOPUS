@@ -1,7 +1,13 @@
+Label
+MeshInstance3D
+DirectionalLight3D
+SpotLight3D
+Panel
+Control
+GPUParticles3D
 Node3D
 AnimatedSprite3D
 RayCast3D
 CollisionShape3D
-MeshInstance3D
 StaticBody3D
 RigidBody3D
