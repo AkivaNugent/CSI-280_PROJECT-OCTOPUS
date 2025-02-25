@@ -1,33 +1,33 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const MAX_STEP_HEIGHT = 0.75
-@onready var player: CharacterBody3D = $"."
-@onready var pivot: Node3D = $"Camera Origin"
-#@export var sens = 0.5
+const MAX_SPEED = 2
+@onready var WORLD_NODE = get_node("../WorldEnvironment")
+@onready var PLAYER = get_node("../Player")
+@onready var MAX_STEP_HEIGHT = PLAYER.MAX_STEP_HEIGHT
 var _snapped_to_stairs_last_frame := false;
-@onready var animated_sprite_2d = $AnimatedSprite3D
+var path = []
+var nextGoalIndex = 0
+var lastRecalc = 0
 
 func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
-	# Move the player down to the top of the procedural terrain
-	position.y = (get_node("../WorldEnvironment").getHeight(position.x, position.z) + 1)
+	# Move the octopus down to the top of the procedural terrain
+	position.y = (WORLD_NODE.getHeight(position.x, position.z) + 1)
+	
+	# Initial path planning
+	_recalcPath()
 
-#func _input(event):
-	#if event is InputEventMouseMotion:
-		#rotate_y(deg_to_rad(-event.relative.x * sens))
-		#pivot.rotate_x(deg_to_rad(-event.relative.y * sens))
-		#pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
+func _recalcPath():
+	# Ask the WORLD_NODE for a path to the player from current position
+	path = WORLD_NODE.aStarNavigation(Vector2i(round(position.x),round(position.z)),Vector2i(round(PLAYER.position.x),round(PLAYER.position.z)))
+	nextGoalIndex = 0
 
 func _step_up(delta) -> bool:
 	# Code adapted from youtube.com/watch?v=Tb-R3l0SQdc
-	if not is_on_floor() and not _snapped_to_stairs_last_frame: return false
+	if not is_on_floor() and not _snapped_to_stairs_last_frame: 	return false
 	# Find the direction we're moving in (x and z only)
 	var expected_move_motion = self.velocity * Vector3(1,0,1) * delta
-	# Find the position to test for collision: in front of the player and slightly up
+	# Find the position to test for collision: in front of the octopus and slightly up
 	# We go up to get some clearance above; making sure there's nothing above in the way
 	var step_pos_with_clearance = self.global_transform.translated(expected_move_motion + Vector3(0, MAX_STEP_HEIGHT * 2, 0))
 	
@@ -61,49 +61,24 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): #or snapped to stairs?
-		velocity.y = JUMP_VELOCITY
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("left", "right", "up", "down")
-	# Get camera's rotation basis
-	var camera_transform := pivot.global_transform.basis  
-	var camera_forward := camera_transform.z.normalized() 
-	var camera_right := camera_transform.x.normalized()  
 	
-	# Calculate movement direction relative to the camera's rotation
-	var direction := (camera_right * input_dir.x + camera_forward * input_dir.y).normalized()
-	
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-		
-		# Get input direction in camera space
-		var input_dir2 := Input.get_vector("left", "right", "up", "down")
-		
-		# Play animation based on raw input direction
-		if input_dir2.length() > 0:
-			if abs(input_dir2.y) > abs(input_dir2.x):
-				if input_dir2.y < 0:
-					animated_sprite_2d.play("move_forward")
-				else:
-					animated_sprite_2d.play("move_backward")
-			else:
-				if input_dir2.x < 0:
-					animated_sprite_2d.play("move_left")
-				else:
-					animated_sprite_2d.play("move_right")
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-		animated_sprite_2d.play("idle")
+	# Once a second, recalculate a new path
+	if (Time.get_ticks_msec() - lastRecalc > 1000):
+		_recalcPath()
 
+	# If there is a path
+	if len(path) > 0:
+		# If we've basically made it to the current waypoint, set the goal to the next one
+		if (abs(path[nextGoalIndex].x - position.x) < MAX_SPEED or abs(path[nextGoalIndex].y - position.z) < MAX_SPEED):
+			nextGoalIndex += 1
+			if (nextGoalIndex > len(path)):
+				_recalcPath()
+		
+		# Move in the appropriate direction
+		velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
+		velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
+	
+	rotation = PLAYER.rotation
+	
 	if not _step_up(delta):
 		move_and_slide()
-	
-	get_node("Label3D").text = str(position)
