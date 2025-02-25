@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://cf1crfbecqrp0"]
+
+[ext_resource type="Script" path="res://octomove.gd" id="1_3w4aa"]
+[ext_resource type="Texture2D" uid="uid://cri1cc7duypbx" path="res://sprite_anim/Octo_1_walking.png" id="2_0idp2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m84he"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj36i"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqy6w"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj5ob"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3bto"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkgu0"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwr88"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7g3s"]
+atlas = ExtResource("2_0idp2")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smxd2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m84he")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj36i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqy6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj5ob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3bto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkgu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwr88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7g3s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k6b8t"]
+height = 0.310925
+radius = 0.1643
+
+[node name="Octopus" type="CharacterBody3D"]
+transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 0, 0, 0)
+script = ExtResource("1_3w4aa")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+sprite_frames = SubResource("SpriteFrames_smxd2")
+frame_progress = 0.827115
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00367962, 0)
+shape = SubResource("CylinderShape3D_k6b8t")
+
+[node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
