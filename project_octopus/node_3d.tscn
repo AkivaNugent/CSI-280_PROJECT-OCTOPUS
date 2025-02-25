@@ -310,8 +310,8 @@ light_color = Color(0.883393, 0.718565, 0.508958, 1)
 
 [node name="Day and night" type="Node3D" parent="." node_paths=PackedStringArray("world_environment", "day_text")]
 script = ExtResource("6_3wk7r")
-day_length = 10.0
-night_length = 10.0
+day_length = 600.0
+night_length = 600.0
 world_environment = NodePath("../WorldEnvironment")
 day_text = NodePath("../UI/Day Text")
 
