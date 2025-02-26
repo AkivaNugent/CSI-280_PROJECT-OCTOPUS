@@ -300,19 +300,44 @@ script = ExtResource("6_0k1nh")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
 
-[node name="Label3D" type="Label3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.367249, 0)
-text = "TEST"
-font_size = 90
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
-light_color = Color(0.915643, 0.90692, 0.701245, 1)
+light_color = Color(0.986558, 0.789148, 0.510263, 1)
 sky_mode = 1
 
-[node name="Day and night" type="Node3D" parent="." node_paths=PackedStringArray("world_environment")]
+[node name="Day and night" type="Node3D" parent="." node_paths=PackedStringArray("world_environment", "day_text")]
 script = ExtResource("6_3wk7r")
 world_environment = NodePath("../WorldEnvironment")
+day_text = NodePath("../Control/Day Text")
 
 [node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
 transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -1.36913)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Day Text" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 168.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "Day: "
+
+[node name="Pos Text" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 20
+text = "XYZ: "
+
+[node name="Facing Text" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 47.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 20
+text = "Facing: "
