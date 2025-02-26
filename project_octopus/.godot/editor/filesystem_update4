@@ -1,3 +1,5 @@
+res://menus'.tscn
 res://node_3d.tscn
-res://camera_3d.gd
-res://player.gd
+res://menus.tscn
+res://menus'.gd
+res://multiplayer_manager.gd
