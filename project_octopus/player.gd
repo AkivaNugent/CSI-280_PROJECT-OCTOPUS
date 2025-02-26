@@ -66,38 +66,37 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	# Get camera's rotation basis
+	var camera_transform := pivot.global_transform.basis  
+	var camera_forward := camera_transform.z.normalized() 
+	var camera_right := camera_transform.x.normalized()  
+	
+	# Calculate movement direction relative to the camera's rotation
+	var direction := (camera_right * input_dir.x + camera_forward * input_dir.y).normalized()
+	
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-	
-		# Check if moving diagonally first
-		if direction.x != 0 and direction.z != 0:
-			# Diagonal movement
-			if direction.z < 0: 
-				if direction.x < 0:
-					animated_sprite_2d.play("move_left")
+		
+		# Get input direction in camera space
+		var input_dir2 := Input.get_vector("left", "right", "up", "down")
+		
+		# Play animation based on raw input direction
+		if input_dir2.length() > 0:
+			if abs(input_dir2.y) > abs(input_dir2.x):
+				if input_dir2.y < 0:
+					animated_sprite_2d.play("move_forward")
 				else:
-					animated_sprite_2d.play("move_right")
+					animated_sprite_2d.play("move_backward")
 			else:
-				if direction.x < 0:
+				if input_dir2.x < 0:
 					animated_sprite_2d.play("move_left")
 				else:
 					animated_sprite_2d.play("move_right")
-		else:
-			# Regular cardinal direction movement
-			if direction.z < 0:
-				animated_sprite_2d.play("move_forward")
-			elif direction.z > 0:
-				animated_sprite_2d.play("move_backward")
-			elif direction.x > 0:
-				animated_sprite_2d.play("move_right")
-			elif direction.x < 0:
-				animated_sprite_2d.play("move_left")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
 
-	if not	_step_up(delta):
+	if not _step_up(delta):
 		move_and_slide()
