@@ -8,6 +8,10 @@ const MAX_STEP_HEIGHT = 0.75
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
 @onready var animated_sprite_2d = $AnimatedSprite3D
+@onready var pos_text: Label = $"../Control/Pos Text"
+var dir_facing: String
+@onready var facing_text: Label = $"../Control/Facing Text"
+
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -58,6 +62,17 @@ func _run_body_test_motion(from: Transform3D, motion : Vector3, result = null) -
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 func _physics_process(delta: float) -> void:
+	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
+	
+	if rotation_degrees.y == 0:
+		dir_facing = "North"
+	if rotation_degrees.y == 90:
+		dir_facing = "West"
+	if rotation_degrees.y == -180:
+		dir_facing = "South"
+	if rotation_degrees.y == -90:
+		dir_facing = "East"
+	facing_text.text = "Facing " + dir_facing
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -105,5 +120,3 @@ func _physics_process(delta: float) -> void:
 
 	if not _step_up(delta):
 		move_and_slide()
-	
-	get_node("Label3D").text = str(position)
