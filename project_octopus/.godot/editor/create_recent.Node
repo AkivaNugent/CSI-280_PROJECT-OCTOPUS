@@ -1,4 +1,10 @@
+AudioStreamPlayer
 Label
+Button
+VBoxContainer
+Sprite2D
+ParallaxLayer
+ParallaxBackground
 Control
 Node3D
 AnimatedSprite3D
@@ -6,4 +12,3 @@ RayCast3D
 CollisionShape3D
 MeshInstance3D
 StaticBody3D
-RigidBody3D
