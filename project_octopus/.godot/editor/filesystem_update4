@@ -1,4 +1,5 @@
 res://node_3d.tscn
-res://day_and_night.gd
+res://menu_screen.tscn
+res://octomove.gd
+res://menu_func.gd
 res://player.gd
-res://camera_3d.gd
