@@ -10,7 +10,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if !bg_music.playing:
-		bg_music.play
+		bg_music.play()
 
 # Start Game
 func _on_start_button_pressed() -> void:

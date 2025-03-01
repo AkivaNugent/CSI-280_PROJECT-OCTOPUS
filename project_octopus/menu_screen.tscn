@@ -111,7 +111,7 @@ texture = ExtResource("8_ebqif")
 centered = false
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.2, 0.2)
+motion_scale = Vector2(0.5, 0.5)
 motion_mirroring = Vector2(1152, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
@@ -174,6 +174,7 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ictsx")
+volume_db = 9.369
 
 [connection signal="pressed" from="VBoxContainer/startButton" to="VBoxContainer" method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/hostButton" to="VBoxContainer" method="_on_host_button_pressed"]

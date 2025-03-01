@@ -1,6 +1,5 @@
 res://node_3d.tscn
-res://player.gd
 res://menu_screen.tscn
-res://parallax_bg_Script.gd
+res://octomove.gd
 res://menu_func.gd
-res://worldbuilder.gd
+res://player.gd

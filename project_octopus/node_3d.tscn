@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=46 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cf1crfbecqrp0" path="res://octopus.tscn" id="7_b4y4o"]
 [ext_resource type="AudioStream" uid="uid://cyrvm4snkn64l" path="res://game_sfx/walking_sound_short.mp3" id="8_4rnoe"]
 [ext_resource type="AudioStream" uid="uid://ddkf4tmcbbxxi" path="res://game_sfx/running_sound_short.mp3" id="9_yxrcw"]
+[ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="10_6842a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -349,3 +350,6 @@ stream = ExtResource("8_4rnoe")
 
 [node name="AudioStreamPlayer_running" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_yxrcw")
+
+[node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_6842a")
