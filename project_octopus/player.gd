@@ -13,11 +13,19 @@ var _snapped_to_stairs_last_frame := false;
 var dir_facing: String
 @onready var facing_text: Label = $"../Control/Facing Text"
 
+# Health Variables
+@export var maxHealth: float = 100
+@export var currentHealth: float = 100
+var regen: float = 5
+@onready var health_bar: ProgressBar = $"../Control/Health Bar"
+
 #Audio Variables
 @onready var player_Walking_Audio = $"../AudioStreamPlayer_walking"
 @onready var player_Running_Audio = $"../AudioStreamPlayer_running"
 
 func _ready():
+	currentHealth = maxHealth
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
@@ -77,6 +85,17 @@ func _physics_process(delta: float) -> void:
 	if rotation_degrees.y == -90:
 		dir_facing = "East"
 	facing_text.text = "Facing " + dir_facing
+	
+	# Press 3 to take damage for testing
+	if Input.is_key_pressed(KEY_3):
+		_take_damage(10)
+	
+	if currentHealth > maxHealth:
+		currentHealth = maxHealth
+	else:
+		currentHealth += regen * delta
+	health_bar.value = currentHealth
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -136,3 +155,9 @@ func _physics_process(delta: float) -> void:
 
 	if not _step_up(delta):
 		move_and_slide()
+		
+func _take_damage(amount):
+	currentHealth -= amount
+	if currentHealth <= 0:
+		# Implement death logic
+		print("dead")

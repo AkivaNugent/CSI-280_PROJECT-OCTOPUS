@@ -345,6 +345,16 @@ offset_bottom = 81.0
 theme_override_font_sizes/font_size = 20
 text = "Facing: "
 
+[node name="Health Bar" type="ProgressBar" parent="Control"]
+modulate = Color(1, 0, 0, 1)
+self_modulate = Color(0.961518, 4.45209e-06, 9.62615e-07, 1)
+layout_mode = 0
+offset_left = 21.0
+offset_top = 581.0
+offset_right = 330.0
+offset_bottom = 637.0
+show_percentage = false
+
 [node name="AudioStreamPlayer_walking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4rnoe")
 

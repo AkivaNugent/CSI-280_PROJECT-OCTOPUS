@@ -1,3 +1,6 @@
+ProgressBar
+Sprite3D
+Label3D
 AudioStreamPlayer
 Label
 Button
@@ -9,6 +12,3 @@ Control
 Node3D
 AnimatedSprite3D
 RayCast3D
-CollisionShape3D
-MeshInstance3D
-StaticBody3D
