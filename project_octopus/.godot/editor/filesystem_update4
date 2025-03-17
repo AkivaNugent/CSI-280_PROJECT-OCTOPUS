@@ -1,3 +1,2 @@
-res://node_3d.tscn
-res://player.gd
-res://menu_screen.tscn
+res://octopus.tscn
+res://octomove.gd
