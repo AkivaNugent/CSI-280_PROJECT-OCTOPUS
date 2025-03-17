@@ -12,10 +12,10 @@ var nextGoalIndex = 0
 var lastRecalc = 0
 var focus_transition_timer := 0.0
 var target_focus_state := false
-const FOCUS_TRANSITION_DELAY := 0.3  # Reduced delay for better responsiveness
+const FOCUS_TRANSITION_DELAY := 0.3 
 var is_mouse_in_area := false
 var hover_check_timer := 0.0
-const HOVER_CHECK_INTERVAL := 0.1  # Check every 0.1 seconds
+const HOVER_CHECK_INTERVAL := 0.1 
 
 func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
@@ -114,15 +114,14 @@ func _physics_process(delta: float) -> void:
 			focus_transition_timer = FOCUS_TRANSITION_DELAY
 
 
-# Highlight Outline When Hovering Over Octopus
+# Hovering Octopus
+# *Need outline*
 func _on_mouse_entered() -> void:
-	print("Hovering")
 	is_mouse_in_area = true
 	target_focus_state = true
 	focus_transition_timer = FOCUS_TRANSITION_DELAY
 
 func _on_mouse_exited() -> void:
-	print("Not Hovering")
 	# Only exit focus if we're truly outside the area
 	# This prevents flickering when camera moves
 	if !_is_mouse_over_octopus():

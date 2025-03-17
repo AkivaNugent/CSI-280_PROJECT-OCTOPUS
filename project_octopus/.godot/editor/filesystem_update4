@@ -1,7 +1,2 @@
-res://node_3d.tscn
-res://menu_screen.tscn
-res://camera_3d.gd
+res://octopus.tscn
 res://octomove.gd
-res://player.gd
-res://pausemenu_screen.gd
-res://pause_menu.tscn
