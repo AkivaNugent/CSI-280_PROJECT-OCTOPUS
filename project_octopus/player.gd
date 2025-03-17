@@ -9,6 +9,7 @@ const SPRINT_VELOCITY = 2
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
 @onready var animated_sprite_2d = $AnimatedSprite3D
+@onready var animation_player = $AnimationPlayer
 @onready var pos_text: Label = $"../Control/Pos Text"
 var dir_facing: String
 @onready var facing_text: Label = $"../Control/Facing Text"
@@ -23,10 +24,12 @@ var regen: float = 5
 @onready var player_Walking_Audio = $"../AudioStreamPlayer_walking"
 @onready var player_Running_Audio = $"../AudioStreamPlayer_running"
 
+#Aiming and Cursor
+
 func _ready():
 	currentHealth = maxHealth
 	
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE 
 	
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
 	# Move the player down to the top of the procedural terrain
@@ -85,10 +88,12 @@ func _physics_process(delta: float) -> void:
 	if rotation_degrees.y == -90:
 		dir_facing = "East"
 	facing_text.text = "Facing " + dir_facing
+
 	
 	# Press 3 to take damage for testing
 	if Input.is_key_pressed(KEY_3):
 		_take_damage(10)
+
 	
 	if currentHealth > maxHealth:
 		currentHealth = maxHealth
@@ -141,17 +146,28 @@ func _physics_process(delta: float) -> void:
 			if abs(input_dir2.y) > abs(input_dir2.x):
 				if input_dir2.y < 0:
 					animated_sprite_2d.play("move_forward")
+					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
+					animation_player.play("walking_right")
 				else:
 					animated_sprite_2d.play("move_backward")
+					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
+					animation_player.play("walking_right")
 			else:
 				if input_dir2.x < 0:
-					animated_sprite_2d.play("move_left")
+					animated_sprite_2d.play("move_right") # changed the logic to just flip the right walking
+					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
+					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
+					animation_player.play("walking_right")
 				else:
 					animated_sprite_2d.play("move_right")
+					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
+					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
+					animation_player.play("walking_right")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
+		animation_player.play("weapon_idle")
 
 	if not _step_up(delta):
 		move_and_slide()
@@ -161,3 +177,6 @@ func _take_damage(amount):
 	if currentHealth <= 0:
 		# Implement death logic
 		print("dead")
+		
+	
+	

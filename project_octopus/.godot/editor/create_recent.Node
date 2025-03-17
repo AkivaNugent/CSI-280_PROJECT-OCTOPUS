@@ -1,5 +1,7 @@
-ProgressBar
 Sprite3D
+Node3D
+AnimationPlayer
+ProgressBar
 Label3D
 AudioStreamPlayer
 Label
@@ -9,6 +11,4 @@ Sprite2D
 ParallaxLayer
 ParallaxBackground
 Control
-Node3D
 AnimatedSprite3D
-RayCast3D
