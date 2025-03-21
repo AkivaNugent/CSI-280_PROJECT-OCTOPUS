@@ -79,6 +79,8 @@ script = ExtResource("1_3w4aa")
 sprite_frames = SubResource("SpriteFrames_smxd2")
 frame_progress = 0.827115
 
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite3D"]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00367962, 0)
 shape = SubResource("CylinderShape3D_k6b8t")
