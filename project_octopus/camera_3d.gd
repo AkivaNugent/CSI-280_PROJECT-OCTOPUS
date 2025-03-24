@@ -19,6 +19,7 @@ var current_look_weight: float = 0.0
 var target_look_weight: float = 0.0
 var default_look_target: Vector3 = Vector3.ZERO
 var current_fov: float
+var reticle = load("res://Reticle.png")
 
 func _ready() -> void:
 	# Initialize FOV
@@ -54,11 +55,15 @@ func _process(delta: float) -> void:
 	var target_fov = default_fov
 	if looking_at_octopus:
 		target_fov = lerp(default_fov, focus_fov, current_look_weight)
+		Input.set_custom_mouse_cursor(reticle, Input.CURSOR_ARROW)
+	else:
+		Input.set_custom_mouse_cursor(null)
 	current_fov = lerp(current_fov, target_fov, focus_transition_speed * delta)
+		
 	fov = current_fov
 	
 	# Look at target or partially at octopus
-	if current_look_weight > 0.01 and octopus_node:
+	if current_look_weight > 0.01 and octopus_node != null:
 		var octopus_pos = octopus_node.global_position
 		octopus_pos.y += height_offset
 		

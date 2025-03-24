@@ -1,3 +1,4 @@
+Control
 Sprite2D
 CanvasLayer
 Button
@@ -10,5 +11,4 @@ Label3D
 AudioStreamPlayer
 ParallaxLayer
 ParallaxBackground
-Control
 Node3D
