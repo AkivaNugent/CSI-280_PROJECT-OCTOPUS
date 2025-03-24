@@ -79,13 +79,14 @@ func _physics_process(delta: float) -> void:
 		# If we've basically made it to the current waypoint, set the goal to the next one
 		if (abs(path[nextGoalIndex].x - position.x) < MAX_SPEED or abs(path[nextGoalIndex].y - position.z) < MAX_SPEED):
 			nextGoalIndex += 1
-			if (nextGoalIndex > len(path)):
-				_recalcPath()
-
-		# Move in the appropriate direction
-		velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
-		velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
-
+      
+		if (nextGoalIndex >= len(path)):
+			_recalcPath()
+		else:
+			# Move in the appropriate direction
+			velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
+			velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
+      
 	rotation = PLAYER.rotation
 	animated_sprite3d.play("default")
 
