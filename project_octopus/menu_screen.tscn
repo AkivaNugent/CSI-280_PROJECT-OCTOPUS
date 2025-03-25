@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://duf3xfj6xg226"]
+[gd_scene load_steps=18 format=3 uid="uid://duf3xfj6xg226"]
 
-[ext_resource type="Script" path="res://worldbuilder.gd" id="1_f15ba"]
+[ext_resource type="Script" uid="uid://b6egry5sk7wtu" path="res://worldbuilder.gd" id="1_f15ba"]
 [ext_resource type="Texture2D" uid="uid://0evygk48gjp5" path="res://menu_parallax_bg/sky.png" id="2_tw58h"]
-[ext_resource type="Script" path="res://parallax_bg_Script.gd" id="2_vm68w"]
+[ext_resource type="Script" uid="uid://bc522mb7dh8aa" path="res://parallax_bg_Script.gd" id="2_vm68w"]
 [ext_resource type="Texture2D" uid="uid://bylv1eu1un7mu" path="res://menu_parallax_bg/clouds_bg.png" id="3_fncrp"]
 [ext_resource type="Texture2D" uid="uid://bllbwqrfdodte" path="res://menu_parallax_bg/sky_lightened.png" id="3_swk4o"]
 [ext_resource type="Texture2D" uid="uid://cu6pj6qs7dpv6" path="res://menu_parallax_bg/clouds_mg_1.png" id="4_w5de4"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bnsa4rbjto5pr" path="res://menu_parallax_bg/clouds_mg_3.png" id="7_2i04c"]
 [ext_resource type="Texture2D" uid="uid://busi5itwrc46w" path="res://menu_parallax_bg/cloud_lonely.png" id="8_ebqif"]
 [ext_resource type="Texture2D" uid="uid://dlm7ap1jl8j2f" path="res://menu_parallax_bg/glacial_mountains.png" id="9_2yb74"]
-[ext_resource type="Script" path="res://menu_func.gd" id="12_km4im"]
+[ext_resource type="Script" uid="uid://b82msr6lsllt4" path="res://menu_func.gd" id="12_km4im"]
 [ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="13_ictsx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
@@ -29,6 +29,8 @@ glow_enabled = true
 fog_enabled = true
 fog_density = 0.05
 adjustment_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_wdxbj"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -133,9 +135,9 @@ script = ExtResource("12_km4im")
 
 [node name="startButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_focus_color = Color(0, 1, 0.952941, 1)
-theme_override_colors/font_color = Color(0.0853879, 0.816334, 0.925283, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.0853879, 0.816334, 0.925283, 1)
+theme_override_colors/font_focus_color = Color(0, 1, 0.952941, 1)
 theme_override_font_sizes/font_size = 35
 text = "Start Game"
 
@@ -175,6 +177,11 @@ vertical_alignment = 1
 [node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ictsx")
 volume_db = 9.369
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_wdxbj")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
 
 [connection signal="pressed" from="VBoxContainer/startButton" to="VBoxContainer" method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/hostButton" to="VBoxContainer" method="_on_host_button_pressed"]
