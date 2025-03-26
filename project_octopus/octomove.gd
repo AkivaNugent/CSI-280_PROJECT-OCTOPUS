@@ -17,6 +17,9 @@ var is_mouse_in_area := false
 var hover_check_timer := 0.0
 const HOVER_CHECK_INTERVAL := 0.1 
 
+var max_health = 100
+var current_health = 100
+
 func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
 	# Move the octopus down to the top of the procedural terrain
@@ -24,6 +27,8 @@ func _ready():
 
 	# Initial path planning
 	_recalcPath()
+	
+	current_health = max_health
 
 func _recalcPath():
 	# Ask the WORLD_NODE for a path to the player from current position
@@ -92,7 +97,6 @@ func _physics_process(delta: float) -> void:
 
 	if not _step_up(delta):
 		move_and_slide()
-
 # Handle smooth focus transitions
 	if focus_transition_timer > 0:
 		focus_transition_timer -= delta
@@ -113,6 +117,9 @@ func _physics_process(delta: float) -> void:
 			is_mouse_in_area = false
 			target_focus_state = false
 			focus_transition_timer = FOCUS_TRANSITION_DELAY
+	# Press 2 to take damage for testing
+	if Input.is_key_pressed(KEY_2):
+		_take_damage(10)
 
 
 # Hovering Octopus
@@ -154,3 +161,11 @@ func _is_mouse_over_octopus() -> bool:
 	
 	# Check if mouse is within this area
 	return octopus_pos.distance_to(mouse_pos) < scaled_radius
+
+func _take_damage(amount) -> void:
+	current_health -= amount
+	if current_health <= 0:
+		_die()
+
+func _die() -> void:
+	queue_free()

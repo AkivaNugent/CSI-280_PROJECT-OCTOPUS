@@ -1,0 +1,14 @@
+Control
+Sprite2D
+CanvasLayer
+Button
+Label
+VBoxContainer
+PanelContainer
+ProgressBar
+Sprite3D
+Label3D
+AudioStreamPlayer
+ParallaxLayer
+ParallaxBackground
+Node3D
