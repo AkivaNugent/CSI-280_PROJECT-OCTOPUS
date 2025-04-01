@@ -1,4 +1,5 @@
-[gd_scene load_steps=57 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=58 format=3 uid="uid://11nairsk57pk"]
+
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
 [ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
@@ -36,22 +37,6 @@ adjustment_enabled = true
 height = 0.819068
 radius = 0.372255
 
-[sub_resource type="Animation" id="Animation_msip7"]
-resource_name = "weapon_idle"
-step = 0.166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponsInventory:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0, 0, 0.2), Vector3(0, 0, 0.2), Vector3(-0.027, 0.068, 0.2), Vector3(0, 0, 0.2), Vector3(0.059, 0, 0.2), Vector3(0.059, 0, 0), Vector3(0.059, 0, 0.2)]
-}
-
 [sub_resource type="Animation" id="Animation_kkjji"]
 length = 0.001
 tracks/0/type = "value"
@@ -79,32 +64,33 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_m0k8g"]
-resource_name = "walking_right"
-step = 0.166667
+[sub_resource type="Animation" id="Animation_ejy8x"]
+resource_name = "melee_swing"
+length = 0.200003
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponsInventory:position")
+tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0, 0, -0.2), Vector3(0, -0.05, -0.2), Vector3(0, -0.1, -0.2), Vector3(0, 0, -0.2), Vector3(0, -0.05, -0.2), Vector3(0, -0.1, -0.2)]
+"times": PackedFloat32Array(0, 0.0375704, 0.0876643, 0.143125, 0.193219),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.218649, 0.0273132, -0.035603), Vector3(0.516077, -0.0922852, -0.0583432), Vector3(0.699226, -0.316498, -0.0597303), Vector3(0.765553, -0.594574, -0.0495096)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WeaponsInventory:rotation")
+tracks/1/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0375704, 0.0876643, 0.141336, 0.193219),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0.0820305), Vector3(0, 0, 0), Vector3(0, 0, -0.0820305), Vector3(0, 0, 0.0820305), Vector3(0, 0, 0), Vector3(0, 0, -0.0820305)]
+"values": [Vector3(0, 0, 0), Vector3(-0.0411314, 0.0198856, -0.402342), Vector3(-0.0970279, 0.0469096, -0.949114), Vector3(-0.148706, 0.0718941, -1.45462), Vector3(-0.198274, 0.0958588, -1.93949)]
 }
 
 [sub_resource type="Animation" id="Animation_2lmx5"]
@@ -135,33 +121,48 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0.0820305), Vector3(0, 0, 0), Vector3(0, 0, -0.0820305), Vector3(0, 0, 0.0820305), Vector3(0, 0, 0), Vector3(0, 0, -0.0820305)]
 }
 
-[sub_resource type="Animation" id="Animation_ejy8x"]
-resource_name = "melee_swing"
-length = 0.200003
-step = 0.05
+[sub_resource type="Animation" id="Animation_m0k8g"]
+resource_name = "walking_right"
+step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
+tracks/0/path = NodePath("WeaponsInventory:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0375704, 0.0876643, 0.143125, 0.193219),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.218649, 0.0273132, -0.035603), Vector3(0.516077, -0.0922852, -0.0583432), Vector3(0.699226, -0.316498, -0.0597303), Vector3(0.765553, -0.594574, -0.0495096)]
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(0, 0, -0.2), Vector3(0, -0.05, -0.2), Vector3(0, -0.1, -0.2), Vector3(0, 0, -0.2), Vector3(0, -0.05, -0.2), Vector3(0, -0.1, -0.2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
+tracks/1/path = NodePath("WeaponsInventory:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0375704, 0.0876643, 0.141336, 0.193219),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.0411314, 0.0198856, -0.402342), Vector3(-0.0970279, 0.0469096, -0.949114), Vector3(-0.148706, 0.0718941, -1.45462), Vector3(-0.198274, 0.0958588, -1.93949)]
+"values": [Vector3(0, 0, 0.0820305), Vector3(0, 0, 0), Vector3(0, 0, -0.0820305), Vector3(0, 0, 0.0820305), Vector3(0, 0, 0), Vector3(0, 0, -0.0820305)]
+}
+
+[sub_resource type="Animation" id="Animation_msip7"]
+resource_name = "weapon_idle"
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponsInventory:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(0, 0, 0.2), Vector3(0, 0, 0.2), Vector3(-0.027, 0.068, 0.2), Vector3(0, 0, 0.2), Vector3(0.059, 0, 0.2), Vector3(0.059, 0, 0), Vector3(0.059, 0, 0.2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ubow"]
@@ -447,6 +448,7 @@ libraries = {
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
 pixel_size = 0.045
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_adtjf")
 animation = &"idle"
 
@@ -457,25 +459,29 @@ visible = false
 
 [node name="Braton" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
 transform = Transform3D(1.99837, -0.242472, -0.00187173, 0.26664, 1.81725, -1.53967e-11, 0.00348781, -0.000423194, 1.07242, 0.49148, -0.547028, 0.106341)
+texture_filter = 0
 texture = ExtResource("6_chvu4")
 
 [node name="Flamethrower" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
 transform = Transform3D(1.99837, -0.242472, -0.00187173, 0.26664, 1.81725, 0, 0.00348781, -0.000423195, 1.07242, 0.617894, -0.38327, 0.111729)
+texture_filter = 0
 texture = ExtResource("7_udelx")
 
 [node name="Pistol" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
 transform = Transform3D(2.27674, -0.276249, -0.00213247, 0.303783, 2.07039, 0, 0.00397367, -0.000482146, 1.22181, 0.371424, -0.468292, 0.0975445)
+texture_filter = 0
 texture = ExtResource("8_cqtjv")
 
 [node name="Melee Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(-2.45152, 0.819556, -0.0227047, 0.78795, 2.54246, 0.0594717, -0.0671265, -0.0868181, 1.52729, 0.366248, 0.0464172, 0.219726)
+texture_filter = 0
 texture = ExtResource("9_bfmdv")
 
 [node name="Sword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
-transform = Transform3D(2.72465, 1.21167, 0, -1.22451, 2.69609, 0, 0, 0, -75.4774, 0.315624, -0.341095, 0.196118)
+transform = Transform3D(2.43095, 1.69594, 6.9732, -1.73582, 2.36816, 10.793, -0.0239774, 0.502662, -74.3756, 0.315624, -0.341095, 0.196118)
+texture_filter = 0
 texture = ExtResource("10_xq57g")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

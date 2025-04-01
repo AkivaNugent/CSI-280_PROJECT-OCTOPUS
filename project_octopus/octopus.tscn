@@ -76,6 +76,7 @@ transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 0, 
 script = ExtResource("1_3w4aa")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_smxd2")
 frame_progress = 0.827115
 
