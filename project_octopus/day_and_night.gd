@@ -27,6 +27,7 @@ func _process(delta):
 				env.adjustment_brightness = lerp(0.1, 1.0, progress)  # Night to Day
 			else:
 				env.adjustment_brightness = lerp(1.0, 0.1, progress)  # Day to Night
+				
 	
 	# switches what cycle to use
 	if time_passed >= cycle_duration:
