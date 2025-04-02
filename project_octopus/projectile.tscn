@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg6f0ujmxkvc7"]
+[gd_scene load_steps=3 format=3 uid="uid://cg6f0ujmxkvc7"]
 
 [ext_resource type="Script" path="res://projectile.gd" id="1_tu700"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_u3e08"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wicrk"]
 
 [node name="Projectile" type="CharacterBody3D"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_tu700")
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_u3e08")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_wicrk")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)

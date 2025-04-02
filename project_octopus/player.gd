@@ -89,12 +89,6 @@ func _physics_process(delta: float) -> void:
 	if rotation_degrees.y == -90:
 		dir_facing = "East"
 	facing_text.text = "Facing " + dir_facing
-
-	
-	# Press 3 to take damage for testing
-	if Input.is_key_pressed(KEY_3):
-		_take_damage(10)
-
 	
 	if currentHealth > maxHealth:
 		currentHealth = maxHealth
@@ -147,28 +141,32 @@ func _physics_process(delta: float) -> void:
 			if abs(input_dir2.y) > abs(input_dir2.x):
 				if input_dir2.y < 0:
 					animated_sprite_2d.play("move_forward")
-					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
 					animation_player.play("walking_right")
 				else:
 					animated_sprite_2d.play("move_backward")
-					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
 					animation_player.play("walking_right")
 			else:
 				if input_dir2.x < 0:
 					animated_sprite_2d.play("move_right") # changed the logic to just flip the right walking
 					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
-					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
 					animation_player.play("walking_right")
 				else:
 					animated_sprite_2d.play("move_right")
 					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
-					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
 					animation_player.play("walking_right")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
 		animation_player.play("weapon_idle")
+		
+	#Move the weapon
+	if get_viewport().get_mouse_position().x > (get_viewport().get_visible_rect().size.x / 2):
+		$Weapon.position.x = abs($Weapon.position.x)
+		$Weapon.rotation.z = -abs($Weapon.rotation.z)
+	else:
+		$Weapon.position.x = -abs($Weapon.position.x)
+		$Weapon.rotation.z = abs($Weapon.rotation.z)
 
 	if not _step_up(delta):
 		move_and_slide()

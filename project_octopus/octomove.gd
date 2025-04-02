@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-const MAX_SPEED = 2
 @onready var WORLD_NODE = get_node("../WorldEnvironment")
 @onready var PLAYER = get_node("../Player")
 @onready var MAX_STEP_HEIGHT = PLAYER.MAX_STEP_HEIGHT
@@ -17,8 +16,9 @@ var is_mouse_in_area := false
 var hover_check_timer := 0.0
 const HOVER_CHECK_INTERVAL := 0.1 
 
-var max_health = 100
-var current_health = 100
+@export var max_health = 100
+var current_health = max_health
+@export var speed = 2
 
 func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
@@ -82,15 +82,19 @@ func _physics_process(delta: float) -> void:
 	# If there is a path
 	if len(path) > 0:
 		# If we've basically made it to the current waypoint, set the goal to the next one
-		if (abs(path[nextGoalIndex].x - position.x) < MAX_SPEED or abs(path[nextGoalIndex].y - position.z) < MAX_SPEED):
+		if (abs(path[nextGoalIndex].x - position.x) < speed or abs(path[nextGoalIndex].y - position.z) < speed):
 			nextGoalIndex += 1
 	  
 		if (nextGoalIndex >= len(path)):
 			_recalcPath()
 		else:
 			# Move in the appropriate direction
-			velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
-			velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
+			var xSign = sign(path[nextGoalIndex].x - position.x)
+			var zSign = sign(path[nextGoalIndex].y - position.z)
+			print(path[nextGoalIndex])
+			velocity.x = xSign * speed
+			velocity.z = zSign * speed
+			
 	  
 	rotation = PLAYER.rotation
 	animated_sprite3d.play("default")
@@ -118,9 +122,6 @@ func _physics_process(delta: float) -> void:
 			is_mouse_in_area = false
 			target_focus_state = false
 			focus_transition_timer = FOCUS_TRANSITION_DELAY
-	# Press 2 to take damage for testing
-	if Input.is_key_pressed(KEY_2):
-		_take_damage(10)
 
 
 # Hovering Octopus
@@ -163,7 +164,7 @@ func _is_mouse_over_octopus() -> bool:
 	# Check if mouse is within this area
 	return octopus_pos.distance_to(mouse_pos) < scaled_radius
 
-func _take_damage(amount) -> void:
+func projectile_hit(amount) -> void:
 	current_health -= amount
 	if current_health <= 0:
 		_die()
