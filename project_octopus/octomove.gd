@@ -1,10 +1,11 @@
 extends CharacterBody3D
 
+const MAX_SPEED = 2
 @onready var WORLD_NODE = get_node("../WorldEnvironment")
 @onready var PLAYER = get_node("../Player")
 @onready var MAX_STEP_HEIGHT = PLAYER.MAX_STEP_HEIGHT
 @onready var animated_sprite3d = $AnimatedSprite3D
-@onready var playerCamera = get_viewport().get_camera_3d()
+@onready var playerCamera = $"../Player/Camera Origin/SpringArm3D/Camera3D"
 var _snapped_to_stairs_last_frame := false;
 var path = []
 var nextGoalIndex = 0
@@ -16,9 +17,8 @@ var is_mouse_in_area := false
 var hover_check_timer := 0.0
 const HOVER_CHECK_INTERVAL := 0.1 
 
-@export var max_health = 100
-var current_health = max_health
-@export var speed = 2
+var max_health = 100
+var current_health = 100
 
 func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
@@ -75,33 +75,26 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Once a second, recalculate a new path
-	if (Time.get_ticks_msec() - lastRecalc > 1000):
+	# Three times a second, recalculate a new path
+	if (Time.get_ticks_usec() - lastRecalc > (1000000 / 3)):
 		_recalcPath()
+		lastRecalc = Time.get_ticks_usec()
 
 	# If there is a path
-	if len(path) > 0:
+	if len(path) > nextGoalIndex:
+		# Move in the appropriate direction
+		velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
+		velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
+		
 		# If we've basically made it to the current waypoint, set the goal to the next one
-		if (abs(path[nextGoalIndex].x - position.x) < speed or abs(path[nextGoalIndex].y - position.z) < speed):
+		if (abs(path[nextGoalIndex].x - position.x) < MAX_SPEED or abs(path[nextGoalIndex].y - position.z) < MAX_SPEED):
 			nextGoalIndex += 1
-	  
-		if (nextGoalIndex >= len(path)):
-			_recalcPath()
-		else:
-			# Move in the appropriate direction
-			var xSign = sign(path[nextGoalIndex].x - position.x)
-			var zSign = sign(path[nextGoalIndex].y - position.z)
-			print(path[nextGoalIndex])
-			velocity.x = xSign * speed
-			velocity.z = zSign * speed
-			
 	  
 	rotation = PLAYER.rotation
 	animated_sprite3d.play("default")
 
 	if not _step_up(delta):
 		move_and_slide()
-		
 # Handle smooth focus transitions
 	if focus_transition_timer > 0:
 		focus_transition_timer -= delta
@@ -122,6 +115,9 @@ func _physics_process(delta: float) -> void:
 			is_mouse_in_area = false
 			target_focus_state = false
 			focus_transition_timer = FOCUS_TRANSITION_DELAY
+	# Press 2 to take damage for testing
+	if Input.is_key_pressed(KEY_2):
+		_take_damage(10)
 
 
 # Hovering Octopus
