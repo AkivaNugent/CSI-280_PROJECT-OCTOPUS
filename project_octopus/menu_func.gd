@@ -22,7 +22,7 @@ func _on_quit_button_pressed() -> void:
 
 # Networking Functions
 func _on_host_button_pressed() -> void:
-	pass # Replace with function body.
+	MultiplayerManager.become_host()
 
 func _on_join_button_pressed() -> void:
-	pass # Replace with function body.
+	MultiplayerManager.join_as_player_2()

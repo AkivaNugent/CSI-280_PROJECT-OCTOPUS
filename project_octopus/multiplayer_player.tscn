@@ -1,153 +1,134 @@
-[gd_scene load_steps=46 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=39 format=3 uid="uid://v7i410a7yydv"]
 
-[ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
-[ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
-[ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
-[ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="5_t8g68"]
-[ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
-[ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
-[ext_resource type="PackedScene" uid="uid://cf1crfbecqrp0" path="res://octopus.tscn" id="7_b4y4o"]
-[ext_resource type="AudioStream" uid="uid://cyrvm4snkn64l" path="res://game_sfx/walking_sound_short.mp3" id="8_4rnoe"]
-[ext_resource type="AudioStream" uid="uid://ddkf4tmcbbxxi" path="res://game_sfx/running_sound_short.mp3" id="9_yxrcw"]
-[ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="10_6842a"]
+[ext_resource type="Script" path="res://multiplayer_controller.gd" id="1_1srk5"]
+[ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="2_kchir"]
+[ext_resource type="Script" path="res://multiplayer_input.gd" id="2_tbn8s"]
+[ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="3_cedc7"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="4_ciy3u"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-
-[sub_resource type="Sky" id="Sky_wrnn1"]
-sky_material = SubResource("ProceduralSkyMaterial_4qqdx")
-
-[sub_resource type="Environment" id="Environment_opreq"]
-background_mode = 2
-sky = SubResource("Sky_wrnn1")
-tonemap_mode = 2
-glow_enabled = true
-fog_enabled = true
-fog_density = 0.05
-adjustment_enabled = true
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_78nj6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbj1d"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s1hwf"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fmre2"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4c02v"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vdydd"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8w7h"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_anm4e"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(0, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2j6ee"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(48, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87oh4"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(96, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u68cj"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(144, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svqbs"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(192, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_58jt6"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(240, 144, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ym1g"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(0, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hd7ah"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(48, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_13kxi"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(96, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nsonh"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(144, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayng0"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(192, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xonn"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(240, 240, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jv1hk"]
-atlas = ExtResource("5_t8g68")
+atlas = ExtResource("3_cedc7")
 region = Rect2(240, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kf1e"]
-atlas = ExtResource("5_t8g68")
+atlas = ExtResource("3_cedc7")
 region = Rect2(192, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4fcq3"]
-atlas = ExtResource("5_t8g68")
+atlas = ExtResource("3_cedc7")
 region = Rect2(144, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tudeg"]
-atlas = ExtResource("5_t8g68")
+atlas = ExtResource("3_cedc7")
 region = Rect2(96, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j7k5e"]
-atlas = ExtResource("5_t8g68")
+atlas = ExtResource("3_cedc7")
 region = Rect2(48, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4n3w"]
-atlas = ExtResource("5_t8g68")
+atlas = ExtResource("3_cedc7")
 region = Rect2(0, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_53hok"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(0, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bwags"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(48, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6s181"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(96, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xwdbt"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(144, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lr1sm"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(192, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujyd3"]
-atlas = ExtResource("4_o6bu0")
+atlas = ExtResource("2_kchir")
 region = Rect2(240, 192, 48, 48)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_adtjf"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_piiay"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -265,98 +246,37 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_kcbcv"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ttb0e"]
 height = 0.819068
 radius = 0.372255
 
-[node name="Node3D" type="Node3D"]
+[node name="MultiplayerPlayer" type="CharacterBody3D"]
+script = ExtResource("1_1srk5")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_opreq")
-script = ExtResource("1_bydk5")
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_78nj6")
+script = ExtResource("2_tbn8s")
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 365.359, 0)
-script = ExtResource("1_d34xq")
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 pixel_size = 0.045
-sprite_frames = SubResource("SpriteFrames_adtjf")
+sprite_frames = SubResource("SpriteFrames_piiay")
 animation = &"idle"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, -0.385773, 0)
-shape = SubResource("CylinderShape3D_kcbcv")
+shape = SubResource("CylinderShape3D_ttb0e")
 
-[node name="Camera Origin" type="Node3D" parent="Player"]
+[node name="Camera Origin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609057, 0)
 
-[node name="SpringArm3D" type="SpringArm3D" parent="Player/Camera Origin"]
+[node name="SpringArm3D" type="SpringArm3D" parent="Camera Origin"]
 spring_length = 3.0
 margin = 0.5
 
-[node name="Camera3D" type="Camera3D" parent="Player/Camera Origin/SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="Camera Origin/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 3)
-script = ExtResource("6_0k1nh")
+script = ExtResource("4_ciy3u")
 
-[node name="StairsAheadRayCast3D" type="RayCast3D" parent="Player"]
+[node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
-light_color = Color(0.986558, 0.789148, 0.510263, 1)
-sky_mode = 1
-
-[node name="Day and night" type="Node3D" parent="." node_paths=PackedStringArray("world_environment", "day_text")]
-script = ExtResource("6_3wk7r")
-world_environment = NodePath("../WorldEnvironment")
-day_text = NodePath("../Control/Day Text")
-
-[node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -1.36913)
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Day Text" type="Label" parent="Control"]
-layout_mode = 0
-offset_right = 168.0
-offset_bottom = 53.0
-theme_override_font_sizes/font_size = 20
-text = "Day: "
-
-[node name="Pos Text" type="Label" parent="Control"]
-layout_mode = 0
-offset_top = 26.0
-offset_right = 40.0
-offset_bottom = 49.0
-theme_override_font_sizes/font_size = 20
-text = "XYZ: "
-
-[node name="Facing Text" type="Label" parent="Control"]
-layout_mode = 0
-offset_top = 53.0
-offset_right = 47.0
-offset_bottom = 81.0
-theme_override_font_sizes/font_size = 20
-text = "Facing: "
-
-[node name="AudioStreamPlayer_walking" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_4rnoe")
-
-[node name="AudioStreamPlayer_running" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_yxrcw")
-
-[node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_6842a")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://multiplayer_player.tscn")
-spawn_path = NodePath("../Players")
-spawn_limit = 2
-
-[node name="Players" type="Node3D" parent="."]
