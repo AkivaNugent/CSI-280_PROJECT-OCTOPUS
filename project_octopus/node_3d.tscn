@@ -1,12 +1,15 @@
-[gd_scene load_steps=43 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=46 format=3 uid="uid://11nairsk57pk"]
 
-[ext_resource type="Script" path="res://worldrenderer.gd" id="1_bydk5"]
+[ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
-[ext_resource type="PackedScene" uid="uid://vkgclr823rn7" path="res://tile.tscn" id="3_p8hm3"]
 [ext_resource type="Texture2D" uid="uid://ue6ieen4yyi4" path="res://sprite_anim/player.png" id="4_o6bu0"]
 [ext_resource type="Texture2D" uid="uid://bvtwsnckcebj5" path="res://sprite_anim/player_left.png" id="5_t8g68"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
 [ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
+[ext_resource type="PackedScene" uid="uid://cf1crfbecqrp0" path="res://octopus.tscn" id="7_b4y4o"]
+[ext_resource type="AudioStream" uid="uid://cyrvm4snkn64l" path="res://game_sfx/walking_sound_short.mp3" id="8_4rnoe"]
+[ext_resource type="AudioStream" uid="uid://ddkf4tmcbbxxi" path="res://game_sfx/running_sound_short.mp3" id="9_yxrcw"]
+[ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="10_6842a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -262,7 +265,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8075l"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kcbcv"]
+height = 0.819068
+radius = 0.372255
 
 [node name="Node3D" type="Node3D"]
 
@@ -270,21 +275,18 @@ animations = [{
 environment = SubResource("Environment_opreq")
 script = ExtResource("1_bydk5")
 
-[node name="Tile4" parent="WorldEnvironment" instance=ExtResource("3_p8hm3")]
-transform = Transform3D(100, 0, 0, 0, 0.562, 0, 0, 0, 100, 0.119, -14.222, 4.137)
-
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.1086, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 365.359, 0)
 script = ExtResource("1_d34xq")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
 pixel_size = 0.045
 sprite_frames = SubResource("SpriteFrames_adtjf")
-animation = &"move_backward"
+animation = &"idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_8075l")
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, -0.385773, 0)
+shape = SubResource("CylinderShape3D_kcbcv")
 
 [node name="Camera Origin" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.609057, 0)
@@ -303,9 +305,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
-light_color = Color(0.915643, 0.90692, 0.701245, 1)
+light_color = Color(0.986558, 0.789148, 0.510263, 1)
 sky_mode = 1
 
-[node name="Day and night" type="Node3D" parent="." node_paths=PackedStringArray("world_environment")]
+[node name="Day and night" type="Node3D" parent="." node_paths=PackedStringArray("world_environment", "day_text")]
 script = ExtResource("6_3wk7r")
 world_environment = NodePath("../WorldEnvironment")
+day_text = NodePath("../Control/Day Text")
+
+[node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -1.36913)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Day Text" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 168.0
+offset_bottom = 53.0
+theme_override_font_sizes/font_size = 20
+text = "Day: "
+
+[node name="Pos Text" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 26.0
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 20
+text = "XYZ: "
+
+[node name="Facing Text" type="Label" parent="Control"]
+layout_mode = 0
+offset_top = 53.0
+offset_right = 47.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 20
+text = "Facing: "
+
+[node name="AudioStreamPlayer_walking" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_4rnoe")
+
+[node name="AudioStreamPlayer_running" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_yxrcw")
+
+[node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_6842a")

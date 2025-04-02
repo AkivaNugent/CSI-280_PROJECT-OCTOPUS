@@ -1,15 +1,28 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
+const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
 const MAX_STEP_HEIGHT = 0.75
+const SPRINT_VELOCITY = 2
 @onready var player: CharacterBody3D = $"."
 @onready var pivot: Node3D = $"Camera Origin"
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
 @onready var animated_sprite_2d = $AnimatedSprite3D
+@onready var pos_text: Label = $"../Control/Pos Text"
+var dir_facing: String
+@onready var facing_text: Label = $"../Control/Facing Text"
+
+#Audio Variables
+@onready var player_Walking_Audio = $"../AudioStreamPlayer_walking"
+@onready var player_Running_Audio = $"../AudioStreamPlayer_running"
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
+	# Move the player down to the top of the procedural terrain
+	position.y = (get_node("../WorldEnvironment").getHeight(position.x, position.z) + 1)
 
 #func _input(event):
 	#if event is InputEventMouseMotion:
@@ -53,6 +66,17 @@ func _run_body_test_motion(from: Transform3D, motion : Vector3, result = null) -
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 func _physics_process(delta: float) -> void:
+	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
+	
+	if rotation_degrees.y == 0:
+		dir_facing = "North"
+	if rotation_degrees.y == 90:
+		dir_facing = "West"
+	if rotation_degrees.y == -180:
+		dir_facing = "South"
+	if rotation_degrees.y == -90:
+		dir_facing = "East"
+	facing_text.text = "Facing " + dir_facing
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -77,6 +101,18 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		
+		# Walking Sound Effect
+		if !player_Walking_Audio.playing && !player_Running_Audio.playing:
+			player_Walking_Audio.play()
+		
+		# Running Sound Effect and Sprint Mechanic
+		if Input.is_action_pressed("sprint"):
+			velocity.z *= SPRINT_VELOCITY
+			velocity.x *= SPRINT_VELOCITY
+			
+		if !player_Running_Audio.playing:
+			player_Running_Audio.play()
 		
 		# Get input direction in camera space
 		var input_dir2 := Input.get_vector("left", "right", "up", "down")

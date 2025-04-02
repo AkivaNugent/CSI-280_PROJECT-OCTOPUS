@@ -15,10 +15,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not target_node:
 		return
-		
 	# Smoothly rotate the camera
 	rotation.y = lerp_angle(rotation.y, target_rotation, rotation_speed * delta)
-		
 	# Apply the same rotation to the player but offset it correctly
 	player.rotation.y = target_rotation + deg_to_rad(90)
 	
@@ -30,7 +28,6 @@ func _process(delta: float) -> void:
 	var desired_position = target_pos + Vector3(camera_distance, 0, 0).rotated(Vector3.UP, target_rotation)
 	current_position = current_position.lerp(desired_position, rotation_speed * delta)
 	global_position = current_position
-	
 	# Make the camera look at the target
 	look_at(target_pos)
 

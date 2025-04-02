@@ -1,0 +1,182 @@
+[gd_scene load_steps=17 format=3 uid="uid://duf3xfj6xg226"]
+
+[ext_resource type="Script" path="res://worldbuilder.gd" id="1_f15ba"]
+[ext_resource type="Texture2D" uid="uid://0evygk48gjp5" path="res://menu_parallax_bg/sky.png" id="2_tw58h"]
+[ext_resource type="Script" path="res://parallax_bg_Script.gd" id="2_vm68w"]
+[ext_resource type="Texture2D" uid="uid://bylv1eu1un7mu" path="res://menu_parallax_bg/clouds_bg.png" id="3_fncrp"]
+[ext_resource type="Texture2D" uid="uid://bllbwqrfdodte" path="res://menu_parallax_bg/sky_lightened.png" id="3_swk4o"]
+[ext_resource type="Texture2D" uid="uid://cu6pj6qs7dpv6" path="res://menu_parallax_bg/clouds_mg_1.png" id="4_w5de4"]
+[ext_resource type="Texture2D" uid="uid://p2u7ds33xvhm" path="res://menu_parallax_bg/clouds_mg_1_lightened.png" id="5_aph5u"]
+[ext_resource type="Texture2D" uid="uid://dr1htfq8iv08q" path="res://menu_parallax_bg/clouds_mg_2.png" id="6_fu2uk"]
+[ext_resource type="Texture2D" uid="uid://bnsa4rbjto5pr" path="res://menu_parallax_bg/clouds_mg_3.png" id="7_2i04c"]
+[ext_resource type="Texture2D" uid="uid://busi5itwrc46w" path="res://menu_parallax_bg/cloud_lonely.png" id="8_ebqif"]
+[ext_resource type="Texture2D" uid="uid://dlm7ap1jl8j2f" path="res://menu_parallax_bg/glacial_mountains.png" id="9_2yb74"]
+[ext_resource type="Script" path="res://menu_func.gd" id="12_km4im"]
+[ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="13_ictsx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wrnn1"]
+sky_material = SubResource("ProceduralSkyMaterial_4qqdx")
+
+[sub_resource type="Environment" id="Environment_opreq"]
+background_mode = 2
+sky = SubResource("Sky_wrnn1")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_density = 0.05
+adjustment_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_opreq")
+script = ExtResource("1_f15ba")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
+light_color = Color(0.986558, 0.789148, 0.510263, 1)
+sky_mode = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_vm68w")
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer9"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_tw58h")
+centered = false
+
+[node name="ParallaxLayer10" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer10"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_swk4o")
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(3, 3)
+texture = ExtResource("3_fncrp")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2(3, 3)
+texture = ExtResource("4_w5de4")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_aph5u")
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+scale = Vector2(3, 3)
+texture = ExtResource("6_fu2uk")
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+scale = Vector2(3, 3)
+texture = ExtResource("7_2i04c")
+centered = false
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
+scale = Vector2(3, 3)
+texture = ExtResource("8_ebqif")
+centered = false
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
+scale = Vector2(3, 3)
+texture = ExtResource("9_2yb74")
+centered = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("12_km4im")
+
+[node name="startButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0, 1, 0.952941, 1)
+theme_override_colors/font_color = Color(0.0853879, 0.816334, 0.925283, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+text = "Start Game"
+
+[node name="hostButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0862745, 0.815686, 0.92549, 1)
+theme_override_font_sizes/font_size = 25
+text = "Host Game"
+
+[node name="joinButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0862745, 0.815686, 0.92549, 1)
+theme_override_font_sizes/font_size = 25
+text = "Join Game"
+
+[node name="quitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0862745, 0.815686, 0.92549, 1)
+theme_override_font_sizes/font_size = 25
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 224.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.636293, 0.908924, 0.92725, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.458383, 0.904604, 1)
+theme_override_colors/font_outline_color = Color(0.219553, 0.663582, 0.965386, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 70
+text = "Project Octopus
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_ictsx")
+volume_db = 9.369
+
+[connection signal="pressed" from="VBoxContainer/startButton" to="VBoxContainer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/hostButton" to="VBoxContainer" method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/joinButton" to="VBoxContainer" method="_on_join_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/quitButton" to="VBoxContainer" method="_on_quit_button_pressed"]

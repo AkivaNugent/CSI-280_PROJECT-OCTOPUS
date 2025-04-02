@@ -5,6 +5,29 @@ Desc: TBD
 ## Central Documentation
 https://docs.google.com/document/d/1zEwFv-X2agyDHZoreTnodJ9Z1QpjB-4eJeBts5b-jd8/edit?usp=sharing
 
+### ITEMS
+
+| TBD              | CREATED          | IMPLEMENTED |
+| ---------------- | ---------------- | ----------- |
+| Flashlight/Torch | small/fast sword |             |
+| sniper           | big/slow sword   |             |
+|                  | pistol           |             |
+|                  | smg/auto-rile    |             |
+|                  | flamethrower     |             |
+|                  | grenade          |             |
+* Note from Akiva - I intend to do the rigging of items to charatcers over the break. right now just focusing on item creation
+
+### BOSSES
+| TBD    | CREATED | IMPLEMENTED |
+| ------ | ------- | ----------- |
+| Glenn  | Noah    |             |
+| Lucien |         |             |
+| Owen   |         |             |
+| Connor |         |             |
+| Thomas |         |             |
+   
+* Note from Akiva - Now that the first skeleton is done with noah, the rest of the bosses should come faster
+
 ---
 
 ### Godot Familiarization
@@ -22,6 +45,3 @@ Repo with code:
 https://github.com/BatteryAcid/first-game-in-godot
 
 ---
-
-
-Hello, it me, Owen, Deris
