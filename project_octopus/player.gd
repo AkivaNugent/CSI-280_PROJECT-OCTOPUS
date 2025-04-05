@@ -148,27 +148,27 @@ func _physics_process(delta: float) -> void:
 				if input_dir2.y < 0:
 					animated_sprite_2d.play("move_forward")
 					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
-					animation_player.play("walking_right")
+					animation_player.play("UP_run_with_weapon")
 				else:
 					animated_sprite_2d.play("move_backward")
 					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
-					animation_player.play("walking_right")
+					animation_player.play("DOWN_run_with_weapon")
 			else:
 				if input_dir2.x < 0:
 					animated_sprite_2d.play("move_right") # changed the logic to just flip the right walking
 					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
 					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
-					animation_player.play("walking_right")
+					animation_player.play("SIDE_run_with_weapon")
 				else:
 					animated_sprite_2d.play("move_right")
 					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
 					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
-					animation_player.play("walking_right")
+					animation_player.play("SIDE_run_with_weapon")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
-		animation_player.play("weapon_idle")
+		animation_player.play("idle_with_weapon")
 
 	if not _step_up(delta):
 		move_and_slide()
