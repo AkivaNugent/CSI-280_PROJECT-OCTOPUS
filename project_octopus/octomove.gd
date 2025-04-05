@@ -75,23 +75,21 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Once a second, recalculate a new path
-	if (Time.get_ticks_msec() - lastRecalc > 1000):
+	# Three times a second, recalculate a new path
+	if (Time.get_ticks_usec() - lastRecalc > (1000000 / 3)):
 		_recalcPath()
+		lastRecalc = Time.get_ticks_usec()
 
 	# If there is a path
-	if len(path) > 0:
+	if len(path) > nextGoalIndex:
+		# Move in the appropriate direction
+		velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
+		velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
+		
 		# If we've basically made it to the current waypoint, set the goal to the next one
 		if (abs(path[nextGoalIndex].x - position.x) < MAX_SPEED or abs(path[nextGoalIndex].y - position.z) < MAX_SPEED):
 			nextGoalIndex += 1
-	  
-		if (nextGoalIndex >= len(path)):
-			_recalcPath()
-		else:
-			# Move in the appropriate direction
-			velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
-			velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
-	  
+
 	rotation = PLAYER.rotation
 	animated_sprite3d.play("default")
 

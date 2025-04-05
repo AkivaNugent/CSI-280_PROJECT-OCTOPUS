@@ -538,12 +538,16 @@ show_percentage = false
 
 [node name="AudioStreamPlayer_walking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4rnoe")
+bus = &"SFX"
 
 [node name="AudioStreamPlayer_running" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_yxrcw")
+bus = &"SFX"
 
 [node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_6842a")
+volume_db = -7.429
+bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
