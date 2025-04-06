@@ -24,6 +24,12 @@ var regen: float = 5
 @onready var player_Walking_Audio = $"../AudioStreamPlayer_walking"
 @onready var player_Running_Audio = $"../AudioStreamPlayer_running"
 
+#Game Over Screen Variables
+const GAMEOVER_SCREEN = preload("res://gameover_screen.tscn")
+@onready var fade_anim_overlay = $"../Control/FadeOverlay"
+var is_dying = false
+var fade_time = 1.5
+
 #Aiming and Cursor
 
 func _ready():
@@ -35,6 +41,7 @@ func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
 	# Move the player down to the top of the procedural terrain
 	position.y = (get_node("../WorldEnvironment").getHeight(position.x, position.z) + 1)
+	
 
 #func _input(event):
 	#if event is InputEventMouseMotion:
@@ -78,6 +85,17 @@ func _run_body_test_motion(from: Transform3D, motion : Vector3, result = null) -
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 func _physics_process(delta: float) -> void:
+	# Game Over Fade Animation
+	if is_dying:
+		# Handle dying fade animation
+		var current_alpha = fade_anim_overlay.color.a
+		if current_alpha < 1.0:
+			fade_anim_overlay.color.a += delta / fade_time
+			if fade_anim_overlay.color.a >= 1.0:
+				# Fade complete, change to game over scene
+				get_tree().change_scene_to_packed(GAMEOVER_SCREEN)
+		return
+		
 	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
 	
 	if rotation_degrees.y == 0:
@@ -175,9 +193,11 @@ func _physics_process(delta: float) -> void:
 		
 func _take_damage(amount):
 	currentHealth -= amount
-	if currentHealth <= 0:
-		# Implement death logic
-		print("dead")
+	if currentHealth <= 0 and !is_dying:
+		# Start death fade sequence
+		is_dying = true
+		3
+		# Could Implement Death Sound/Song
 		
 	
 	

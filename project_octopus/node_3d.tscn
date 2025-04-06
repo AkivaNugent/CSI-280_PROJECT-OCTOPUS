@@ -623,6 +623,19 @@ offset_right = 330.0
 offset_bottom = 637.0
 show_percentage = false
 
+[node name="FadeOverlay" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -216.0
+offset_top = -120.0
+offset_right = 1373.0
+offset_bottom = 783.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.29, 0.585833, 0)
+
 [node name="AudioStreamPlayer_walking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4rnoe")
 bus = &"SFX"
