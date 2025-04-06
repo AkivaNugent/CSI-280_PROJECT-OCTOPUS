@@ -146,21 +146,21 @@ func _physics_process(delta: float) -> void:
 		if input_dir2.length() > 0:
 			if abs(input_dir2.y) > abs(input_dir2.x):
 				if input_dir2.y < 0:
-					animated_sprite_2d.play("move_forward")
-					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
+					animated_sprite_2d.play("move_up")
+					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
 					animation_player.play("UP_run_with_weapon")
 				else:
-					animated_sprite_2d.play("move_backward")
+					animated_sprite_2d.play("move_down")
 					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
-					animation_player.play("DOWN_run_with_weapon")
+					animation_player.play("DOWN_run_with_animation")
 			else:
 				if input_dir2.x < 0:
-					animated_sprite_2d.play("move_right") # changed the logic to just flip the right walking
+					animated_sprite_2d.play("move_side") # changed the logic to just flip the right walking
 					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
 					$WeaponsInventory.scale.x = -abs($WeaponsInventory.scale.x)
 					animation_player.play("SIDE_run_with_weapon")
 				else:
-					animated_sprite_2d.play("move_right")
+					animated_sprite_2d.play("move_side")
 					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
 					$WeaponsInventory.scale.x = abs($WeaponsInventory.scale.x)
 					animation_player.play("SIDE_run_with_weapon")
