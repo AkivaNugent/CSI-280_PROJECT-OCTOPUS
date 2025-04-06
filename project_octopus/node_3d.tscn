@@ -36,6 +36,184 @@ adjustment_enabled = true
 height = 0.819068
 radius = 0.372255
 
+[sub_resource type="Animation" id="Animation_ciahn"]
+resource_name = "DOWN_jump_with_weapon"
+length = 0.375012
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0.23531, -0.389313, -0.251133), Vector3(0.381161, 0.426453, -0.112423), Vector3(0.425526, 0.27182, -0.225827)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.197609, -1.77695, 1.93756), Vector3(-0.298797, -1.94862, -0.142239), Vector3(-0.242772, -1.92119, 0.297135)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.173737, -0.311432, 0.032504), Vector3(-0.0603523, 0.417786, -0.0727848), Vector3(-0.119663, 0.231171, -0.0296743)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.306249, -1.90454, -0.575821), Vector3(0.170879, -2.38914, 0.801452), Vector3(-0.0516202, -2.42635, 0.16541)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_h4yw6"]
+resource_name = "DOWN_run_with_animation"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.31493, -0.23111, 0.0343804), Vector3(-0.372242, -0.302521, 0.0343804), Vector3(-0.329994, -0.101257, -0.214891), Vector3(-0.291424, -0.0206299, -0.359602), Vector3(-0.338539, -0.20993, 0.00569901), Vector3(-0.266106, -0.148346, 0.0403657), Vector3(-0.118977, 0.100983, 0.112151), Vector3(-0.0404015, 0.154205, 0.112151)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(0.151293, 1.55284, 1.4602), Vector3(0.148982, 1.27705, 1.65345), Vector3(0.187819, 1.04352, 1.90242), Vector3(0.334163, 0.864908, 1.91014), Vector3(0.154394, 1.51385, 1.86969), Vector3(0.332757, 1.85687, 1.27357), Vector3(0.0849897, 2.47139, 0.472164), Vector3(0.0147168, 2.46699, 0.383866)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.161388, -0.234131, -0.0881116), Vector3(-0.242664, -0.186798, -0.0881116), Vector3(-0.213932, -0.102478, -0.18907), Vector3(-0.201248, -0.00799561, -0.18907), Vector3(-0.185829, -0.18222, -0.138203), Vector3(-0.145061, -0.131134, -0.138203), Vector3(-0.135185, -0.049408, -0.138203), Vector3(-0.149952, 0.0249634, -0.138203)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(0.0827821, 0.420485, -0.290179), Vector3(0.0932576, 0.13851, -0.630996), Vector3(-0.00948218, -0.527888, -0.610729), Vector3(0.099535, -0.60149, -0.394797), Vector3(0.181001, -0.0601627, -0.423045), Vector3(0.167119, -0.0921507, -0.60724), Vector3(0.271548, 0.264877, -0.750247), Vector3(0.15043, 0.347052, -0.363267)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.875),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_hf6qi"]
 length = 0.001
 tracks/0/type = "value"
@@ -121,6 +299,95 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2d72x"]
+resource_name = "SIDE_jump_with_weapon"
+length = 0.375012
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0.123268, -0.419769, 0.0288054), Vector3(0.174561, 0.523132, -0.0463738), Vector3(0.275196, 0.0793457, 0.0173614)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.0136798, 2.95902, 2.06135), Vector3(-0.0939538, 2.76628, -0.0519724), Vector3(-0.0460425, 2.83355, 0.394451)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0.999999, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.0059433, -0.25708, -0.116346), Vector3(0.146725, 0.349609, -0.116346), Vector3(0.159637, 0.0232239, -0.116346)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0.0414455, -0.0662156, -1.13595), Vector3(0.0267446, 0.0733875, 1.09832), Vector3(0.0778648, 0.00607178, -0.0457233)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ceh5p"]
@@ -210,6 +477,95 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.875),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8e7ak"]
+resource_name = "UP_jump_with_weapon_2"
+length = 0.375012
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(-0.478294, -0.32074, 0.0394859), Vector3(-0.15062, 0.511597, -0.112423), Vector3(-0.272095, 0.404266, -0.00842604)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0.0946602, 1.03823, 1.82479), Vector3(-0.0120766, 1.06705, -0.278468), Vector3(0.0190741, 0.789207, 0.130594)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.167763, -0.320007, -0.144476), Vector3(0.189842, 0.29187, -0.144476), Vector3(0.173027, 0.186768, -0.144476)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.003e-08, 3.14159, -0.4127), Vector3(0.130155, 2.18378, 1.01911), Vector3(0.62808, 1.99405, 0.148157)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
 "values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
 }
 
@@ -386,362 +742,6 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.879241),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_8e7ak"]
-resource_name = "UP_jump_with_weapon_2"
-length = 0.375012
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.478294, -0.32074, 0.0394859), Vector3(-0.15062, 0.511597, -0.112423), Vector3(-0.272095, 0.404266, -0.00842604)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(0.0946602, 1.03823, 1.82479), Vector3(-0.0120766, 1.06705, -0.278468), Vector3(0.0190741, 0.789207, 0.130594)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.167763, -0.320007, -0.144476), Vector3(0.189842, 0.29187, -0.144476), Vector3(0.173027, 0.186768, -0.144476)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(-1.003e-08, 3.14159, -0.4127), Vector3(0.130155, 2.18378, 1.01911), Vector3(0.62808, 1.99405, 0.148157)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_2d72x"]
-resource_name = "SIDE_jump_with_weapon"
-length = 0.375012
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(0.123268, -0.419769, 0.0288054), Vector3(0.174561, 0.523132, -0.0463738), Vector3(0.275196, 0.0793457, 0.0173614)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.0136798, 2.95902, 2.06135), Vector3(-0.0939538, 2.76628, -0.0519724), Vector3(-0.0460425, 2.83355, 0.394451)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(0.999999, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.0059433, -0.25708, -0.116346), Vector3(0.146725, 0.349609, -0.116346), Vector3(0.159637, 0.0232239, -0.116346)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(0.0414455, -0.0662156, -1.13595), Vector3(0.0267446, 0.0733875, 1.09832), Vector3(0.0778648, 0.00607178, -0.0457233)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_h4yw6"]
-resource_name = "DOWN_run_with_animation"
-loop_mode = 1
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.31493, -0.23111, 0.0343804), Vector3(-0.372242, -0.302521, 0.0343804), Vector3(-0.329994, -0.101257, -0.214891), Vector3(-0.291424, -0.0206299, -0.359602), Vector3(-0.338539, -0.20993, 0.00569901), Vector3(-0.266106, -0.148346, 0.0403657), Vector3(-0.118977, 0.100983, 0.112151), Vector3(-0.0404015, 0.154205, 0.112151)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0.151293, 1.55284, 1.4602), Vector3(0.148982, 1.27705, 1.65345), Vector3(0.187819, 1.04352, 1.90242), Vector3(0.334163, 0.864908, 1.91014), Vector3(0.154394, 1.51385, 1.86969), Vector3(0.332757, 1.85687, 1.27357), Vector3(0.0849897, 2.47139, 0.472164), Vector3(0.0147168, 2.46699, 0.383866)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.875),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.161388, -0.234131, -0.0881116), Vector3(-0.242664, -0.186798, -0.0881116), Vector3(-0.213932, -0.102478, -0.18907), Vector3(-0.201248, -0.00799561, -0.18907), Vector3(-0.185829, -0.18222, -0.138203), Vector3(-0.145061, -0.131134, -0.138203), Vector3(-0.135185, -0.049408, -0.138203), Vector3(-0.149952, 0.0249634, -0.138203)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0.0827821, 0.420485, -0.290179), Vector3(0.0932576, 0.13851, -0.630996), Vector3(-0.00948218, -0.527888, -0.610729), Vector3(0.099535, -0.60149, -0.394797), Vector3(0.181001, -0.0601627, -0.423045), Vector3(0.167119, -0.0921507, -0.60724), Vector3(0.271548, 0.264877, -0.750247), Vector3(0.15043, 0.347052, -0.363267)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.875),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ciahn"]
-resource_name = "DOWN_jump_with_weapon"
-length = 0.375012
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponsInventory/Melee Weapons:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(0.23531, -0.389313, -0.251133), Vector3(0.381161, 0.426453, -0.112423), Vector3(0.425526, 0.27182, -0.225827)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite3D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.197609, -1.77695, 1.93756), Vector3(-0.298797, -1.94862, -0.142239), Vector3(-0.242772, -1.92119, 0.297135)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("WeaponsInventory/Ranged Weapons:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.173737, -0.311432, 0.032504), Vector3(-0.0603523, 0.417786, -0.0727848), Vector3(-0.119663, 0.231171, -0.0296743)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("WeaponsInventory/Ranged Weapons:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector3(-0.306249, -1.90454, -0.575821), Vector3(0.170879, -2.38914, 0.801452), Vector3(-0.0516202, -2.42635, 0.16541)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("WeaponsInventory/Ranged Weapons:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector3(1, 1, 1), Vector3(1, 1, 1)]
@@ -1128,7 +1128,7 @@ animation = &"jump_down"
 transform = Transform3D(0.987436, -0.15802, 0, 0.15802, 0.987436, 0, 0, 0, 1, 0.0124488, -0.0220032, 0.131601)
 
 [node name="Ranged Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(0.884223, 0.467066, 0, -0.467066, 0.884223, 0, 0, 0, 1, -0.171047, -0.14502, -0.116346)
+transform = Transform3D(0.884223, 0.467065, 0, -0.467065, 0.884223, 0, 0, 0, 1, -0.171047, -0.14502, -0.116346)
 
 [node name="Braton" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
 transform = Transform3D(1.99837, -0.242472, -0.00187173, 0.26664, 1.81725, -2.91038e-11, 0.00348781, -0.000423194, 1.07242, 0.114998, 0.0549927, 0.106341)
