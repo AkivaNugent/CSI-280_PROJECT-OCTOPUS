@@ -13,4 +13,8 @@ func _process(delta: float) -> void:
 
 
 func _on_reset_button_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file("res://node_3d.tscn")
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

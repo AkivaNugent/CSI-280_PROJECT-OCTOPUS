@@ -18,10 +18,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.93, 0, 0.217, 0.290196)
+color = Color(0, 0, 0, 0.513726)
 
 [node name="gameover_label" type="Label" parent="."]
-z_index = 100
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,7 +33,11 @@ offset_right = 135.5
 offset_bottom = -77.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
+theme_override_colors/font_color = Color(0.72, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(3.85046e-07, 0.455667, 0.541539, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 80
 text = "Game Over"
 
 [node name="menu" type="VBoxContainer" parent="."]
@@ -53,6 +56,13 @@ grow_vertical = 2
 
 [node name="reset_button" type="Button" parent="menu"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 35
 text = "Reset Game"
 
+[node name="quit_button" type="Button" parent="menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Quit"
+
 [connection signal="pressed" from="menu/reset_button" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="menu/quit_button" to="." method="_on_quit_button_pressed"]

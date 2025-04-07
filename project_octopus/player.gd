@@ -27,8 +27,9 @@ var regen: float = 5
 #Game Over Screen Variables
 const GAMEOVER_SCREEN = preload("res://gameover_screen.tscn")
 @onready var fade_anim_overlay = $"../Control/FadeOverlay"
-var is_dying = false
-var fade_time = 1.5
+@onready var is_dying = false
+@onready var fade_time = 1.5
+@onready var you_died_text = $"../Control/YouDied"
 
 #Aiming and Cursor
 
@@ -37,6 +38,8 @@ func _ready():
   
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	you_died_text.visible = false
 	
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
 	# Move the player down to the top of the procedural terrain
@@ -90,9 +93,10 @@ func _physics_process(delta: float) -> void:
 		# Handle dying fade animation
 		var current_alpha = fade_anim_overlay.color.a
 		if current_alpha < 1.0:
-			fade_anim_overlay.color.a += delta / fade_time
+			fade_anim_overlay.color.a += delta / fade_time / 3
+			you_died_text.modulate.a = min(fade_anim_overlay.color.a * 1.5, 1.0)
 			if fade_anim_overlay.color.a >= 1.0:
-				# Fade complete, change to game over scene
+				# change to game over scene
 				get_tree().change_scene_to_packed(GAMEOVER_SCREEN)
 		return
 		
@@ -196,7 +200,8 @@ func _take_damage(amount):
 	if currentHealth <= 0 and !is_dying:
 		# Start death fade sequence
 		is_dying = true
-		3
+		you_died_text.visible = true
+		
 		# Could Implement Death Sound/Song
 		
 	
