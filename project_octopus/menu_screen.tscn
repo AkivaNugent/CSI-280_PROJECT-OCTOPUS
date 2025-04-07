@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://duf3xfj6xg226"]
+[gd_scene load_steps=18 format=3 uid="uid://duf3xfj6xg226"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_f15ba"]
 [ext_resource type="Texture2D" uid="uid://0evygk48gjp5" path="res://menu_parallax_bg/sky.png" id="2_tw58h"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bnsa4rbjto5pr" path="res://menu_parallax_bg/clouds_mg_3.png" id="7_2i04c"]
 [ext_resource type="Texture2D" uid="uid://busi5itwrc46w" path="res://menu_parallax_bg/cloud_lonely.png" id="8_ebqif"]
 [ext_resource type="Texture2D" uid="uid://dlm7ap1jl8j2f" path="res://menu_parallax_bg/glacial_mountains.png" id="9_2yb74"]
+[ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="12_87xeo"]
 [ext_resource type="Script" path="res://menu_func.gd" id="12_km4im"]
 [ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="13_ictsx"]
 
@@ -119,6 +120,29 @@ scale = Vector2(3, 3)
 texture = ExtResource("9_2yb74")
 centered = false
 
+[node name="Label" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 224.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.636293, 0.908924, 0.92725, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.458383, 0.904604, 1)
+theme_override_colors/font_outline_color = Color(0.219553, 0.663582, 0.965386, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("12_87xeo")
+theme_override_font_sizes/font_size = 90
+text = "Project Octopus
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FadeOverlay" type="ColorRect" parent="."]
+offset_left = -568.0
+offset_top = -230.0
+offset_right = 1696.0
+offset_bottom = 988.0
+color = Color(1, 1, 1, 0)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,6 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 10
 script = ExtResource("12_km4im")
 
 [node name="startButton" type="Button" parent="VBoxContainer"]
@@ -136,41 +161,30 @@ layout_mode = 2
 theme_override_colors/font_focus_color = Color(0, 1, 0.952941, 1)
 theme_override_colors/font_color = Color(0.0853879, 0.816334, 0.925283, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("12_87xeo")
+theme_override_font_sizes/font_size = 38
 text = "Start Game"
 
 [node name="hostButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0862745, 0.815686, 0.92549, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("12_87xeo")
+theme_override_font_sizes/font_size = 38
 text = "Host Game"
 
 [node name="joinButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0862745, 0.815686, 0.92549, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("12_87xeo")
+theme_override_font_sizes/font_size = 38
 text = "Join Game"
 
 [node name="quitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0862745, 0.815686, 0.92549, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("12_87xeo")
+theme_override_font_sizes/font_size = 38
 text = "Quit"
-
-[node name="Label" type="Label" parent="."]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 224.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.636293, 0.908924, 0.92725, 1)
-theme_override_colors/font_shadow_color = Color(0, 0.458383, 0.904604, 1)
-theme_override_colors/font_outline_color = Color(0.219553, 0.663582, 0.965386, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 70
-text = "Project Octopus
-"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ictsx")
