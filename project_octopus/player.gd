@@ -31,6 +31,8 @@ const GAMEOVER_SCREEN = preload("res://gameover_screen.tscn")
 @onready var fade_time = 1.5
 @onready var you_died_text = $"../Control/YouDied"
 
+var lastTookDamage = 0
+
 #Aiming and Cursor
 
 func _ready():
@@ -99,6 +101,15 @@ func _physics_process(delta: float) -> void:
 				# change to game over scene
 				get_tree().change_scene_to_packed(GAMEOVER_SCREEN)
 		return
+		
+	var ScreenColorer = get_tree().get_current_scene().get_node("CanvasLayer/ScreenColorer")
+	# Draw the screen red if the player recently took damage
+	if (Time.get_ticks_usec() - lastTookDamage < (1000000 / 2)):
+		ScreenColorer.modulate = Color(1.0, 0.5, 0.5, 0.2)
+		ScreenColorer.size = get_viewport().size
+		
+	else:
+		ScreenColorer.modulate = Color(1.0, 1.0, 1.0, 0.0)
 		
 	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
 	
@@ -193,14 +204,16 @@ func _physics_process(delta: float) -> void:
 	if not _step_up(delta):
 		move_and_slide()
 		
-func _take_damage(amount):
-	currentHealth -= amount
-	if currentHealth <= 0 and !is_dying:
-		# Start death fade sequence
-		is_dying = true
-		you_died_text.visible = true
-		
-		# Could Implement Death Sound/Song
+func take_damage(amount):
+	if (Time.get_ticks_usec() - lastTookDamage > (1000000 / 2)):
+		currentHealth -= amount
+		lastTookDamage = Time.get_ticks_usec()
+		if currentHealth <= 0 and !is_dying:
+			# Start death fade sequence
+			is_dying = true
+			you_died_text.visible = true
+			
+			# Could Implement Death Sound/Song
 		
 	
 	

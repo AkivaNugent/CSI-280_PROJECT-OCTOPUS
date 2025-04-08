@@ -10,6 +10,9 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
+	if global_position.distance_to(startPos) > maxRange:
+		queue_free()
+		
 	var collided = false
 	for index in get_slide_collision_count():
 		var collision := get_slide_collision(index)
@@ -18,7 +21,4 @@ func _physics_process(delta: float) -> void:
 		if body.has_method("projectile_hit"):
 			body.projectile_hit(damage)
 	if collided:
-		queue_free()
-		
-	if global_position.distance_to(startPos) > maxRange:
 		queue_free()
