@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=70 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
@@ -13,8 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://twtj5b3qh7b3" path="res://sprite_anim/MELEE_BusterSword.png" id="9_bfmdv"]
 [ext_resource type="AudioStream" uid="uid://ddkf4tmcbbxxi" path="res://game_sfx/running_sound_short.mp3" id="9_yxrcw"]
 [ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="10_6842a"]
+[ext_resource type="PackedScene" uid="uid://bj5en7c31467i" path="res://weapon.tscn" id="10_mqv01"]
+[ext_resource type="Texture2D" uid="uid://du8eqyvw7rfdc" path="res://sprite_anim/MELEE_sword.png" id="10_xq57g"]
 [ext_resource type="PackedScene" uid="uid://bxi6bygwc0ey" path="res://pause_menu.tscn" id="11_o04wj"]
-[ext_resource type="PackedScene" uid="uid://bj5en7c31467i" path="res://weapon.tscn" id="11_wek74"]
 [ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="12_g2row"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
@@ -35,7 +36,7 @@ adjustment_enabled = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kcbcv"]
 height = 0.819068
-radius = 0.324602
+radius = 0.372255
 
 [sub_resource type="Animation" id="Animation_kkjji"]
 length = 0.001
@@ -534,11 +535,7 @@ libraries = {
 }
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
-<<<<<<< HEAD
-pixel_size = 0.045
-=======
 pixel_size = 0.0225
->>>>>>> main
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_adtjf")
 animation = &"jump_up"
@@ -571,17 +568,14 @@ transform = Transform3D(-2.45152, 0.819556, -0.0227047, 0.78795, 2.54246, 0.0594
 texture_filter = 0
 texture = ExtResource("9_bfmdv")
 
-<<<<<<< HEAD
-[node name="Weapon" parent="Player" instance=ExtResource("11_wek74")]
-transform = Transform3D(3.62523, 1.69047, 0, -1.69047, 3.62523, 0, 0, 0, 4, 0.205898, -0.569061, 0.0452429)
-range = 2.0
-weaponSpritePath = "res://sprite_anim/MELEE_sword.png"
-=======
 [node name="Sword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.43095, 1.69594, 6.9732, -1.73582, 2.36816, 10.793, -0.0239774, 0.502662, -74.3756, 0.315624, -0.341095, 0.196118)
 texture_filter = 0
 texture = ExtResource("10_xq57g")
->>>>>>> main
+
+[node name="Weapon" parent="Player" instance=ExtResource("10_mqv01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.350856, -0.320404, 0)
+weaponSpritePath = "res://sprite_anim/MELEE_sword.png"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
@@ -672,12 +666,16 @@ color = Color(0, 0, 0, 0)
 
 [node name="AudioStreamPlayer_walking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4rnoe")
+bus = &"SFX"
 
 [node name="AudioStreamPlayer_running" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_yxrcw")
+bus = &"SFX"
 
 [node name="AudioStreamPlayer_bgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_6842a")
+volume_db = -7.429
+bus = &"Music"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
