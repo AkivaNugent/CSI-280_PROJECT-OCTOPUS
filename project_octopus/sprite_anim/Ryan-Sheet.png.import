@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr2ndyivya6ad"
-path.s3tc="res://.godot/imported/Dirt.png-cc1fb26691f8e5bcf036ffa7faba0c81.s3tc.ctex"
+uid="uid://doyr238ki6clg"
+path.s3tc="res://.godot/imported/Ryan-Sheet.png-9276613d0665d7c25186552a0b4c481f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Dirt.png"
-dest_files=["res://.godot/imported/Dirt.png-cc1fb26691f8e5bcf036ffa7faba0c81.s3tc.ctex"]
+source_file="res://sprite_anim/Ryan-Sheet.png"
+dest_files=["res://.godot/imported/Ryan-Sheet.png-9276613d0665d7c25186552a0b4c481f.s3tc.ctex"]
 
 [params]
 
