@@ -16,6 +16,7 @@ const FOCUS_TRANSITION_DELAY := 0.3
 var is_mouse_in_area := false
 var hover_check_timer := 0.0
 const HOVER_CHECK_INTERVAL := 0.1 
+var lastTookDamage = 0
 
 var max_health = 100
 var current_health = 100
@@ -74,6 +75,10 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+	# End the red damage effect after a few frames
+	if (Time.get_ticks_usec() - lastTookDamage > (1000000 / 2)):
+		$AnimatedSprite3D.modulate = Color.WHITE
 
 	# Three times a second, recalculate a new path
 	if (Time.get_ticks_usec() - lastRecalc > (1000000 / 3)):
@@ -159,6 +164,8 @@ func _is_mouse_over_octopus() -> bool:
 
 func projectile_hit(amount) -> void:
 	current_health -= amount
+	$AnimatedSprite3D.modulate = Color(1.0, 0.5, 0.5, 1.0)
+	lastTookDamage = Time.get_ticks_usec() 
 	if current_health <= 0:
 		_die()
 
