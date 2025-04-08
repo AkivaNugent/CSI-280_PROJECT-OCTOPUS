@@ -115,9 +115,6 @@ func _physics_process(delta: float) -> void:
 			is_mouse_in_area = false
 			target_focus_state = false
 			focus_transition_timer = FOCUS_TRANSITION_DELAY
-	# Press 2 to take damage for testing
-	if Input.is_key_pressed(KEY_2):
-		_take_damage(10)
 
 
 # Hovering Octopus
@@ -160,7 +157,7 @@ func _is_mouse_over_octopus() -> bool:
 	# Check if mouse is within this area
 	return octopus_pos.distance_to(mouse_pos) < scaled_radius
 
-func _take_damage(amount) -> void:
+func projectile_hit(amount) -> void:
 	current_health -= amount
 	if current_health <= 0:
 		_die()

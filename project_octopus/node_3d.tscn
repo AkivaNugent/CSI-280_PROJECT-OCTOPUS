@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=70 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://twtj5b3qh7b3" path="res://sprite_anim/MELEE_BusterSword.png" id="9_bfmdv"]
 [ext_resource type="AudioStream" uid="uid://ddkf4tmcbbxxi" path="res://game_sfx/running_sound_short.mp3" id="9_yxrcw"]
 [ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="10_6842a"]
+[ext_resource type="PackedScene" uid="uid://n51y2be06pgb" path="res://weapon.tscn" id="10_mqv01"]
 [ext_resource type="Texture2D" uid="uid://du8eqyvw7rfdc" path="res://sprite_anim/MELEE_sword.png" id="10_xq57g"]
 [ext_resource type="PackedScene" uid="uid://bxi6bygwc0ey" path="res://pause_menu.tscn" id="11_o04wj"]
 [ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="12_g2row"]
@@ -499,7 +500,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D2" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_opreq")
@@ -571,6 +572,10 @@ texture = ExtResource("9_bfmdv")
 transform = Transform3D(2.43095, 1.69594, 6.9732, -1.73582, 2.36816, 10.793, -0.0239774, 0.502662, -74.3756, 0.315624, -0.341095, 0.196118)
 texture_filter = 0
 texture = ExtResource("10_xq57g")
+
+[node name="Weapon" parent="Player" instance=ExtResource("10_mqv01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.350856, -0.320404, 0)
+weaponSpritePath = "res://sprite_anim/MELEE_sword.png"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
