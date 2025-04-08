@@ -575,7 +575,7 @@ texture = ExtResource("10_xq57g")
 
 [node name="Weapon" parent="Player" instance=ExtResource("10_mqv01")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.350856, -0.320404, 0)
-range = 1.0
+range = 0.1
 weaponSpritePath = "res://sprite_anim/MELEE_sword.png"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -590,6 +590,9 @@ day_text = NodePath("../Control/Day Text")
 
 [node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
 transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -1.36913)
+max_health = 100
+damage = 10
+speed = 2.0
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

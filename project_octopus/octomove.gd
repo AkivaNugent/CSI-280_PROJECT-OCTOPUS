@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-const MAX_SPEED = 2
 @onready var WORLD_NODE = get_node("../WorldEnvironment")
 @onready var PLAYER = get_node("../Player")
 @onready var MAX_STEP_HEIGHT = PLAYER.MAX_STEP_HEIGHT
@@ -18,8 +17,11 @@ var hover_check_timer := 0.0
 const HOVER_CHECK_INTERVAL := 0.1 
 var lastTookDamage = 0
 
-var max_health = 100
-var current_health = 100
+@export var max_health : int
+var current_health
+
+@export var damage : int
+@export var speed : float
 
 func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
@@ -90,11 +92,11 @@ func _physics_process(delta: float) -> void:
 	# If there is a path
 	if len(path) > nextGoalIndex:
 		# Move in the appropriate direction
-		velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
-		velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
+		velocity.x = speed * sign(path[nextGoalIndex].x - position.x)
+		velocity.z = speed * sign(path[nextGoalIndex].y - position.z)
 		
 		# If we've basically made it to the current waypoint, set the goal to the next one
-		if (abs(path[nextGoalIndex].x - position.x) < MAX_SPEED or abs(path[nextGoalIndex].y - position.z) < MAX_SPEED):
+		if (abs(path[nextGoalIndex].x - position.x) < speed or abs(path[nextGoalIndex].y - position.z) < speed):
 			nextGoalIndex += 1
 
 	rotation = PLAYER.rotation
@@ -108,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		var collision := get_slide_collision(index)
 		var body = collision.get_collider()
 		if body.has_method("take_damage"): #Should only be player
-			body.take_damage(10)
+			body.take_damage(damage)
 		
 # Handle smooth focus transitions
 	if focus_transition_timer > 0:
