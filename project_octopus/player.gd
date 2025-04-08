@@ -102,11 +102,14 @@ func _physics_process(delta: float) -> void:
 				get_tree().change_scene_to_packed(GAMEOVER_SCREEN)
 		return
 		
+	var ScreenColorer = get_tree().get_current_scene().get_node("CanvasLayer/ScreenColorer")
 	# Draw the screen red if the player recently took damage
 	if (Time.get_ticks_usec() - lastTookDamage < (1000000 / 2)):
-		get_tree().get_current_scene().get_node("CanvasLayer/ScreenColorer").modulate = Color(1.0, 0.5, 0.5, 0.2)
+		ScreenColorer.modulate = Color(1.0, 0.5, 0.5, 0.2)
+		ScreenColorer.size = get_viewport().size
+		
 	else:
-		get_tree().get_current_scene().get_node("CanvasLayer/ScreenColorer").modulate = Color(1.0, 1.0, 1.0, 0.0)
+		ScreenColorer.modulate = Color(1.0, 1.0, 1.0, 0.0)
 		
 	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
 	

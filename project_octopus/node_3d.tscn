@@ -575,6 +575,7 @@ texture = ExtResource("10_xq57g")
 
 [node name="Weapon" parent="Player" instance=ExtResource("10_mqv01")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.350856, -0.320404, 0)
+range = 1.0
 weaponSpritePath = "res://sprite_anim/MELEE_sword.png"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
