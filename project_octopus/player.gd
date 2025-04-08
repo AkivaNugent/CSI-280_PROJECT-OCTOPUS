@@ -165,7 +165,7 @@ func _physics_process(delta: float) -> void:
 					animated_sprite_2d.play("move_up")
 					animation_player.play("walking_right")
 				else:
-					animated_sprite_2d.play("move_backward")
+					animated_sprite_2d.play("move_down")
 					animation_player.play("walking_right")
 			else:
 				if input_dir2.x < 0:

@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://twtj5b3qh7b3" path="res://sprite_anim/MELEE_BusterSword.png" id="9_bfmdv"]
 [ext_resource type="AudioStream" uid="uid://ddkf4tmcbbxxi" path="res://game_sfx/running_sound_short.mp3" id="9_yxrcw"]
 [ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="10_6842a"]
-[ext_resource type="PackedScene" uid="uid://bj5en7c31467i" path="res://weapon.tscn" id="10_mqv01"]
+[ext_resource type="PackedScene" uid="uid://n51y2be06pgb" path="res://weapon.tscn" id="10_mqv01"]
 [ext_resource type="Texture2D" uid="uid://du8eqyvw7rfdc" path="res://sprite_anim/MELEE_sword.png" id="10_xq57g"]
 [ext_resource type="PackedScene" uid="uid://bxi6bygwc0ey" path="res://pause_menu.tscn" id="11_o04wj"]
 [ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="12_g2row"]
@@ -500,7 +500,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D2" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_opreq")
