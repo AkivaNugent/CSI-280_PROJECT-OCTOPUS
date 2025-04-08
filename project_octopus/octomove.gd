@@ -76,8 +76,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# End the red damage effect after a few frames
-	if (Time.get_ticks_usec() - lastTookDamage > (1000000 / 2)):
+	# Draw the octopus red if it recently took damage
+	if (Time.get_ticks_usec() - lastTookDamage < (1000000 / 2)):
+		$AnimatedSprite3D.modulate = Color(1.0, 0.5, 0.5, 1.0)
+	else:
 		$AnimatedSprite3D.modulate = Color.WHITE
 
 	# Three times a second, recalculate a new path
@@ -100,6 +102,14 @@ func _physics_process(delta: float) -> void:
 
 	if not _step_up(delta):
 		move_and_slide()
+	
+	#Octopus collision handling
+	for index in get_slide_collision_count():
+		var collision := get_slide_collision(index)
+		var body = collision.get_collider()
+		if body.has_method("take_damage"): #Should only be player
+			body.take_damage(10)
+		
 # Handle smooth focus transitions
 	if focus_transition_timer > 0:
 		focus_transition_timer -= delta
@@ -164,7 +174,6 @@ func _is_mouse_over_octopus() -> bool:
 
 func projectile_hit(amount) -> void:
 	current_health -= amount
-	$AnimatedSprite3D.modulate = Color(1.0, 0.5, 0.5, 1.0)
 	lastTookDamage = Time.get_ticks_usec() 
 	if current_health <= 0:
 		_die()

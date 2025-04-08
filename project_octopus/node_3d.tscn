@@ -680,3 +680,7 @@ bus = &"Music"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="pause_menu" parent="CanvasLayer" instance=ExtResource("11_o04wj")]
+
+[node name="ScreenColorer" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
