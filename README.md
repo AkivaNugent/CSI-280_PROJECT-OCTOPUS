@@ -1,6 +1,6 @@
 # CSI-280_PROJECT-OCTOPUS
 ---
-An open-source arena battler, with you and your friends alone against swarms of octopi and strangely familiar faces.
+An open-source arena battler, with you \[Ryan Buck\] and your friends \[also Ryan Buck\] alone against swarms of octopi and strangely familiar faces.
 
 ## Setup
 
