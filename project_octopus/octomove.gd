@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-const MAX_SPEED = 2
 @onready var WORLD_NODE = get_node("../WorldEnvironment")
 @onready var PLAYER = get_node("../Player")
 @onready var MAX_STEP_HEIGHT = PLAYER.MAX_STEP_HEIGHT
@@ -16,9 +15,13 @@ const FOCUS_TRANSITION_DELAY := 0.3
 var is_mouse_in_area := false
 var hover_check_timer := 0.0
 const HOVER_CHECK_INTERVAL := 0.1 
+var lastTookDamage = 0
 
-var max_health = 100
-var current_health = 100
+@export var max_health : int
+var current_health
+
+@export var damage : int
+@export var speed : float
 
 func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
@@ -75,6 +78,12 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
+	# Draw the octopus red if it recently took damage
+	if (Time.get_ticks_usec() - lastTookDamage < (1000000 / 2)):
+		$AnimatedSprite3D.modulate = Color(1.0, 0.5, 0.5, 1.0)
+	else:
+		$AnimatedSprite3D.modulate = Color.WHITE
+
 	# Three times a second, recalculate a new path
 	if (Time.get_ticks_usec() - lastRecalc > (1000000 / 3)):
 		_recalcPath()
@@ -83,11 +92,11 @@ func _physics_process(delta: float) -> void:
 	# If there is a path
 	if len(path) > nextGoalIndex:
 		# Move in the appropriate direction
-		velocity.x = MAX_SPEED * sign(path[nextGoalIndex].x - position.x)
-		velocity.z = MAX_SPEED * sign(path[nextGoalIndex].y - position.z)
+		velocity.x = speed * sign(path[nextGoalIndex].x - position.x)
+		velocity.z = speed * sign(path[nextGoalIndex].y - position.z)
 		
 		# If we've basically made it to the current waypoint, set the goal to the next one
-		if (abs(path[nextGoalIndex].x - position.x) < MAX_SPEED or abs(path[nextGoalIndex].y - position.z) < MAX_SPEED):
+		if (abs(path[nextGoalIndex].x - position.x) < speed or abs(path[nextGoalIndex].y - position.z) < speed):
 			nextGoalIndex += 1
 
 	rotation = PLAYER.rotation
@@ -95,6 +104,14 @@ func _physics_process(delta: float) -> void:
 
 	if not _step_up(delta):
 		move_and_slide()
+	
+	#Octopus collision handling
+	for index in get_slide_collision_count():
+		var collision := get_slide_collision(index)
+		var body = collision.get_collider()
+		if body.has_method("take_damage"): #Should only be player
+			body.take_damage(damage)
+		
 # Handle smooth focus transitions
 	if focus_transition_timer > 0:
 		focus_transition_timer -= delta
@@ -115,9 +132,6 @@ func _physics_process(delta: float) -> void:
 			is_mouse_in_area = false
 			target_focus_state = false
 			focus_transition_timer = FOCUS_TRANSITION_DELAY
-	# Press 2 to take damage for testing
-	if Input.is_key_pressed(KEY_2):
-		_take_damage(10)
 
 
 # Hovering Octopus
@@ -160,8 +174,9 @@ func _is_mouse_over_octopus() -> bool:
 	# Check if mouse is within this area
 	return octopus_pos.distance_to(mouse_pos) < scaled_radius
 
-func _take_damage(amount) -> void:
+func projectile_hit(amount) -> void:
 	current_health -= amount
+	lastTookDamage = Time.get_ticks_usec() 
 	if current_health <= 0:
 		_die()
 

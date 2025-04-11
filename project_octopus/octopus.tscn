@@ -73,6 +73,8 @@ radius = 0.1643
 
 [node name="Octopus" type="CharacterBody3D"]
 transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_3w4aa")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
