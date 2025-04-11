@@ -509,7 +509,7 @@ environment = SubResource("Environment_opreq")
 script = ExtResource("1_bydk5")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 365.359, 88.3804)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 365.359, 5.22108)
 script = ExtResource("1_d34xq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -595,7 +595,7 @@ world_environment = NodePath("../WorldEnvironment")
 day_text = NodePath("../Control/Day Text")
 
 [node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -84.6779)
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -5.94867)
 max_health = 100
 damage = 10
 speed = 2.0

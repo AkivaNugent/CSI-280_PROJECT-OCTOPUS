@@ -36,11 +36,9 @@ func _tracePath(cameFrom, current) -> Array:
 	while current in cameFrom:
 		current = cameFrom[current]
 		path.push_front(current)
-	print(path)
 	return path
 
 func aStarNavigation(start,finish) -> Array:
-	print(start, finish)
 	# Calculate a path between two points over the heightmap using A*
 	
 	# Note that because start and finish should be Vector2i type, they use x and y as indices, even though we're accessing things on the xz plane.
@@ -157,12 +155,6 @@ func _ready() -> void:
 		_placeChord(x, z)
 		_placeChord(x, -z)
 		
-		#Build ice cliffs around back half of map
-		_placeCubeSpecific(x, z, 1000)
-		_placeCubeSpecific(x, -z, 1000)
-		if (x != z):
-			_placeCubeSpecific(z, -x, 1000)
-			_placeCubeSpecific(-z, -x, 1000)
 		z += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
