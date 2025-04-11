@@ -174,24 +174,24 @@ func _physics_process(delta: float) -> void:
 			if abs(input_dir2.y) > abs(input_dir2.x):
 				if input_dir2.y < 0:
 					animated_sprite_2d.play("move_up")
-					animation_player.play("UP_run_with_weapon")
+					#animation_player.play("UP_run_with_weapon")
 				else:
 					animated_sprite_2d.play("move_down")
-					animation_player.play("DOWN_run_with_animation")
+					#animation_player.play("DOWN_run_with_animation")
 			else:
 				if input_dir2.x < 0:
 					animated_sprite_2d.play("move_side") # changed the logic to just flip the right walking
 					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
-					animation_player.play("SIDE_run_with_weapon")
+					#animation_player.play("SIDE_run_with_weapon")
 				else:
 					animated_sprite_2d.play("move_side")
 					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
-					animation_player.play("SIDE_run_with_weapon")
+					#animation_player.play("SIDE_run_with_weapon")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
-		animation_player.play("idle_with_weapon")
+		#animation_player.play("idle_with_weapon")
 		
 	#Move the weapon
 	if get_viewport().get_mouse_position().x > (get_viewport().get_visible_rect().size.x / 2):

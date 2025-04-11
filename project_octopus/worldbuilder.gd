@@ -36,17 +36,19 @@ func _tracePath(cameFrom, current) -> Array:
 	while current in cameFrom:
 		current = cameFrom[current]
 		path.push_front(current)
+	print(path)
 	return path
 
 func aStarNavigation(start,finish) -> Array:
+	print(start, finish)
 	# Calculate a path between two points over the heightmap using A*
 	
 	# Note that because start and finish should be Vector2i type, they use x and y as indices, even though we're accessing things on the xz plane.
 	# Just keep in mind for this function y variable means z worldspace
 	
 	# If one of the points is off the map, give up
-	if ((start.x ** 2) + (start.y ** 2) > MAP_RAD ** 2) or \
-		((finish.x ** 2) + (finish.y ** 2) > MAP_RAD ** 2):
+	if ((start.x ** 2) + (start.y ** 2) > (MAP_RAD - 1) ** 2) or \
+		((finish.x ** 2) + (finish.y ** 2) > (MAP_RAD - 1) ** 2):
 		return []
 	
 	

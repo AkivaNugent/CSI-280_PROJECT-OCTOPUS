@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=71 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
@@ -37,6 +37,8 @@ adjustment_enabled = true
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kcbcv"]
 height = 0.819068
 radius = 0.372255
+
+[sub_resource type="BoxMesh" id="BoxMesh_86d5v"]
 
 [sub_resource type="Animation" id="Animation_kkjji"]
 length = 0.001
@@ -507,7 +509,7 @@ environment = SubResource("Environment_opreq")
 script = ExtResource("1_bydk5")
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 365.359, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 365.359, 88.3804)
 script = ExtResource("1_d34xq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -528,6 +530,10 @@ script = ExtResource("6_0k1nh")
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="Player"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/StairsAheadRayCast3D"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.508179, 0)
+mesh = SubResource("BoxMesh_86d5v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
@@ -589,7 +595,7 @@ world_environment = NodePath("../WorldEnvironment")
 day_text = NodePath("../Control/Day Text")
 
 [node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -1.36913)
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -84.6779)
 max_health = 100
 damage = 10
 speed = 2.0

@@ -26,7 +26,7 @@ var current_health
 func _ready():
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
 	# Move the octopus down to the top of the procedural terrain
-	position.y = (WORLD_NODE.getHeight(position.x, position.z) + 1)
+	position.y = (WORLD_NODE.getHeight(position.x, position.z) + 10)
 
 	# Initial path planning
 	_recalcPath()
@@ -85,7 +85,12 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite3D.modulate = Color.WHITE
 
 	# Three times a second, recalculate a new path
-	if (Time.get_ticks_usec() - lastRecalc > (1000000 / 3)):
+	# For every ten tiles between the player and the octopus, give another 0.2 seconds between calculations
+	var distanceToPlayer = position.distance_to(PLAYER.position)
+	const usecToSec = 1000000
+	var nextRecalc = (usecToSec / 3) + ((usecToSec / 5) * (distanceToPlayer / 10))
+	#print(nextRecalc / usecToSec)
+	if (Time.get_ticks_usec() - lastRecalc > nextRecalc):
 		_recalcPath()
 		lastRecalc = Time.get_ticks_usec()
 
