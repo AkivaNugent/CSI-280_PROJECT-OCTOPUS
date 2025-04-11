@@ -45,8 +45,8 @@ func aStarNavigation(start,finish) -> Array:
 	# Just keep in mind for this function y variable means z worldspace
 	
 	# If one of the points is off the map, give up
-	if (abs(start.x) > MAP_RAD or abs(start.y) > MAP_RAD or
-		abs(finish.x) > MAP_RAD or abs(finish.y) > MAP_RAD):
+	if ((start.x ** 2) + (start.y ** 2) > MAP_RAD ** 2) or \
+		((finish.x ** 2) + (finish.y ** 2) > MAP_RAD ** 2):
 		return []
 	
 	
