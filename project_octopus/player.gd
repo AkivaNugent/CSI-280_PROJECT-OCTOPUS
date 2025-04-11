@@ -200,6 +200,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Weapon.position.x = -abs($Weapon.position.x)
 		$Weapon.rotation.z = abs($Weapon.rotation.z)
+	
+	# Put the StairsAheadRayCast (for step up) actually in front of the player
+	$StairsAheadRayCast3D.position = velocity.normalized().cross(Vector3(0,1,0))
 
 	if not _step_up(delta):
 		move_and_slide()
