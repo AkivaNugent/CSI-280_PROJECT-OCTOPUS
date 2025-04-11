@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
-[ext_resource type="Texture2D" uid="uid://doyr238ki6clg" path="res://sprite_anim/Ryan-Sheet.png" id="4_auwos"]
+[ext_resource type="Texture2D" uid="uid://dbqsl5ndmwj7b" path="res://sprite_anim/Ryan-Sheet.png" id="4_auwos"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
 [ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
 [ext_resource type="Texture2D" uid="uid://cwldstqsr6pf" path="res://sprite_anim/RANGED_Braton.png" id="6_chvu4"]
