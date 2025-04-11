@@ -123,6 +123,10 @@ func _physics_process(delta: float) -> void:
 		dir_facing = "East"
 	facing_text.text = "Facing " + dir_facing
 	
+	# Kill player for falling off map
+	if position.y < 0:
+		take_damage(9999)
+		
 	if currentHealth > maxHealth:
 		currentHealth = maxHealth
 	else:
