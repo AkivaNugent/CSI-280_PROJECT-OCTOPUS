@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cf1crfbecqrp0"]
 
-[ext_resource type="Script" path="res://octomove.gd" id="1_3w4aa"]
+[ext_resource type="Script" uid="uid://ca48xpq8qf2lj" path="res://octomove.gd" id="1_3w4aa"]
 [ext_resource type="Texture2D" uid="uid://cri1cc7duypbx" path="res://sprite_anim/Octo_1_walking.png" id="2_0idp2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m84he"]

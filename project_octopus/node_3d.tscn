@@ -1,12 +1,12 @@
 [gd_scene load_steps=70 format=3 uid="uid://11nairsk57pk"]
 
-[ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
-[ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
+[ext_resource type="Script" uid="uid://dn1ojcctxk1de" path="res://worldbuilder.gd" id="1_bydk5"]
+[ext_resource type="Script" uid="uid://tounbm55sgnv" path="res://player.gd" id="1_d34xq"]
+[ext_resource type="Script" uid="uid://bpdnixlyqg0m8" path="res://node_3d.gd" id="1_i0g27"]
 [ext_resource type="Texture2D" uid="uid://doyr238ki6clg" path="res://sprite_anim/Ryan-Sheet.png" id="4_auwos"]
-[ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
-[ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
+[ext_resource type="Script" uid="uid://bs52hav1e33xe" path="res://camera_3d.gd" id="6_0k1nh"]
+[ext_resource type="Script" uid="uid://t5unuvcntfml" path="res://day_and_night.gd" id="6_3wk7r"]
 [ext_resource type="Texture2D" uid="uid://cwldstqsr6pf" path="res://sprite_anim/RANGED_Braton.png" id="6_chvu4"]
-[ext_resource type="PackedScene" uid="uid://cf1crfbecqrp0" path="res://octopus.tscn" id="7_b4y4o"]
 [ext_resource type="Texture2D" uid="uid://2l1o23jp8jle" path="res://sprite_anim/RANGED_Flamethrower.png" id="7_udelx"]
 [ext_resource type="AudioStream" uid="uid://cyrvm4snkn64l" path="res://game_sfx/walking_sound_short.mp3" id="8_4rnoe"]
 [ext_resource type="Texture2D" uid="uid://c466g4p3ib1s0" path="res://sprite_anim/RANGED_pistol.png" id="8_cqtjv"]
@@ -168,11 +168,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ubow"]
 _data = {
-"RESET": SubResource("Animation_kkjji"),
-"melee_swing": SubResource("Animation_ejy8x"),
-"walking_left": SubResource("Animation_2lmx5"),
-"walking_right": SubResource("Animation_m0k8g"),
-"weapon_idle": SubResource("Animation_msip7")
+&"RESET": SubResource("Animation_kkjji"),
+&"melee_swing": SubResource("Animation_ejy8x"),
+&"walking_left": SubResource("Animation_2lmx5"),
+&"walking_right": SubResource("Animation_m0k8g"),
+&"weapon_idle": SubResource("Animation_msip7")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1isxh"]
@@ -501,6 +501,7 @@ animations = [{
 }]
 
 [node name="Node3D2" type="Node3D"]
+script = ExtResource("1_i0g27")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_opreq")
@@ -531,7 +532,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
-"": SubResource("AnimationLibrary_3ubow")
+&"": SubResource("AnimationLibrary_3ubow")
 }
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Player"]
@@ -587,12 +588,6 @@ sky_mode = 1
 script = ExtResource("6_3wk7r")
 world_environment = NodePath("../WorldEnvironment")
 day_text = NodePath("../Control/Day Text")
-
-[node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -1.36913)
-max_health = 100
-damage = 10
-speed = 2.0
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
