@@ -531,7 +531,7 @@ script = ExtResource("6_0k1nh")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0350475, 0.771033)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/StairsAheadRayCast3D"]
+[node name="DebugMeshInstance3D" type="MeshInstance3D" parent="Player/StairsAheadRayCast3D"]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.508179, 0)
 mesh = SubResource("BoxMesh_86d5v")
 

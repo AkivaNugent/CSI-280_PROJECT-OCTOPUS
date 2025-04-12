@@ -71,8 +71,8 @@ func _step_up(delta) -> bool:
 		# Find how far to step up; the distance to the test point, plus the distance the tester could travel (which is negative, since it's down), relative to current position. Then extract only the y.
 		var step_height = ((step_pos_with_clearance.origin + down_check_result.get_travel()) - self.global_position).y
 		# Final check to make sure the step height is valid
-		# The step_height <= 0.01 "prevents some physics glitchiness"
-		if step_height > MAX_STEP_HEIGHT or step_height <= 0.01 or (down_check_result.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT: return false
+		# The step_height <= 0.001 "prevents some physics glitchiness"
+		if step_height > MAX_STEP_HEIGHT or step_height <= 0.001 or (down_check_result.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT: return false
 		# Make the final jump to new position
 		self.global_position = step_pos_with_clearance.origin + down_check_result.get_travel()
 		apply_floor_snap()
@@ -113,13 +113,13 @@ func _physics_process(delta: float) -> void:
 		
 	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
 	
-	if rotation_degrees.y == 0:
+	if rotation_degrees.y == 360:
 		dir_facing = "North"
 	if rotation_degrees.y == 90:
 		dir_facing = "West"
-	if rotation_degrees.y == -180:
+	if rotation_degrees.y == 180:
 		dir_facing = "South"
-	if rotation_degrees.y == -90:
+	if rotation_degrees.y == 270:
 		dir_facing = "East"
 	facing_text.text = "Facing " + dir_facing
 	
@@ -214,9 +214,9 @@ func _physics_process(delta: float) -> void:
 	# Basically: if positive X is in the player's X axis, then map X to X and Z to Z, then consider the sign of positiveX.
 	# If positive X is in the Z axis relative to the player, swap the variables before considering the sign
 	if int(positiveX.x) != 0:
-		$StairsAheadRayCast3D.position = Vector3(norm.x * positiveX.x, 0, norm.z * positiveX.x)
+		$StairsAheadRayCast3D.position = Vector3(norm.x * positiveX.x, -0.1, norm.z * positiveX.x)
 	else:
-		$StairsAheadRayCast3D.position = Vector3(-norm.z * positiveX.z, 0, norm.x * positiveX.z)
+		$StairsAheadRayCast3D.position = Vector3(-norm.z * positiveX.z, -0.1, norm.x * positiveX.z)
 
 	if not _step_up(delta):
 		move_and_slide()
