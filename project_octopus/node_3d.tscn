@@ -598,7 +598,6 @@ day_text = NodePath("../Control/Day Text")
 transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -5.94867)
 max_health = 100
 damage = 10
-speed = 2.0
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -206,7 +206,17 @@ func _physics_process(delta: float) -> void:
 		$Weapon.rotation.z = abs($Weapon.rotation.z)
 	
 	# Put the StairsAheadRayCast (for step up) actually in front of the player
-	$StairsAheadRayCast3D.position = velocity.normalized().cross(Vector3(0,1,0))
+	# First, establish which direction relative to the player is worldspace positive X using their rotation
+	var positiveX = Vector3(cos(deg_to_rad(rotation_degrees.y)),0,sin(deg_to_rad(rotation_degrees.y))) 
+	# Then, find the direction of movement in worldspace
+	var norm = velocity.normalized()
+	# Use the positiveX vector to figure out what that velocity looks like relative to the player
+	# Basically: if positive X is in the player's X axis, then map X to X and Z to Z, then consider the sign of positiveX.
+	# If positive X is in the Z axis relative to the player, swap the variables before considering the sign
+	if int(positiveX.x) != 0:
+		$StairsAheadRayCast3D.position = Vector3(norm.x * positiveX.x, 0, norm.z * positiveX.x)
+	else:
+		$StairsAheadRayCast3D.position = Vector3(-norm.z * positiveX.z, 0, norm.x * positiveX.z)
 
 	if not _step_up(delta):
 		move_and_slide()
