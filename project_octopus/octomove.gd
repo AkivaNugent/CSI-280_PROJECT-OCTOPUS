@@ -20,6 +20,8 @@ var lastTookDamage = 0
 @export var max_health : int
 var current_health
 
+const MAX_PATHING_RANGE = 10
+
 @export var damage : int
 @export var speed : float
 
@@ -29,13 +31,13 @@ func _ready():
 	position.y = (WORLD_NODE.getHeight(position.x, position.z) + 10)
 
 	# Initial path planning
-	_recalcPath()
+	_recalcPath(PLAYER.position)
 	
 	current_health = max_health
 
-func _recalcPath():
+func _recalcPath(targPosition):
 	# Ask the WORLD_NODE for a path to the player from current position
-	path = WORLD_NODE.aStarNavigation(Vector2i(round(position.x),round(position.z)),Vector2i(round(PLAYER.position.x),round(PLAYER.position.z)))
+	path = WORLD_NODE.aStarNavigation(Vector2i(round(position.x),round(position.z)),Vector2i(round(targPosition.x),round(targPosition.z)))
 	nextGoalIndex = 0
 
 func _step_up(delta) -> bool:
@@ -89,9 +91,15 @@ func _physics_process(delta: float) -> void:
 	var distanceToPlayer = position.distance_to(PLAYER.position)
 	const usecToSec = 1000000
 	var nextRecalc = (usecToSec / 3) + ((usecToSec / 5) * (distanceToPlayer / 10))
-	#print(nextRecalc / usecToSec)
 	if (Time.get_ticks_usec() - lastRecalc > nextRecalc):
-		_recalcPath()
+		# Only path direct to player if they're close. Otherwise, approximate by pathing to the nearest point to the player on a circle radius MAX_PATHING_RANGE
+		if distanceToPlayer < MAX_PATHING_RANGE:
+			_recalcPath(PLAYER.position)
+		else:
+			var relativePosition = PLAYER.position - position
+			var targPoint = (relativePosition / relativePosition.length()) * MAX_PATHING_RANGE
+			targPoint = position + targPoint
+			_recalcPath(targPoint)
 		lastRecalc = Time.get_ticks_usec()
 
 	# If there is a path
