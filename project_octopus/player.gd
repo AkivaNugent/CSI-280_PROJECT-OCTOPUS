@@ -71,8 +71,8 @@ func _step_up(delta) -> bool:
 		# Find how far to step up; the distance to the test point, plus the distance the tester could travel (which is negative, since it's down), relative to current position. Then extract only the y.
 		var step_height = ((step_pos_with_clearance.origin + down_check_result.get_travel()) - self.global_position).y
 		# Final check to make sure the step height is valid
-		# The step_height <= 0.01 "prevents some physics glitchiness"
-		if step_height > MAX_STEP_HEIGHT or step_height <= 0.01 or (down_check_result.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT: return false
+		# The step_height <= 0.001 "prevents some physics glitchiness"
+		if step_height > MAX_STEP_HEIGHT or step_height <= 0.001 or (down_check_result.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT: return false
 		# Make the final jump to new position
 		self.global_position = step_pos_with_clearance.origin + down_check_result.get_travel()
 		apply_floor_snap()
@@ -113,16 +113,20 @@ func _physics_process(delta: float) -> void:
 		
 	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
 	
-	if rotation_degrees.y == 0:
+	if rotation_degrees.y == 360:
 		dir_facing = "North"
 	if rotation_degrees.y == 90:
 		dir_facing = "West"
-	if rotation_degrees.y == -180:
+	if rotation_degrees.y == 180:
 		dir_facing = "South"
-	if rotation_degrees.y == -90:
+	if rotation_degrees.y == 270:
 		dir_facing = "East"
 	facing_text.text = "Facing " + dir_facing
 	
+	# Kill player for falling off map
+	if position.y < 0:
+		take_damage(9999)
+		
 	if currentHealth > maxHealth:
 		currentHealth = maxHealth
 	else:
@@ -174,24 +178,24 @@ func _physics_process(delta: float) -> void:
 			if abs(input_dir2.y) > abs(input_dir2.x):
 				if input_dir2.y < 0:
 					animated_sprite_2d.play("move_up")
-					animation_player.play("UP_run_with_weapon")
+					#animation_player.play("UP_run_with_weapon")
 				else:
 					animated_sprite_2d.play("move_down")
-					animation_player.play("DOWN_run_with_animation")
+					#animation_player.play("DOWN_run_with_animation")
 			else:
 				if input_dir2.x < 0:
 					animated_sprite_2d.play("move_side") # changed the logic to just flip the right walking
 					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
-					animation_player.play("SIDE_run_with_weapon")
+					#animation_player.play("SIDE_run_with_weapon")
 				else:
 					animated_sprite_2d.play("move_side")
 					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
-					animation_player.play("SIDE_run_with_weapon")
+					#animation_player.play("SIDE_run_with_weapon")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		animated_sprite_2d.play("idle")
-		animation_player.play("idle_with_weapon")
+		#animation_player.play("idle_with_weapon")
 		
 	#Move the weapon
 	if get_viewport().get_mouse_position().x > (get_viewport().get_visible_rect().size.x / 2):
@@ -200,6 +204,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Weapon.position.x = -abs($Weapon.position.x)
 		$Weapon.rotation.z = abs($Weapon.rotation.z)
+	
+	# Put the StairsAheadRayCast (for step up) actually in front of the player
+	# First, establish which direction relative to the player is worldspace positive X using their rotation
+	var positiveX = Vector3(cos(deg_to_rad(rotation_degrees.y)),0,sin(deg_to_rad(rotation_degrees.y))) 
+	# Then, find the direction of movement in worldspace
+	var norm = velocity.normalized()
+	# Use the positiveX vector to figure out what that velocity looks like relative to the player
+	# Basically: if positive X is in the player's X axis, then map X to X and Z to Z, then consider the sign of positiveX.
+	# If positive X is in the Z axis relative to the player, swap the variables before considering the sign
+	if int(positiveX.x) != 0:
+		$StairsAheadRayCast3D.position = Vector3(norm.x * positiveX.x, -0.1, norm.z * positiveX.x)
+	else:
+		$StairsAheadRayCast3D.position = Vector3(-norm.z * positiveX.z, -0.1, norm.x * positiveX.z)
 
 	if not _step_up(delta):
 		move_and_slide()

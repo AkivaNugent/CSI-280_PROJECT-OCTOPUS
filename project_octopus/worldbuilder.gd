@@ -45,8 +45,8 @@ func aStarNavigation(start,finish) -> Array:
 	# Just keep in mind for this function y variable means z worldspace
 	
 	# If one of the points is off the map, give up
-	if (abs(start.x) > MAP_RAD or abs(start.y) > MAP_RAD or
-		abs(finish.x) > MAP_RAD or abs(finish.y) > MAP_RAD):
+	if ((start.x ** 2) + (start.y ** 2) > (MAP_RAD - 1) ** 2) or \
+		((finish.x ** 2) + (finish.y ** 2) > (MAP_RAD - 1) ** 2):
 		return []
 	
 	
@@ -155,12 +155,6 @@ func _ready() -> void:
 		_placeChord(x, z)
 		_placeChord(x, -z)
 		
-		#Build ice cliffs around back half of map
-		_placeCubeSpecific(x, z, 1000)
-		_placeCubeSpecific(x, -z, 1000)
-		if (x != z):
-			_placeCubeSpecific(z, -x, 1000)
-			_placeCubeSpecific(-z, -x, 1000)
 		z += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
