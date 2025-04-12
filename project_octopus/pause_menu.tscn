@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxi6bygwc0ey"]
+[gd_scene load_steps=4 format=3 uid="uid://bxi6bygwc0ey"]
 
 [ext_resource type="Script" path="res://pausemenu_screen.gd" id="1_ntrjx"]
 [ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="2_b4mo3"]
+[ext_resource type="PackedScene" uid="uid://bxqerx8mhs6xj" path="res://keybind_menu.tscn" id="3_w8cbh"]
 
 [node name="pause_menu" type="Control"]
 process_mode = 3
@@ -84,9 +85,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -198.5
-offset_top = -123.5
+offset_top = -151.0
 offset_right = 198.5
-offset_bottom = 13.5
+offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
@@ -107,6 +108,14 @@ theme_override_font_sizes/font_size = 25
 text = "Save
 "
 
+[node name="Keybinds" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.318765, 0.716975, 0.789315, 1)
+theme_override_fonts/font = ExtResource("2_b4mo3")
+theme_override_font_sizes/font_size = 25
+text = "Keybinds
+"
+
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_direction = 2
 layout_mode = 2
@@ -115,9 +124,13 @@ theme_override_fonts/font = ExtResource("2_b4mo3")
 theme_override_font_sizes/font_size = 25
 text = "Quit"
 
+[node name="KeybindMenu" parent="." instance=ExtResource("3_w8cbh")]
+layout_mode = 1
+
 [connection signal="mouse_exited" from="musicMenu/master_hslider" to="." method="_on_master_hslider_mouse_exited"]
 [connection signal="mouse_exited" from="musicMenu/music_hslider" to="." method="_on_music_hslider_mouse_exited"]
 [connection signal="mouse_exited" from="musicMenu/sfx_hslider" to="." method="_on_sfx_hslider_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="VBoxContainer/Save Game" to="." method="_on_save_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Keybinds" to="." method="_on_keybinds_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

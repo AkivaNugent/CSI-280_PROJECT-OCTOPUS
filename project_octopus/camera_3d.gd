@@ -77,8 +77,8 @@ func _process(delta: float) -> void:
 # Handle Input Events
 func _input(event: InputEvent) -> void:
 	# Press Q to rotate left
-	if Input.is_key_pressed(KEY_Q):  
+	if Input.is_action_just_pressed("rotate_left"):  
 		target_rotation = fmod(target_rotation + deg_to_rad(90), TAU)
 	# Press E to rotate right
-	elif Input.is_key_pressed(KEY_E):  
+	elif Input.is_action_just_pressed("rotate_right"):  
 		target_rotation = fmod(target_rotation - deg_to_rad(90), TAU)
