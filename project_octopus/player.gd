@@ -8,7 +8,7 @@ const SPRINT_VELOCITY = 2
 @onready var pivot: Node3D = $"Camera Origin"
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
-@onready var animated_sprite_2d = $AnimatedSprite3D
+@onready var animated_sprite_3d = $AnimatedSprite3D
 @onready var animation_player = $AnimationPlayer
 @onready var pos_text: Label = $"../Control/Pos Text"
 var dir_facing: String
@@ -140,6 +140,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): #or snapped to stairs?
 		velocity.y = JUMP_VELOCITY
+		is_jumping = true
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
@@ -167,35 +168,26 @@ func _physics_process(delta: float) -> void:
 			velocity.z *= SPRINT_VELOCITY
 			velocity.x *= SPRINT_VELOCITY
 			
-		if !player_Running_Audio.playing:
-			player_Running_Audio.play()
+			if !player_Running_Audio.playing:
+				player_Running_Audio.play()
+			if player_Walking_Audio.playing:
+				player_Walking_Audio.stop()
+		else:
+			if player_Running_Audio.playing:
+				player_Running_Audio.stop()
 		
-		# Get input direction in camera space
-		var input_dir2 := Input.get_vector("left", "right", "up", "down")
+		# Get input direction in camera space for animation
+		var raw_input_dir := Input.get_vector("left", "right", "up", "down")
 		
-		# Play animation based on raw input direction
-		if input_dir2.length() > 0:
-			if abs(input_dir2.y) > abs(input_dir2.x):
-				if input_dir2.y < 0:
-					animated_sprite_2d.play("move_up")
-					#animation_player.play("UP_run_with_weapon")
-				else:
-					animated_sprite_2d.play("move_down")
-					#animation_player.play("DOWN_run_with_animation")
-			else:
-				if input_dir2.x < 0:
-					animated_sprite_2d.play("move_side") # changed the logic to just flip the right walking
-					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
-					#animation_player.play("SIDE_run_with_weapon")
-				else:
-					animated_sprite_2d.play("move_side")
-					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
-					#animation_player.play("SIDE_run_with_weapon")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		animated_sprite_2d.play("idle")
-		#animation_player.play("idle_with_weapon")
+		
+		# Stop walking/running sounds when not moving
+		if player_Walking_Audio.playing:
+			player_Walking_Audio.stop()
+		if player_Running_Audio.playing:
+			player_Running_Audio.stop()
 		
 	#Move the weapon
 	if get_viewport().get_mouse_position().x > (get_viewport().get_visible_rect().size.x / 2):
@@ -218,6 +210,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		$StairsAheadRayCast3D.position = Vector3(-norm.z * positiveX.z, -0.1, norm.x * positiveX.z)
 
+	# Handle animations
+	
+	handle_animations(input_dir)
+
 	if not _step_up(delta):
 		move_and_slide()
 		
@@ -231,6 +227,74 @@ func take_damage(amount):
 			you_died_text.visible = true
 			
 			# Could Implement Death Sound/Song
-		
+
+# ------ ANIMATION SECTION START ------ #
+# CHARACTER STATES
+enum Direction {UP, DOWN, LEFT, RIGHT}
+enum MovementState {STILL, RUNNING, JUMPING, FALLING}
+enum ActionState {NORMAL, ATTACKING}
+
+# ANIMATION VARIABLES
+var current_direction = Direction.DOWN
+var current_movement = MovementState.STILL
+var current_action = ActionState.NORMAL
+var raw_input_dir = Vector2.ZERO
+var is_jumping = false
+var on_floor_now = true
+var was_on_the_floor_last_frame = true
+
+func handle_animations(input_direction: Vector2):
+	raw_input_dir = input_direction
+
+	# CARDINALITY BASED ON INPUT
+	if raw_input_dir.length() > 0:
+		if abs(raw_input_dir.y) > abs(raw_input_dir.x):
+			current_direction = Direction.UP if raw_input_dir.y < 0 else Direction.DOWN
+		else:
+			current_direction = Direction.LEFT if raw_input_dir.x < 0 else Direction.RIGHT
+	
+	on_floor_now = is_on_floor()
+	
+	# RESET STATES IF REQUIRED
+	#	JUMPING
+	if on_floor_now && !was_on_the_floor_last_frame && is_jumping:
+		is_jumping = false
+		print("STATE RESET ---------------------------------- landed from jump")
+	
+	# MOVEMENT STATE CHECK
+	if !on_floor_now:
+		if is_jumping:
+			current_movement = MovementState.JUMPING
+			print("JUMPING")
+		else:
+			current_movement = MovementState.FALLING
+			print("FALLING")
+	else:
+		if raw_input_dir.length() > 0:
+			current_movement = MovementState.RUNNING
+			print("RUNNING")
+		else:
+			current_movement = MovementState.STILL
+			print("STILL")
+	
+	# ANIMATION SELECTION FOR THE CURRENT STATE
+	match current_direction:
+		Direction.UP:
+			if current_movement == MovementState.JUMPING:
+				print("JUMPING UPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
+				
+			print("Facing: UP")
+		Direction.DOWN:
+			print("Facing: DOWN")
+		Direction.LEFT:
+			print("Facing: LEFT")
+		Direction.RIGHT:
+			print("Facing: RIGHT")
 	
 	
+	# PREVIOUS FRAME UPDATES
+	was_on_the_floor_last_frame = on_floor_now
+	
+	
+	pass
+# ------ ANIMATION SECTION END ------ #
