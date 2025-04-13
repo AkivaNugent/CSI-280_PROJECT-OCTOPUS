@@ -1,17 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://c52wekq4x7p7j"]
+[gd_scene load_steps=7 format=3 uid="uid://c52wekq4x7p7j"]
 
 [ext_resource type="Script" path="res://gameover_screen.gd" id="1_8wij1"]
 [ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="2_4yidw"]
+[ext_resource type="Texture2D" uid="uid://rmtp72kh2ush" path="res://game_over.jpg" id="2_dql00"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxc36"]
-bg_color = Color(0.439216, 0, 0.137255, 0)
-skew = Vector2(3, 1)
-shadow_color = Color(0.819608, 0.184314, 0.286275, 0.403922)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xnck"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+shadow_color = Color(0, 0, 0, 0.356863)
 shadow_size = 1000
-anti_aliasing_size = 4.249
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg53c"]
+bg_color = Color(0.6, 0.6, 0.6, 0.184314)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frx3v"]
-bg_color = Color(0, 0, 0, 0.286275)
+bg_color = Color(0, 0, 0, 0.568627)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -41,6 +51,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.513726)
 
+[node name="bkg_img" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_dql00")
+
 [node name="gameover_label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -60,7 +79,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 0.372549)
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_4yidw")
 theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = SubResource("StyleBoxFlat_yxc36")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4xnck")
 text = "Game Over"
 
 [node name="menu" type="VBoxContainer" parent="."]
@@ -82,7 +101,7 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_4yidw")
 theme_override_font_sizes/font_size = 35
-theme_override_styles/hover = SubResource("StyleBoxFlat_frx3v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_eg53c")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_frx3v")
 theme_override_styles/normal = SubResource("StyleBoxFlat_frx3v")
 text = "Reset Game"
@@ -110,7 +129,7 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_4yidw")
 theme_override_font_sizes/font_size = 35
-theme_override_styles/hover = SubResource("StyleBoxFlat_frx3v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_eg53c")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_frx3v")
 theme_override_styles/normal = SubResource("StyleBoxFlat_frx3v")
 text = "Quit"
