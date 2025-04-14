@@ -267,7 +267,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xy5mq")
 }, {
-"duration": 1.1e+08,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ad87u")
 }],
 "loop": true,
@@ -355,7 +355,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y7uog")
 }, {
-"duration": 1.1e+08,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ax5dh")
 }],
 "loop": true,
@@ -414,7 +414,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ub08")
 }, {
-"duration": 1.1e+08,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_agqgh")
 }],
 "loop": true,
@@ -503,12 +503,12 @@ libraries = {
 pixel_size = 0.0225
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_adtjf")
-animation = &"side_jump"
+animation = &"down_run"
 
 [node name="WeaponsInventory" type="Node3D" parent="Player"]
 
 [node name="Ranged Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.916041, -0.401084, 2.53518e-06, -0.401084, 0.916041, 1.003e-08, -2.32635e-06, -1.00763e-06, -1, 0.167763, -0.320007, -0.144476)
+transform = Transform3D(0.884223, 0.467065, 0, -0.467065, 0.884223, 0, 0, 0, 1, -0.171047, -0.14502, -0.116346)
 visible = false
 
 [node name="Braton" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
@@ -527,7 +527,7 @@ texture_filter = 0
 texture = ExtResource("8_cqtjv")
 
 [node name="Melee Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.0487659, -0.511917, 0.85765, 0.963583, -0.250147, -0.0945189, 0.262924, 0.821808, 0.505473, 0.165552, -0.113556, -0.338769)
+transform = Transform3D(-0.126653, -0.991947, 0, 0.991947, -0.126653, 0, 0, 0, 1, 0.165552, -0.113556, -0.338769)
 
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.52974, -0.497143, -0.0484084, 0.481337, 2.62493, 0.0413645, 0.0671289, -0.086828, 1.52767, -0.0669861, 0.3153, 0.235466)

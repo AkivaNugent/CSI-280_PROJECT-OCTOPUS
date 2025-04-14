@@ -242,69 +242,126 @@ var raw_input_dir = Vector2.ZERO
 var is_jumping = false
 var on_floor_now = true
 var was_on_the_floor_last_frame = true
+var current_spirte_animation = ""
+var current_player_animation = ""
+var is_attacking = false
 
 func handle_animations(input_direction: Vector2):
-	raw_input_dir = input_direction
-
-	# CARDINALITY BASED ON INPUT
-	if raw_input_dir.length() > 0:
-		if abs(raw_input_dir.y) > abs(raw_input_dir.x):
-			current_direction = Direction.UP if raw_input_dir.y < 0 else Direction.DOWN
-		else:
-			current_direction = Direction.LEFT if raw_input_dir.x < 0 else Direction.RIGHT
-	
-	on_floor_now = is_on_floor()
-	
 	# RESET STATES IF REQUIRED
 	#	JUMPING
-	if on_floor_now && !was_on_the_floor_last_frame && is_jumping:
-		is_jumping = false
-		print("STATE RESET ---------------------------------- landed from jump")
+	resetJump()
 	
-	# MOVEMENT STATE CHECK
-	if !on_floor_now:
-		if is_jumping:
-			current_movement = MovementState.JUMPING
-			print("JUMPING")
-		else:
-			current_movement = MovementState.FALLING
-			print("FALLING")
-	else:
-		if raw_input_dir.length() > 0:
-			current_movement = MovementState.RUNNING
-		else:
-			current_movement = MovementState.STILL
-	# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC
-	# ANIMATION SELECTION FOR THE CURRENT STATE
-	match current_direction:
-		Direction.UP:
-			if current_movement == MovementState.JUMPING:
-				print("JUMPING UPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
-			if current_movement == MovementState.RUNNING:
-				print("RUNNING")
-			if current_movement == MovementState.STILL:
-				animated_sprite_3d.play("idle")
-				print("IDLE")
-			print("Facing: UP")
-		Direction.DOWN:
-			print("Facing: DOWN")
-		Direction.LEFT:
-			print("Facing: LEFT")
-		Direction.RIGHT:
-			animated_sprite_3d.play("move_side")
-			print("Facing: RIGHT")
+	# CURRENT-STATE SETTERS
+	# DIRECTION
+	current_direction = setDirection(input_direction)
+	# MOVEMENT STATE
+	current_movement = setMovmentState(input_direction)
+	# ACTION STATE
+	current_action = setActionState()
 	
-	# RENAME ANIMATIONS SO I CAN CANCATINATE THE JUMPING OR RUNNING ONTO A STRING FOR DRIECTION. 
-	#THIS SHOULD LESSEN EXECUTION L0GIC
+	#SET ANIMATIONS
+	#SPRITE
+	current_spirte_animation  = applyDirection(current_direction)
+	current_spirte_animation += applyMovmentState(current_movement)
+	current_spirte_animation += applyActionState(current_action)
+	#ANIMATIONPLAYER
+	current_player_animation = "player_animations/"
+	current_player_animation += applyDirection(current_direction)
+	current_player_animation += applyMovmentState(current_movement)
+	
+	#print(current_spirte_animation)
+	#print(current_player_animation)
+	animated_sprite_3d.play(current_spirte_animation)
+	animation_player.play(current_player_animation)
+	flipSpriteForDirection(current_direction)
+	
+	
 	# PREVIOUS FRAME UPDATES
 	was_on_the_floor_last_frame = on_floor_now
-
+	on_floor_now = is_on_floor()
 	pass
+	
+	
+# HELPER FUNCTIONS 
+func resetJump():
+	if on_floor_now && !was_on_the_floor_last_frame && is_jumping:
+		is_jumping = false
+		#print("STATE RESET --- landed from jump")
+
+func setDirection(raw_inp_dir):
+	var cardinality
+	if raw_inp_dir.length() > 0:
+		if abs(raw_inp_dir.y) > abs(raw_inp_dir.x):
+			cardinality = Direction.UP if raw_inp_dir.y < 0 else Direction.DOWN
+		else:
+			cardinality = Direction.LEFT if raw_inp_dir.x < 0 else Direction.RIGHT
+	return cardinality
+
+func applyDirection(current_direction):
+	var cardinality = "idle"
+	match current_direction:
+			Direction.UP:
+				cardinality = "up"
+			Direction.DOWN:
+				cardinality = "down"
+			Direction.LEFT:
+				cardinality = "side"
+			Direction.RIGHT:
+				cardinality = "side"
+	return cardinality
+	
+func setMovmentState(raw_input_dir):
+	var motionValue
+	if !is_on_floor():
+		if is_jumping:
+			motionValue = MovementState.JUMPING
+		else:
+			motionValue = MovementState.FALLING
+	else:
+		if raw_input_dir.length() > 0:
+			motionValue = MovementState.RUNNING
+		else:
+			motionValue = MovementState.STILL
+	return motionValue
+	
+func applyMovmentState(current_movement):
+	var motionValue = ""
+	
+	match current_movement:
+		MovementState.JUMPING:
+			motionValue = "_jump"
+		MovementState.RUNNING:
+			motionValue = "_run"
+	
+	return motionValue
+	
+func setActionState():
+	var action = ActionState.NORMAL
+	if Input.is_action_just_pressed("attack") or Input.is_action_just_pressed("ui_left_mouse"):
+		print("ATTACKED")
+		action = ActionState.ATTACKING
+	
+	return action
+	
+func applyActionState(current_action):
+	var action
+	
+	match current_action:
+		ActionState.NORMAL:
+			action = ""
+		ActionState.ATTACKING:
+			action = "_atk"
+			
+	return action
+	
+func flipSpriteForDirection(direction):
+	var weapons_inventory = get_node_or_null("WeaponsInventory")
+	
+	if direction == Direction.LEFT:
+		animated_sprite_3d.scale.x = -abs(animated_sprite_3d.scale.x)
+		weapons_inventory.scale.x = -1
+			
+	elif direction == Direction.RIGHT:
+		animated_sprite_3d.scale.x = abs(animated_sprite_3d.scale.x)
+		weapons_inventory.scale.x = 1
 # ------ ANIMATION SECTION END ------ #
