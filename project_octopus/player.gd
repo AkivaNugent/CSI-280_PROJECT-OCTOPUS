@@ -35,6 +35,10 @@ var lastTookDamage = 0
 
 #Aiming and Cursor
 
+# Animation Variables
+var is_playing_attack_anim = false
+var attack_timer: Timer
+
 func _ready():
 	currentHealth = maxHealth
   
@@ -42,6 +46,16 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	you_died_text.visible = false
+	
+	# Create and configure attack animation timer
+	attack_timer = Timer.new()
+	attack_timer.one_shot = true
+	attack_timer.wait_time = 0.5  # Default time - adjust based on your actual animation length
+	attack_timer.timeout.connect(on_attack_animation_timeout)
+	add_child(attack_timer)
+	
+	# Reset attack animation flag at start
+	is_playing_attack_anim = false
 	
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
 	# Move the player down to the top of the procedural terrain
@@ -211,7 +225,6 @@ func _physics_process(delta: float) -> void:
 		$StairsAheadRayCast3D.position = Vector3(-norm.z * positiveX.z, -0.1, norm.x * positiveX.z)
 
 	# Handle animations
-	
 	handle_animations(input_dir)
 
 	if not _step_up(delta):
@@ -230,11 +243,13 @@ func take_damage(amount):
 
 # ------ ANIMATION SECTION START ------ #
 # CHARACTER STATES
+# ####
 enum Direction {UP, DOWN, LEFT, RIGHT}
 enum MovementState {STILL, RUNNING, JUMPING, FALLING}
 enum ActionState {NORMAL, ATTACKING}
 
 # ANIMATION VARIABLES
+# ####
 var current_direction = Direction.DOWN
 var current_movement = MovementState.STILL
 var current_action = ActionState.NORMAL
@@ -245,57 +260,52 @@ var was_on_the_floor_last_frame = true
 var current_spirte_animation = ""
 var current_player_animation = ""
 var is_attacking = false
+var inp_to_dir
 
+# DRIVING FUNCTION
+# ####
 func handle_animations(input_direction: Vector2):
 	# RESET STATES IF REQUIRED
-	#	JUMPING
 	resetJump()
 	
 	# CURRENT-STATE SETTERS
-	# DIRECTION
 	current_direction = setDirection(input_direction)
-	# MOVEMENT STATE
 	current_movement = setMovmentState(input_direction)
-	# ACTION STATE
 	current_action = setActionState()
 	
-	#SET ANIMATIONS
-	#SPRITE
-	current_spirte_animation  = applyDirection(current_direction)
+	# SET ANIMATIONS
+	current_spirte_animation = applyDirection(current_direction)
 	current_spirte_animation += applyMovmentState(current_movement)
 	current_spirte_animation += applyActionState(current_action)
-	#ANIMATIONPLAYER
+	
 	current_player_animation = "player_animations/"
 	current_player_animation += applyDirection(current_direction)
 	current_player_animation += applyMovmentState(current_movement)
 	
-	#print(current_spirte_animation)
-	#print(current_player_animation)
-	animated_sprite_3d.play(current_spirte_animation)
-	animation_player.play(current_player_animation)
-	flipSpriteForDirection(current_direction)
+	if "_atk" in current_spirte_animation:
+		print(current_spirte_animation)
 	
+	if !(is_playing_attack_anim and not "_atk" in current_spirte_animation):
+		play_animation(current_spirte_animation, current_player_animation)
 	
 	# PREVIOUS FRAME UPDATES
 	was_on_the_floor_last_frame = on_floor_now
 	on_floor_now = is_on_floor()
-	pass
-	
-	
+
 # HELPER FUNCTIONS 
+# ####
 func resetJump():
 	if on_floor_now && !was_on_the_floor_last_frame && is_jumping:
 		is_jumping = false
 		#print("STATE RESET --- landed from jump")
 
 func setDirection(raw_inp_dir):
-	var cardinality
 	if raw_inp_dir.length() > 0:
 		if abs(raw_inp_dir.y) > abs(raw_inp_dir.x):
-			cardinality = Direction.UP if raw_inp_dir.y < 0 else Direction.DOWN
+			inp_to_dir = Direction.UP if raw_inp_dir.y < 0 else Direction.DOWN
 		else:
-			cardinality = Direction.LEFT if raw_inp_dir.x < 0 else Direction.RIGHT
-	return cardinality
+			inp_to_dir = Direction.LEFT if raw_inp_dir.x < 0 else Direction.RIGHT
+	return inp_to_dir
 
 func applyDirection(current_direction):
 	var cardinality = "idle"
@@ -332,13 +342,15 @@ func applyMovmentState(current_movement):
 			motionValue = "_jump"
 		MovementState.RUNNING:
 			motionValue = "_run"
+		MovementState.FALLING:
+			motionValue = "_run"
 	
 	return motionValue
 	
 func setActionState():
 	var action = ActionState.NORMAL
 	if Input.is_action_just_pressed("attack") or Input.is_action_just_pressed("ui_left_mouse"):
-		print("ATTACKED")
+		#print("ATTACKED")
 		action = ActionState.ATTACKING
 	
 	return action
@@ -357,11 +369,29 @@ func applyActionState(current_action):
 func flipSpriteForDirection(direction):
 	var weapons_inventory = get_node_or_null("WeaponsInventory")
 	
-	if direction == Direction.LEFT:
+	if direction == Direction.LEFT or direction == Direction.DOWN:
 		animated_sprite_3d.scale.x = -abs(animated_sprite_3d.scale.x)
 		weapons_inventory.scale.x = -1
 			
 	elif direction == Direction.RIGHT:
 		animated_sprite_3d.scale.x = abs(animated_sprite_3d.scale.x)
 		weapons_inventory.scale.x = 1
+		
+func play_animation(sprite_anim: String, player_anim: String):
+	animated_sprite_3d.play(sprite_anim)
+	animation_player.play(player_anim)
+	flipSpriteForDirection(current_direction)
+	
+	if "_atk" in sprite_anim:
+		is_playing_attack_anim = true
+		attack_timer.wait_time = .5
+			
+		if attack_timer.time_left > 0:
+			attack_timer.stop()
+			
+		attack_timer.start()
+
+func on_attack_animation_timeout():
+	is_playing_attack_anim = false
+	print("ATK ENDED")
 # ------ ANIMATION SECTION END ------ #

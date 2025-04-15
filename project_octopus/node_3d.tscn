@@ -62,6 +62,38 @@ _data = {
 "RESET": SubResource("Animation_c1j52")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1isxh"]
+atlas = ExtResource("4_auwos")
+region = Rect2(0, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3fv1"]
+atlas = ExtResource("4_auwos")
+region = Rect2(64, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7cyv"]
+atlas = ExtResource("4_auwos")
+region = Rect2(128, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7pmy"]
+atlas = ExtResource("4_auwos")
+region = Rect2(192, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3u6as"]
+atlas = ExtResource("4_auwos")
+region = Rect2(256, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bljtl"]
+atlas = ExtResource("4_auwos")
+region = Rect2(320, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3u5e"]
+atlas = ExtResource("4_auwos")
+region = Rect2(384, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8icv"]
+atlas = ExtResource("4_auwos")
+region = Rect2(448, 384, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_01wgp"]
 atlas = ExtResource("5_36hur")
 region = Rect2(0, 0, 64, 64)
@@ -113,38 +145,6 @@ region = Rect2(448, 256, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xr73n"]
 atlas = ExtResource("5_36hur")
 region = Rect2(0, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1isxh"]
-atlas = ExtResource("4_auwos")
-region = Rect2(0, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j3fv1"]
-atlas = ExtResource("4_auwos")
-region = Rect2(64, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e7cyv"]
-atlas = ExtResource("4_auwos")
-region = Rect2(128, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l7pmy"]
-atlas = ExtResource("4_auwos")
-region = Rect2(192, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3u6as"]
-atlas = ExtResource("4_auwos")
-region = Rect2(256, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bljtl"]
-atlas = ExtResource("4_auwos")
-region = Rect2(320, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v3u5e"]
-atlas = ExtResource("4_auwos")
-region = Rect2(384, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p8icv"]
-atlas = ExtResource("4_auwos")
-region = Rect2(448, 384, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_43lg6"]
 atlas = ExtResource("5_36hur")
@@ -254,6 +254,35 @@ region = Rect2(0, 320, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1isxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3fv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7cyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7pmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u6as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bljtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3u5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8icv")
+}],
+"loop": true,
+"name": &"down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_01wgp")
 }],
 "loop": true,
@@ -304,44 +333,15 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_xr73n")
 }],
-"loop": true,
-"name": &"down_run__atk",
+"loop": false,
+"name": &"down_run_atk",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1isxh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j3fv1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e7cyv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l7pmy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3u6as")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bljtl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v3u5e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p8icv")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_43lg6")
 }],
 "loop": true,
@@ -392,7 +392,7 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_rjq4t")
 }],
 "loop": true,
@@ -400,7 +400,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_fqdmy")
 }],
 "loop": true,
@@ -451,7 +451,7 @@ animations = [{
 "speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_1723k")
 }],
 "loop": true,
@@ -503,12 +503,12 @@ libraries = {
 pixel_size = 0.0225
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_adtjf")
-animation = &"side_jump"
+animation = &"side_atk"
 
 [node name="WeaponsInventory" type="Node3D" parent="Player"]
 
 [node name="Ranged Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.916041, -0.401084, 2.53518e-06, -0.401084, 0.916041, 1.003e-08, -2.32635e-06, -1.00763e-06, -1, 0.167763, -0.320007, -0.144476)
+transform = Transform3D(-0.916041, -0.401084, 2.53518e-06, -0.401084, 0.916041, 1.00314e-08, -2.32635e-06, -1.00763e-06, -1, 0.167763, -0.320007, -0.144476)
 visible = false
 
 [node name="Braton" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
@@ -527,7 +527,7 @@ texture_filter = 0
 texture = ExtResource("8_cqtjv")
 
 [node name="Melee Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.0487659, -0.511917, 0.85765, 0.963583, -0.250147, -0.0945189, 0.262924, 0.821808, 0.505473, 0.165552, -0.113556, -0.338769)
+transform = Transform3D(-0.0487659, -0.511917, 0.85765, 0.963583, -0.250147, -0.0945191, 0.262924, 0.821808, 0.505473, 0.165552, -0.113556, -0.338769)
 
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.52974, -0.497143, -0.0484084, 0.481337, 2.62493, 0.0413645, 0.0671289, -0.086828, 1.52767, -0.0669861, 0.3153, 0.235466)
