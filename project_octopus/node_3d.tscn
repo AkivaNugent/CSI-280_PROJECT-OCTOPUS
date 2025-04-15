@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=78 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cwldstqsr6pf" path="res://sprite_anim/RANGED_Braton.png" id="6_chvu4"]
 [ext_resource type="PackedScene" uid="uid://cf1crfbecqrp0" path="res://octopus.tscn" id="7_b4y4o"]
 [ext_resource type="Texture2D" uid="uid://2l1o23jp8jle" path="res://sprite_anim/RANGED_Flamethrower.png" id="7_udelx"]
+[ext_resource type="Texture2D" uid="uid://bx3ccew8hk3md" path="res://sprite_anim/TEMP_extra_idles.png" id="7_wftrk"]
 [ext_resource type="AudioStream" uid="uid://cyrvm4snkn64l" path="res://game_sfx/walking_sound_short.mp3" id="8_4rnoe"]
 [ext_resource type="Texture2D" uid="uid://c466g4p3ib1s0" path="res://sprite_anim/RANGED_pistol.png" id="8_cqtjv"]
 [ext_resource type="Texture2D" uid="uid://twtj5b3qh7b3" path="res://sprite_anim/MELEE_BusterSword.png" id="9_bfmdv"]
@@ -146,6 +147,10 @@ region = Rect2(448, 256, 64, 64)
 atlas = ExtResource("5_36hur")
 region = Rect2(0, 192, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8adt"]
+atlas = ExtResource("7_wftrk")
+region = Rect2(0, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_43lg6"]
 atlas = ExtResource("5_36hur")
 region = Rect2(0, 64, 64, 64)
@@ -197,6 +202,10 @@ region = Rect2(448, 192, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjq4t"]
 atlas = ExtResource("5_36hur")
 region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tni1c"]
+atlas = ExtResource("7_wftrk")
+region = Rect2(0, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fqdmy"]
 atlas = ExtResource("5_36hur")
@@ -341,6 +350,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8adt")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 10.0,
 "texture": SubResource("AtlasTexture_43lg6")
 }],
@@ -397,6 +414,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"side_run_atk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tni1c")
+}],
+"loop": true,
+"name": &"up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -503,7 +528,7 @@ libraries = {
 pixel_size = 0.0225
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_adtjf")
-animation = &"side_atk"
+animation = &"up"
 
 [node name="WeaponsInventory" type="Node3D" parent="Player"]
 
