@@ -6,6 +6,8 @@ const MAX_SPEED = 2
 @onready var MAX_STEP_HEIGHT = PLAYER.MAX_STEP_HEIGHT
 @onready var animated_sprite3d = $AnimatedSprite3D
 @onready var playerCamera = $"../Player/Camera Origin/SpringArm3D/Camera3D"
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
+
 var _snapped_to_stairs_last_frame := false;
 var path = []
 var nextGoalIndex = 0
@@ -162,6 +164,7 @@ func _is_mouse_over_octopus() -> bool:
 
 func _take_damage(amount) -> void:
 	current_health -= amount
+	gpu_particles_3d.emitting = true
 	if current_health <= 0:
 		_die()
 
