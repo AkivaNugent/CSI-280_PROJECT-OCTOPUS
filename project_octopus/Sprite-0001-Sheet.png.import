@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbqsl5ndmwj7b"
-path.s3tc="res://.godot/imported/Ryan-Sheet.png-9276613d0665d7c25186552a0b4c481f.s3tc.ctex"
+uid="uid://srv1mn78bjml"
+path.s3tc="res://.godot/imported/Sprite-0001-Sheet.png-48ee13a826b207b468b4bd94a41083df.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprite_anim/Ryan-Sheet.png"
-dest_files=["res://.godot/imported/Ryan-Sheet.png-9276613d0665d7c25186552a0b4c481f.s3tc.ctex"]
+source_file="res://Sprite-0001-Sheet.png"
+dest_files=["res://.godot/imported/Sprite-0001-Sheet.png-48ee13a826b207b468b4bd94a41083df.s3tc.ctex"]
 
 [params]
 
