@@ -6,16 +6,31 @@ const JUMP_VELOCITY = 4.5
 const MAX_STEP_HEIGHT = 0.75
 const SPRINT_VELOCITY = 2
 @onready var player: CharacterBody3D = $"."
+@export var player_id := 1:
+	set(id):
+		player_id = id
+		%InputSynchronizer.set_multiplayer_authority(id)
 @onready var pivot: Node3D = $"Camera Origin"
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
 @onready var animated_sprite_2d = $AnimatedSprite3D
-@onready var pos_text: Label = $"../Control/Pos Text"
+@onready var pos_text: Label = $"../../Control/Pos Text"
 var dir_facing: String
-@onready var facing_text: Label = $"../Control/Facing Text"
+@onready var facing_text: Label = $"../../Control/Facing Text"
 #Audio Variables
-@onready var player_Walking_Audio = $"../AudioStreamPlayer_walking"
-@onready var player_Running_Audio = $"../AudioStreamPlayer_running"
+@onready var player_Walking_Audio = $"../../AudioStreamPlayer_walking"
+@onready var player_Running_Audio = $"../../AudioStreamPlayer_running"
+
+func _ready():
+	print("Player instance path: ", get_path())
+	print("Parent node: ", get_parent().name)
+	print("Available nodes at parent level:")
+	for child in get_parent().get_children():
+		print("- ", child.name)
+	print("Available nodes two levels up:")
+	if get_parent() and get_parent().get_parent():
+		for child in get_parent().get_parent().get_children():
+			print("- ", child.name)
 
 func _step_up(delta) -> bool:
 	# Code adapted from youtube.com/watch?v=Tb-R3l0SQdc
@@ -72,7 +87,7 @@ func _apply_animations(delta):
 		animated_sprite_2d.play("idle")
 func _apply_movement_from_input(delta):
 	# Get the input direction and handle the movement/deceleration
-	var input_dir := Input.get_vector("left", "right", "up", "down")
+	var input_dir: Vector2 = %InputSynchronizer.input_direction #Input synchronizer is a multiplayer synchronizer we reference to get the data as its being pressed
 	# Get camera's rotation basis
 	var camera_transform := pivot.global_transform.basis  
 	var camera_forward := camera_transform.z.normalized() 
@@ -98,31 +113,6 @@ func _apply_movement_from_input(delta):
 			player_Running_Audio.play()
 
 
-func _physics_process(delta: float) -> void:
-	# Update position text
-	pos_text.text = "X: " + str(round(position.x)) + " Y: "  + str(round(position.y)) + " Z: " + str(round(position.z))
-	
-	if rotation_degrees.y == 0:
-		dir_facing = "North"
-	if rotation_degrees.y == 90:
-		dir_facing = "West"
-	if rotation_degrees.y == -180:
-		dir_facing = "South"
-	if rotation_degrees.y == -90:
-		dir_facing = "East"
-	facing_text.text = "Facing " + dir_facing
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): #or snapped to stairs?
-		velocity.y = JUMP_VELOCITY
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
-	
-	_apply_movement_from_input(delta)
-	_apply_animations((delta))
-
-	if not _step_up(delta):
-		move_and_slide()
+func _physics_process(delta):
+	if multiplayer.is_server():
+		_apply_movement_from_input(delta)

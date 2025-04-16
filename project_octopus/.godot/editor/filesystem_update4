@@ -1,7 +1,4 @@
 res://menu_screen.tscn
-res://multiplayer_manager.gd
 res://multiplayer_player.tscn
-res://multiplayer_controller.gd
 res://node_3d.tscn
-res://game_manager.gd
-res://multiplayer_input.gd
+res://multiplayer_controller.gd
