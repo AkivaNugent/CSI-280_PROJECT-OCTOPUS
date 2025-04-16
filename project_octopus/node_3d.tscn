@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=81 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
@@ -484,6 +484,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s7xmq"]
+emission_shape_scale = Vector3(0.2, 0.2, 0.2)
+emission_shape = 1
+emission_sphere_radius = 1.0
+turbulence_noise_strength = 7.13
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otyry"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ttrk6"]
+material = SubResource("StandardMaterial3D_otyry")
+size = Vector3(0.1, 0.1, 0.1)
+
 [node name="Node3D2" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -552,7 +565,7 @@ texture_filter = 0
 texture = ExtResource("8_cqtjv")
 
 [node name="Melee Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.0487659, -0.511917, 0.85765, 0.963583, -0.250147, -0.0945191, 0.262924, 0.821808, 0.505473, 0.165552, -0.113556, -0.338769)
+transform = Transform3D(-0.0487658, -0.511917, 0.85765, 0.963583, -0.250147, -0.0945191, 0.262924, 0.821808, 0.505473, 0.165552, -0.113556, -0.338769)
 
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.52974, -0.497143, -0.0484084, 0.481337, 2.62493, 0.0413645, 0.0671289, -0.086828, 1.52767, -0.0669861, 0.3153, 0.235466)
@@ -570,6 +583,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.350856, -0.320404, 0)
 visible = false
 range = 0.1
 weaponSpritePath = "res://sprite_anim/MELEE_sword.png"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Player"]
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_s7xmq")
+draw_pass_1 = SubResource("BoxMesh_ttrk6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.1745, 15)
