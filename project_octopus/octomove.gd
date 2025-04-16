@@ -79,7 +79,6 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
 	# Draw the octopus red if it recently took damage
 	if (Time.get_ticks_usec() - lastTookDamage < (1000000 / 2)):
 		$AnimatedSprite3D.modulate = Color(1.0, 0.5, 0.5, 1.0)
