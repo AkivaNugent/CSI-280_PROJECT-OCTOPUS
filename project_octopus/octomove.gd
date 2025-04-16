@@ -16,6 +16,7 @@ var is_mouse_in_area := false
 var hover_check_timer := 0.0
 const HOVER_CHECK_INTERVAL := 0.1 
 var lastTookDamage = 0
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
 @export var max_health : int
 var current_health
@@ -190,6 +191,7 @@ func _is_mouse_over_octopus() -> bool:
 func projectile_hit(amount) -> void:
 	current_health -= amount
 	lastTookDamage = Time.get_ticks_usec() 
+	gpu_particles_3d.emitting = true
 	if current_health <= 0:
 		_die()
 
