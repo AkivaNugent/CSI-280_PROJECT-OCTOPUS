@@ -8,7 +8,7 @@ const SPRINT_VELOCITY = 2
 @onready var pivot: Node3D = $"Camera Origin"
 #@export var sens = 0.5
 var _snapped_to_stairs_last_frame := false;
-@onready var animated_sprite_2d = $AnimatedSprite3D
+@onready var animated_sprite_3d = $AnimatedSprite3D
 @onready var animation_player = $AnimationPlayer
 @onready var pos_text: Label = $"../Control/Pos Text"
 var dir_facing: String
@@ -30,10 +30,15 @@ const GAMEOVER_SCREEN = preload("res://gameover_screen.tscn")
 @onready var is_dying = false
 @onready var fade_time = 1.5
 @onready var you_died_text = $"../Control/YouDied"
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
 var lastTookDamage = 0
 
 #Aiming and Cursor
+
+# Animation Variables
+var is_playing_attack_anim = false
+var attack_timer: Timer
 
 func _ready():
 	currentHealth = maxHealth
@@ -42,6 +47,16 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	you_died_text.visible = false
+	
+	# Create and configure attack animation timer
+	attack_timer = Timer.new()
+	attack_timer.one_shot = true
+	attack_timer.wait_time = 0.5  # Default time - adjust based on your actual animation length
+	attack_timer.timeout.connect(on_attack_animation_timeout)
+	add_child(attack_timer)
+	
+	# Reset attack animation flag at start
+	is_playing_attack_anim = false
 	
 	await get_tree().create_timer(0.1).timeout # Make sure the generator has time to finish
 	# Move the player down to the top of the procedural terrain
@@ -140,6 +155,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): #or snapped to stairs?
 		velocity.y = JUMP_VELOCITY
+		is_jumping = true
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
@@ -167,35 +183,26 @@ func _physics_process(delta: float) -> void:
 			velocity.z *= SPRINT_VELOCITY
 			velocity.x *= SPRINT_VELOCITY
 			
-		if !player_Running_Audio.playing:
-			player_Running_Audio.play()
+			if !player_Running_Audio.playing:
+				player_Running_Audio.play()
+			if player_Walking_Audio.playing:
+				player_Walking_Audio.stop()
+		else:
+			if player_Running_Audio.playing:
+				player_Running_Audio.stop()
 		
-		# Get input direction in camera space
-		var input_dir2 := Input.get_vector("left", "right", "up", "down")
+		# Get input direction in camera space for animation
+		var raw_input_dir := Input.get_vector("left", "right", "up", "down")
 		
-		# Play animation based on raw input direction
-		if input_dir2.length() > 0:
-			if abs(input_dir2.y) > abs(input_dir2.x):
-				if input_dir2.y < 0:
-					animated_sprite_2d.play("move_up")
-					#animation_player.play("UP_run_with_weapon")
-				else:
-					animated_sprite_2d.play("move_down")
-					#animation_player.play("DOWN_run_with_animation")
-			else:
-				if input_dir2.x < 0:
-					animated_sprite_2d.play("move_side") # changed the logic to just flip the right walking
-					animated_sprite_2d.scale.x = -abs(animated_sprite_2d.scale.x)
-					#animation_player.play("SIDE_run_with_weapon")
-				else:
-					animated_sprite_2d.play("move_side")
-					animated_sprite_2d.scale.x = abs(animated_sprite_2d.scale.x)
-					#animation_player.play("SIDE_run_with_weapon")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		animated_sprite_2d.play("idle")
-		#animation_player.play("idle_with_weapon")
+		
+		# Stop walking/running sounds when not moving
+		if player_Walking_Audio.playing:
+			player_Walking_Audio.stop()
+		if player_Running_Audio.playing:
+			player_Running_Audio.stop()
 		
 	#Move the weapon
 	if get_viewport().get_mouse_position().x > (get_viewport().get_visible_rect().size.x / 2):
@@ -218,6 +225,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		$StairsAheadRayCast3D.position = Vector3(-norm.z * positiveX.z, -0.1, norm.x * positiveX.z)
 
+	# Handle animations
+	handle_animations(input_dir)
+
 	if not _step_up(delta):
 		move_and_slide()
 		
@@ -225,12 +235,165 @@ func take_damage(amount):
 	if (Time.get_ticks_usec() - lastTookDamage > (1000000 / 2)):
 		currentHealth -= amount
 		lastTookDamage = Time.get_ticks_usec()
+		gpu_particles_3d.emitting = true
 		if currentHealth <= 0 and !is_dying:
 			# Start death fade sequence
 			is_dying = true
 			you_died_text.visible = true
 			
 			# Could Implement Death Sound/Song
+
+# ------ ANIMATION SECTION START ------ #
+# CHARACTER STATES
+# ####
+enum Direction {UP, DOWN, LEFT, RIGHT}
+enum MovementState {STILL, RUNNING, JUMPING, FALLING}
+enum ActionState {NORMAL, ATTACKING}
+
+# ANIMATION VARIABLES
+# ####
+var current_direction = Direction.DOWN
+var current_movement = MovementState.STILL
+var current_action = ActionState.NORMAL
+var raw_input_dir = Vector2.ZERO
+var is_jumping = false
+var on_floor_now = true
+var was_on_the_floor_last_frame = true
+var current_spirte_animation = ""
+var current_player_animation = ""
+var is_attacking = false
+var inp_to_dir
+
+# DRIVING FUNCTION
+# ####
+func handle_animations(input_direction: Vector2):
+	# RESET STATES IF REQUIRED
+	resetJump()
+	
+	# CURRENT-STATE SETTERS
+	current_direction = setDirection(input_direction)
+	current_movement = setMovmentState(input_direction)
+	current_action = setActionState()
+	
+	# SET ANIMATIONS
+	current_spirte_animation = applyDirection(current_direction)
+	current_spirte_animation += applyMovmentState(current_movement)
+	current_spirte_animation += applyActionState(current_action)
+	
+	current_player_animation = "player_animations/"
+	current_player_animation += applyDirection(current_direction)
+	current_player_animation += applyMovmentState(current_movement)
+	
+	if "_atk" in current_spirte_animation:
+		print(current_spirte_animation)
+	
+	if !(is_playing_attack_anim and not "_atk" in current_spirte_animation):
+		play_animation(current_spirte_animation, current_player_animation)
+	
+	# PREVIOUS FRAME UPDATES
+	was_on_the_floor_last_frame = on_floor_now
+	on_floor_now = is_on_floor()
+
+# HELPER FUNCTIONS 
+# ####
+func resetJump():
+	if on_floor_now && !was_on_the_floor_last_frame && is_jumping:
+		is_jumping = false
+		#print("STATE RESET --- landed from jump")
+
+func setDirection(raw_inp_dir):
+	if raw_inp_dir.length() > 0:
+		if abs(raw_inp_dir.y) > abs(raw_inp_dir.x):
+			inp_to_dir = Direction.UP if raw_inp_dir.y < 0 else Direction.DOWN
+		else:
+			inp_to_dir = Direction.LEFT if raw_inp_dir.x < 0 else Direction.RIGHT
+	return inp_to_dir
+
+func applyDirection(current_direction):
+	var cardinality = "idle"
+	match current_direction:
+			Direction.UP:
+				cardinality = "up"
+			Direction.DOWN:
+				cardinality = "down"
+			Direction.LEFT:
+				cardinality = "side"
+			Direction.RIGHT:
+				cardinality = "side"
+	return cardinality
+	
+func setMovmentState(raw_input_dir):
+	var motionValue
+	if !is_on_floor():
+		if is_jumping:
+			motionValue = MovementState.JUMPING
+		else:
+			motionValue = MovementState.FALLING
+	else:
+		if raw_input_dir.length() > 0:
+			motionValue = MovementState.RUNNING
+		else:
+			motionValue = MovementState.STILL
+	return motionValue
+	
+func applyMovmentState(current_movement):
+	var motionValue = ""
+	
+	match current_movement:
+		MovementState.JUMPING:
+			motionValue = "_jump"
+		MovementState.RUNNING:
+			motionValue = "_run"
+		MovementState.FALLING:
+			motionValue = "_run"
+	
+	return motionValue
+	
+func setActionState():
+	var action = ActionState.NORMAL
+	if Input.is_action_just_pressed("attack") or Input.is_action_just_pressed("ui_left_mouse"):
+		#print("ATTACKED")
+		action = ActionState.ATTACKING
+	
+	return action
+	
+func applyActionState(current_action):
+	var action
+	
+	match current_action:
+		ActionState.NORMAL:
+			action = ""
+		ActionState.ATTACKING:
+			action = "_atk"
+			
+	return action
+	
+func flipSpriteForDirection(direction):
+	var weapons_inventory = get_node_or_null("WeaponsInventory")
+	
+	if direction == Direction.LEFT or direction == Direction.DOWN:
+		animated_sprite_3d.scale.x = -abs(animated_sprite_3d.scale.x)
+		weapons_inventory.scale.x = -1
+			
+	elif direction == Direction.RIGHT:
+		animated_sprite_3d.scale.x = abs(animated_sprite_3d.scale.x)
+		weapons_inventory.scale.x = 1
 		
+func play_animation(sprite_anim: String, player_anim: String):
+	animated_sprite_3d.play(sprite_anim)
+	animation_player.play(player_anim)
+	flipSpriteForDirection(current_direction)
 	
-	
+	if "_atk" in sprite_anim:
+		is_playing_attack_anim = true
+		attack_timer.wait_time = .5
+			
+		if attack_timer.time_left > 0:
+			attack_timer.stop()
+			
+		attack_timer.start()
+
+func on_attack_animation_timeout():
+	is_playing_attack_anim = false
+	print("ATK ENDED")
+# ------ ANIMATION SECTION END ------ #
