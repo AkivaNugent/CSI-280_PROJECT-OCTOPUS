@@ -30,6 +30,7 @@ const GAMEOVER_SCREEN = preload("res://gameover_screen.tscn")
 @onready var is_dying = false
 @onready var fade_time = 1.5
 @onready var you_died_text = $"../Control/YouDied"
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
 var lastTookDamage = 0
 
@@ -234,6 +235,7 @@ func take_damage(amount):
 	if (Time.get_ticks_usec() - lastTookDamage > (1000000 / 2)):
 		currentHealth -= amount
 		lastTookDamage = Time.get_ticks_usec()
+		gpu_particles_3d.emitting = true
 		if currentHealth <= 0 and !is_dying:
 			# Start death fade sequence
 			is_dying = true

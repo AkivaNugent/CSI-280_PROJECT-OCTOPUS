@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxqerx8mhs6xj"]
+[gd_scene load_steps=4 format=3 uid="uid://bxqerx8mhs6xj"]
 
 [ext_resource type="PackedScene" uid="uid://0jheavkd84c8" path="res://input_button.tscn" id="1_4v2m4"]
 [ext_resource type="Script" path="res://keybind_menu.gd" id="1_tvmw6"]
+[ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="2_qyy5o"]
 
 [node name="KeybindMenu" type="Control"]
 top_level = true
@@ -41,6 +42,7 @@ layout_mode = 2
 [node name="ReturnButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_qyy5o")
 text = "Return"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
