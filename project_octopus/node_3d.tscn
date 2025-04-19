@@ -55,6 +55,42 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0.165552, -0.113556, -0.338769)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponsInventory/Melee Weapons:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.60239e-08, 2.43887, 1.69779)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponsInventory/Melee Weapons:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lt4qr"]
 _data = {
@@ -763,12 +799,12 @@ libraries = {
 pixel_size = 0.0225
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_adtjf")
-animation = &"side"
+animation = &"down_run_atk"
 
 [node name="WeaponsInventory" type="Node3D" parent="Player"]
 
 [node name="Ranged Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.916041, -0.401084, 2.53518e-06, -0.401084, 0.916041, 1.00314e-08, -2.32635e-06, -1.00763e-06, -1, 0.167763, -0.320007, -0.144476)
+transform = Transform3D(0.865068, 0.293542, 0.406805, -0.285144, 0.954911, -0.0826876, -0.412735, -0.0444677, 0.909765, -0.161388, -0.234131, -0.0881116)
 visible = false
 
 [node name="Braton" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
@@ -787,7 +823,7 @@ texture_filter = 0
 texture = ExtResource("8_cqtjv")
 
 [node name="Melee Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.0487658, -0.511917, 0.85765, 0.963583, -0.250147, -0.0945191, 0.262924, 0.821808, 0.505473, 0.165552, -0.113556, -0.338769)
+transform = Transform3D(0.0966468, 0.756941, 0.646297, 0.991947, -0.126653, -1.60239e-08, 0.0818552, 0.641093, -0.763086, 0.165552, -0.113556, -0.338769)
 
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.52974, -0.497143, -0.0484084, 0.481337, 2.62493, 0.0413645, 0.0671289, -0.086828, 1.52767, -0.0669861, 0.3153, 0.235466)
