@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 
 	# If there is a path
 	if len(path) > nextGoalIndex:
-		# Move in the appropriate direction
+		# Move in the appropriate directiongit 
 		velocity.x = speed * sign(path[nextGoalIndex].x - position.x)
 		velocity.z = speed * sign(path[nextGoalIndex].y - position.z)
 		
