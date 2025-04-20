@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://11nairsk57pk"]
+[gd_scene load_steps=73 format=3 uid="uid://11nairsk57pk"]
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
@@ -576,7 +576,6 @@ texture_filter = 0
 texture = ExtResource("8_cqtjv")
 
 [node name="Melee Weapons" type="Node3D" parent="Player/WeaponsInventory"]
-transform = Transform3D(-0.0487658, -0.511917, 0.85765, 0.963583, -0.250147, -0.0945191, 0.262924, 0.821808, 0.505473, 0.165552, -0.113556, -0.338769)
 
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(-2.45152, 0.819556, -0.0227047, 0.78795, 2.54246, 0.0594717, -0.0671265, -0.0868181, 1.52729, 0.366248, 0.0464172, 0.219726)
