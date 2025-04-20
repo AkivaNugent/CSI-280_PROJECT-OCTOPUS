@@ -21,6 +21,8 @@ var lastTookDamage = 0
 @export var max_health : int
 var current_health
 
+var octoTracker;
+
 const MAX_PATHING_RANGE = 10
 
 @export var damage : int
@@ -32,14 +34,35 @@ func _ready():
 	position.y = (WORLD_NODE.getHeight(position.x, position.z) + 10)
 
 	# Initial path planning
-	_recalcPath(PLAYER.position)
+	_recalcPath()
 	
 	current_health = max_health
 
-func _recalcPath(targPosition):
-	# Ask the WORLD_NODE for a path to the player from current position
+func _recalcPath():
+	# Three times a second, recalculate a new path
+	# For every ten tiles between the player and the octopus, give another 0.2 seconds between calculations
+	var distanceToPlayer = position.distance_to(PLAYER.position)
+	const usecToSec = 1000000
+	var nextRecalc = (usecToSec / 3) + ((usecToSec / 5) * (distanceToPlayer / 10))
+	
+	# Return if too early
+	if (Time.get_ticks_usec() - lastRecalc < nextRecalc):
+		return
+	
+	var targPosition = position
+	# Only path direct to player if they're close. Otherwise, approximate by pathing to the nearest point to the player on a circle radius MAX_PATHING_RANGE
+	if distanceToPlayer < MAX_PATHING_RANGE:
+		targPosition = PLAYER.position
+	else:
+		var relativePosition = PLAYER.position - position
+		targPosition = (relativePosition / relativePosition.length()) * MAX_PATHING_RANGE
+		targPosition = position + targPosition
+		
+	# Ask the WORLD_NODE for a path to the target position from current position
 	path = WORLD_NODE.aStarNavigation(Vector2i(round(position.x),round(position.z)),Vector2i(round(targPosition.x),round(targPosition.z)))
 	nextGoalIndex = 0
+	
+	lastRecalc = Time.get_ticks_usec()
 
 func _step_up(delta) -> bool:
 	# Code adapted from youtube.com/watch?v=Tb-R3l0SQdc
@@ -77,35 +100,23 @@ func _run_body_test_motion(from: Transform3D, motion : Vector3, result = null) -
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 func _physics_process(delta: float) -> void:
+	if (position.y < 0):
+		_die()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
 	# Draw the octopus red if it recently took damage
 	if (Time.get_ticks_usec() - lastTookDamage < (1000000 / 2)):
 		$AnimatedSprite3D.modulate = Color(1.0, 0.5, 0.5, 1.0)
 	else:
 		$AnimatedSprite3D.modulate = Color.WHITE
 
-	# Three times a second, recalculate a new path
-	# For every ten tiles between the player and the octopus, give another 0.2 seconds between calculations
-	var distanceToPlayer = position.distance_to(PLAYER.position)
-	const usecToSec = 1000000
-	var nextRecalc = (usecToSec / 3) + ((usecToSec / 5) * (distanceToPlayer / 10))
-	if (Time.get_ticks_usec() - lastRecalc > nextRecalc):
-		# Only path direct to player if they're close. Otherwise, approximate by pathing to the nearest point to the player on a circle radius MAX_PATHING_RANGE
-		if distanceToPlayer < MAX_PATHING_RANGE:
-			_recalcPath(PLAYER.position)
-		else:
-			var relativePosition = PLAYER.position - position
-			var targPoint = (relativePosition / relativePosition.length()) * MAX_PATHING_RANGE
-			targPoint = position + targPoint
-			_recalcPath(targPoint)
-		lastRecalc = Time.get_ticks_usec()
+	# Delays between real pathing attempts handled in function
+	_recalcPath()
 
 	# If there is a path
 	if len(path) > nextGoalIndex:
-		# Move in the appropriate direction
+		# Move in the appropriate directiongit 
 		velocity.x = speed * sign(path[nextGoalIndex].x - position.x)
 		velocity.z = speed * sign(path[nextGoalIndex].y - position.z)
 		
@@ -196,4 +207,5 @@ func projectile_hit(amount) -> void:
 		_die()
 
 func _die() -> void:
+	octoTracker.live_octos.erase(self)
 	queue_free()
