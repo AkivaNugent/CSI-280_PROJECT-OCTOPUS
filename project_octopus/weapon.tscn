@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgolw2bygh83w"]
+
+[ext_resource type="Script" path="res://weapon.gd" id="1_m3p6n"]
+[ext_resource type="Texture2D" uid="uid://du8eqyvw7rfdc" path="res://sprite_anim/MELEE_sword.png" id="2_ohox4"]
+
+[node name="Weapon" type="Node3D"]
+script = ExtResource("1_m3p6n")
+damage = 15.0
+range = 5.0
+projectileSpeed = 30.0
+fireRate = 0.5
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.999655, 0, -0.0262642, 0, 1, 0, 0.0262642, 0, 0.999655, 0, 0, 0)
+centered = false
+offset = Vector2(-10, 0)
+pixel_size = 0.0225
+texture_filter = 0
+texture = ExtResource("2_ohox4")

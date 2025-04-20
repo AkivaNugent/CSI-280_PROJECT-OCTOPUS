@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
+[ext_resource type="Script" path="res://spawner.gd" id="1_yc5s2"]
 [ext_resource type="Texture2D" uid="uid://dbqsl5ndmwj7b" path="res://sprite_anim/Ryan-Sheet.png" id="4_auwos"]
 [ext_resource type="AnimationLibrary" uid="uid://sbg0xefx5154" path="res://sprite_anim/player_animation_suite.res" id="4_s4vnr"]
 [ext_resource type="Texture2D" uid="uid://srv1mn78bjml" path="res://Sprite-0001-Sheet.png" id="5_36hur"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
 [ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
 [ext_resource type="Texture2D" uid="uid://cwldstqsr6pf" path="res://sprite_anim/RANGED_Braton.png" id="6_chvu4"]
-[ext_resource type="PackedScene" uid="uid://cf1crfbecqrp0" path="res://octopus.tscn" id="7_b4y4o"]
 [ext_resource type="Texture2D" uid="uid://2l1o23jp8jle" path="res://sprite_anim/RANGED_Flamethrower.png" id="7_udelx"]
 [ext_resource type="Texture2D" uid="uid://bx3ccew8hk3md" path="res://sprite_anim/TEMP_extra_idles.png" id="7_wftrk"]
 [ext_resource type="AudioStream" uid="uid://cyrvm4snkn64l" path="res://game_sfx/walking_sound_short.mp3" id="8_4rnoe"]
@@ -497,6 +497,7 @@ material = SubResource("StandardMaterial3D_otyry")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Node3D2" type="Node3D"]
+script = ExtResource("1_yc5s2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_opreq")
@@ -600,12 +601,6 @@ sky_mode = 1
 script = ExtResource("6_3wk7r")
 world_environment = NodePath("../WorldEnvironment")
 day_text = NodePath("../Control/Day Text")
-
-[node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -5.94867)
-max_health = 100
-damage = 10
-speed = 2.0
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
