@@ -16,7 +16,7 @@ var projectileScene = load("res://projectile.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Sprite3D.texture = load(weaponSpritePath)
+	self.texture = load(weaponSpritePath)
 
 func _process(delta) -> void:
 	if Input.is_mouse_button_pressed(1) and float(Time.get_ticks_msec() - lastShotTime) / 1000 > fireRate:
@@ -27,7 +27,7 @@ func _process(delta) -> void:
 		var mousepos = get_viewport().get_mouse_position()
 
 		var origin = cam.project_ray_origin(mousepos)
-		var end = origin + cam.project_ray_normal(mousepos) * range * 10
+		var end = origin + cam.project_ray_normal(mousepos) * origin.length() * range * 10
 		var query = PhysicsRayQueryParameters3D.create(origin, end)
 		query.collide_with_areas = true
 
@@ -51,4 +51,4 @@ func _process(delta) -> void:
 			projectile.damage = damage
 			projectile.maxRange = range
 			projectile.get_node("Sprite3D").texture = load(projectileSpritePath)
-			projectile.PLAYER = get_node("../../Player")
+			projectile.PLAYER = get_node("../../../../Player")
