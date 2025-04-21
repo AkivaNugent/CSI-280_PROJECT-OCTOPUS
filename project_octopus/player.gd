@@ -275,9 +275,11 @@ func handle_animations(input_direction: Vector2):
 	current_player_animation = "player_animations/"
 	current_player_animation += applyDirection(current_direction)
 	current_player_animation += applyMovmentState(current_movement)
+	current_player_animation += applyActionState(current_action)
 	
 	if "_atk" in current_spirte_animation:
 		print(current_spirte_animation)
+		print("PLAYER:" + current_player_animation)
 	
 	if !(is_playing_attack_anim and not "_atk" in current_spirte_animation):
 		play_animation(current_spirte_animation, current_player_animation)
