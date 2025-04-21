@@ -805,6 +805,7 @@ animation = &"down_run_atk"
 
 [node name="Ranged Weapons" type="Node3D" parent="Player/WeaponsInventory"]
 transform = Transform3D(0.884223, 0.467065, 0, -0.467065, 0.884223, 0, 0, 0, 1, -0.171047, -0.14502, -0.116346)
+visible = false
 
 [node name="Braton" type="Sprite3D" parent="Player/WeaponsInventory/Ranged Weapons"]
 transform = Transform3D(1.99837, -0.242472, -0.00187173, 0.26664, 1.81725, -1.67638e-08, 0.00348783, -0.000423186, 1.07242, 0.0937195, -0.0583191, 0.255787)
@@ -823,7 +824,6 @@ texture = ExtResource("8_cqtjv")
 
 [node name="Melee Weapons" type="Node3D" parent="Player/WeaponsInventory"]
 transform = Transform3D(0.0966468, 0.75694, 0.646298, 0.991947, -0.126653, -1.60239e-08, 0.0818553, 0.641093, -0.763085, 0.165552, -0.113556, -0.338769)
-visible = false
 
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.52974, -0.497143, -0.0484084, 0.481337, 2.62493, 0.0413645, 0.0671289, -0.086828, 1.52767, -0.0669861, 0.3153, 0.235466)
