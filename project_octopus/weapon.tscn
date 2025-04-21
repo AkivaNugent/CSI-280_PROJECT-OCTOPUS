@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://n51y2be06pgb"]
+[gd_scene load_steps=3 format=3 uid="uid://cgolw2bygh83w"]
 
 [ext_resource type="Script" path="res://weapon.gd" id="1_m3p6n"]
 [ext_resource type="Texture2D" uid="uid://du8eqyvw7rfdc" path="res://sprite_anim/MELEE_sword.png" id="2_ohox4"]

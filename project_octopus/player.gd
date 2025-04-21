@@ -203,14 +203,6 @@ func _physics_process(delta: float) -> void:
 			player_Walking_Audio.stop()
 		if player_Running_Audio.playing:
 			player_Running_Audio.stop()
-		
-	#Move the weapon
-	if get_viewport().get_mouse_position().x > (get_viewport().get_visible_rect().size.x / 2):
-		$Weapon.position.x = abs($Weapon.position.x)
-		$Weapon.rotation.z = -abs($Weapon.rotation.z)
-	else:
-		$Weapon.position.x = -abs($Weapon.position.x)
-		$Weapon.rotation.z = abs($Weapon.rotation.z)
 	
 	# Put the StairsAheadRayCast (for step up) actually in front of the player
 	# First, establish which direction relative to the player is worldspace positive X using their rotation

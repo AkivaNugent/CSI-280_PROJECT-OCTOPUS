@@ -2,22 +2,21 @@
 
 [ext_resource type="Script" path="res://worldbuilder.gd" id="1_bydk5"]
 [ext_resource type="Script" path="res://player.gd" id="1_d34xq"]
+[ext_resource type="Script" path="res://spawner.gd" id="1_yc5s2"]
 [ext_resource type="Texture2D" uid="uid://dbqsl5ndmwj7b" path="res://sprite_anim/Ryan-Sheet.png" id="4_auwos"]
 [ext_resource type="AnimationLibrary" uid="uid://sbg0xefx5154" path="res://sprite_anim/player_animation_suite.res" id="4_s4vnr"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="6_0k1nh"]
 [ext_resource type="Script" path="res://day_and_night.gd" id="6_3wk7r"]
 [ext_resource type="Texture2D" uid="uid://cwldstqsr6pf" path="res://sprite_anim/RANGED_Braton.png" id="6_chvu4"]
-[ext_resource type="PackedScene" uid="uid://cf1crfbecqrp0" path="res://octopus.tscn" id="7_b4y4o"]
 [ext_resource type="Texture2D" uid="uid://2l1o23jp8jle" path="res://sprite_anim/RANGED_Flamethrower.png" id="7_udelx"]
 [ext_resource type="AudioStream" uid="uid://cyrvm4snkn64l" path="res://game_sfx/walking_sound_short.mp3" id="8_4rnoe"]
 [ext_resource type="Texture2D" uid="uid://c466g4p3ib1s0" path="res://sprite_anim/RANGED_pistol.png" id="8_cqtjv"]
-[ext_resource type="Texture2D" uid="uid://twtj5b3qh7b3" path="res://sprite_anim/MELEE_BusterSword.png" id="9_bfmdv"]
 [ext_resource type="AudioStream" uid="uid://ddkf4tmcbbxxi" path="res://game_sfx/running_sound_short.mp3" id="9_yxrcw"]
 [ext_resource type="AudioStream" uid="uid://p3s62mrlp5k1" path="res://game_music/CaveOfTheUnkown.mp3" id="10_6842a"]
-[ext_resource type="PackedScene" uid="uid://n51y2be06pgb" path="res://weapon.tscn" id="10_mqv01"]
 [ext_resource type="Texture2D" uid="uid://du8eqyvw7rfdc" path="res://sprite_anim/MELEE_sword.png" id="10_xq57g"]
 [ext_resource type="PackedScene" uid="uid://bxi6bygwc0ey" path="res://pause_menu.tscn" id="11_o04wj"]
 [ext_resource type="FontFile" uid="uid://c30o807fwffpj" path="res://fonts/Underdog-Regular.ttf" id="12_g2row"]
+[ext_resource type="Script" path="res://weapon.gd" id="12_pfv77"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4qqdx"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -756,6 +755,7 @@ material = SubResource("StandardMaterial3D_otyry")
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Node3D2" type="Node3D"]
+script = ExtResource("1_yc5s2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_opreq")
@@ -828,19 +828,18 @@ transform = Transform3D(0.0966468, 0.756941, 0.646297, 0.991947, -0.126653, -1.6
 [node name="BusterSword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.52974, -0.497143, -0.0484084, 0.481337, 2.62493, 0.0413645, 0.0671289, -0.086828, 1.52767, -0.0669861, 0.3153, 0.235466)
 texture_filter = 0
-texture = ExtResource("9_bfmdv")
+script = ExtResource("12_pfv77")
+damage = 30.0
+range = 1.0
+projectileSpeed = 20.0
+fireRate = 0.5
+weaponSpritePath = "res://sprite_anim/MELEE_BusterSword.png"
 
 [node name="Sword" type="Sprite3D" parent="Player/WeaponsInventory/Melee Weapons"]
 transform = Transform3D(2.92398, -0.591573, -3.20864, 0.610705, 2.8521, 12.4426, -0.0239772, 0.502662, -74.3756, -0.0802917, 0.0490685, 0.136723)
 visible = false
 texture_filter = 0
 texture = ExtResource("10_xq57g")
-
-[node name="Weapon" parent="Player" instance=ExtResource("10_mqv01")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.350856, -0.320404, 0)
-visible = false
-range = 0.1
-weaponSpritePath = "res://sprite_anim/MELEE_sword.png"
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Player"]
 emitting = false
@@ -860,12 +859,6 @@ sky_mode = 1
 script = ExtResource("6_3wk7r")
 world_environment = NodePath("../WorldEnvironment")
 day_text = NodePath("../Control/Day Text")
-
-[node name="Octopus" parent="." instance=ExtResource("7_b4y4o")]
-transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -5.98473e-08, 362.935, -5.94867)
-max_health = 100
-damage = 10
-speed = 2.0
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
